@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "713978211809",
+    "project_id": "optlav-64105",
+    "storage_bucket": "optlav-64105.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713978211809:android:1a62b0f9eb098827f436a0",
+        "android_client_info": {
+          "package_name": "com.example.optlove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713978211809-8dc3n27k5nfcl4sn2gokctpunpmoehj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9m9YDJuBKVGGolSe2FJu8ibvqUeySI1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713978211809-8dc3n27k5nfcl4sn2gokctpunpmoehj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713978211809-bfh2rt5lls1i04qp2fpi1orjme7hjsvd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ru.optlav",
+                "app_store_id": "1574633396"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713978211809:android:6e0064cf888a2631f436a0",
+        "android_client_info": {
+          "package_name": "com.optlav.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713978211809-8dc3n27k5nfcl4sn2gokctpunpmoehj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9m9YDJuBKVGGolSe2FJu8ibvqUeySI1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713978211809-8dc3n27k5nfcl4sn2gokctpunpmoehj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713978211809-bfh2rt5lls1i04qp2fpi1orjme7hjsvd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ru.optlav",
+                "app_store_id": "1574633396"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
