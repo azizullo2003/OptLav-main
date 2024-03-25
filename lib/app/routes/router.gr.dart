@@ -20,8 +20,9 @@ import '../../presentation/about/view/pages/about_info_page.dart' as _i17;
 import '../../presentation/about/view/pages/about_page.dart' as _i16;
 import '../../presentation/favorite/view/pages/favorite_page.dart' as _i11;
 import '../../presentation/main/%20data/models/category.dart' as _i34;
-import '../../presentation/main/%20data/models/company.dart' as _i35;
-import '../../presentation/main/%20data/models/product.dart' as _i36;
+import '../../presentation/main/%20data/models/company.dart' as _i36;
+import '../../presentation/main/%20data/models/product.dart' as _i37;
+import '../../presentation/main/%20data/models/subcategory.dart' as _i35;
 import '../../presentation/main/view/pages/action_list_page.dart' as _i18;
 import '../../presentation/main/view/pages/catalog_page.dart' as _i22;
 import '../../presentation/main/view/pages/company_catalog.dart' as _i25;
@@ -34,7 +35,7 @@ import '../../presentation/main/view/pages/products_page.dart' as _i24;
 import '../../presentation/main/view/pages/subcatalog_page.dart' as _i23;
 import '../../presentation/main/view/pages/top_list_page.dart' as _i19;
 import '../../presentation/onboarding/view/pages/onboarding_page.dart' as _i2;
-import '../../presentation/orders/data/models/order_info.dart' as _i37;
+import '../../presentation/orders/data/models/order_info.dart' as _i38;
 import '../../presentation/orders/view/orders_page.dart' as _i29;
 import '../../presentation/orders/view/orders_products_page.dart' as _i30;
 import '../../presentation/profile/view/pages/profile_page.dart' as _i10;
@@ -901,7 +902,7 @@ class SubcatalogRouteArgs {
 class ProductsRoute extends _i31.PageRouteInfo<ProductsRouteArgs> {
   ProductsRoute({
     _i32.Key? key,
-    required _i34.Category category,
+    required _i35.Subcategory category,
   }) : super(
           ProductsRoute.name,
           path: 'products',
@@ -922,7 +923,7 @@ class ProductsRouteArgs {
 
   final _i32.Key? key;
 
-  final _i34.Category category;
+  final _i35.Subcategory category;
 
   @override
   String toString() {
@@ -935,7 +936,7 @@ class ProductsRouteArgs {
 class CompanyCatalog extends _i31.PageRouteInfo<CompanyCatalogArgs> {
   CompanyCatalog({
     _i32.Key? key,
-    required _i35.Company company,
+    required _i36.Company company,
     bool? fromFavorite,
   }) : super(
           CompanyCatalog.name,
@@ -959,7 +960,7 @@ class CompanyCatalogArgs {
 
   final _i32.Key? key;
 
-  final _i35.Company company;
+  final _i36.Company company;
 
   final bool? fromFavorite;
 
@@ -974,7 +975,7 @@ class CompanyCatalogArgs {
 class CompanyProducts extends _i31.PageRouteInfo<CompanyProductsArgs> {
   CompanyProducts({
     _i32.Key? key,
-    required _i35.Company company,
+    required _i36.Company company,
     required String categoryId,
     required String categoryName,
     bool? fromFavorite,
@@ -1004,7 +1005,7 @@ class CompanyProductsArgs {
 
   final _i32.Key? key;
 
-  final _i35.Company company;
+  final _i36.Company company;
 
   final String categoryId;
 
@@ -1023,7 +1024,7 @@ class CompanyProductsArgs {
 class CompanyInfoRoute extends _i31.PageRouteInfo<CompanyInfoRouteArgs> {
   CompanyInfoRoute({
     _i32.Key? key,
-    required _i35.Company company,
+    required _i36.Company company,
   }) : super(
           CompanyInfoRoute.name,
           path: 'company_info',
@@ -1044,7 +1045,7 @@ class CompanyInfoRouteArgs {
 
   final _i32.Key? key;
 
-  final _i35.Company company;
+  final _i36.Company company;
 
   @override
   String toString() {
@@ -1057,7 +1058,7 @@ class CompanyInfoRouteArgs {
 class ProductsInfoRoute extends _i31.PageRouteInfo<ProductsInfoRouteArgs> {
   ProductsInfoRoute({
     _i32.Key? key,
-    required _i36.Product product,
+    required _i37.Product product,
   }) : super(
           ProductsInfoRoute.name,
           path: 'products_info',
@@ -1078,7 +1079,7 @@ class ProductsInfoRouteArgs {
 
   final _i32.Key? key;
 
-  final _i36.Product product;
+  final _i37.Product product;
 
   @override
   String toString() {
@@ -1103,7 +1104,7 @@ class OrdersRoute extends _i31.PageRouteInfo<void> {
 class OrdersProductsRoute extends _i31.PageRouteInfo<OrdersProductsRouteArgs> {
   OrdersProductsRoute({
     _i32.Key? key,
-    required _i37.OrderInfo order,
+    required _i38.OrderInfo order,
   }) : super(
           OrdersProductsRoute.name,
           path: 'orderProducts',
@@ -1124,7 +1125,7 @@ class OrdersProductsRouteArgs {
 
   final _i32.Key? key;
 
-  final _i37.OrderInfo order;
+  final _i38.OrderInfo order;
 
   @override
   String toString() {

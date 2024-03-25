@@ -48,10 +48,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/home/busik/upload-keystore.jks')
-            storePassword 'busik0729'
-            keyAlias       'upload'
-            keyPassword 'busik0729'
+            storeFile file('release.jks')
+            storePassword 'kL1aJ0(;aSQ,1RzLer'
+            keyAlias       'OptlavRu'
+            keyPassword 'l!QaizKfH'
         }
     }
     compileSdkVersion 34

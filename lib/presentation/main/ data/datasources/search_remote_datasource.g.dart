@@ -68,7 +68,6 @@ class _SearchApi implements SearchApi {
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SubcategoriesResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
-    print(_result.data);
     return httpResponse;
   }
 

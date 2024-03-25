@@ -2,6 +2,7 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/presentation/main/%20data/models/product.dart';
 import 'package:optlove/presentation/main/%20data/models/subcategory.dart';
 import 'package:optlove/presentation/main/view/widgets/subcatalog_card.dart';
@@ -91,7 +92,9 @@ class _SubcatalogPageState extends State<SubcatalogPage> {
                             itemCount: _subcategories.length,
                             itemBuilder: (BuildContext context, int index) {
                               return SubcatalogCard(
-                                onPressed: () {},
+                                onPressed: () {
+                                  openProduct(_subcategories[index]);
+                                },
                                 subcategory: _subcategories[index],
                               );
                             }),
@@ -134,6 +137,12 @@ class _SubcatalogPageState extends State<SubcatalogPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void openProduct(Subcategory category) {
+    context.router.push(
+      ProductsRoute(category: category),
     );
   }
 }

@@ -6,17 +6,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/core/widgets/in_cart_dialog.dart';
 import 'package:optlove/presentation/main/%20data/models/product.dart';
+import 'package:optlove/presentation/main/%20data/models/subcategory.dart';
 import 'package:optlove/presentation/main/view/widgets/grid_product_card.dart';
 import 'package:optlove/presentation/main/view/widgets/product_card.dart';
-
-import '../../ data/models/category.dart';
 import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
 import '../../../favorite/view/bloc/favorite_bloc.dart';
 import '../bloc/search_bloc.dart';
 
 class ProductsPage extends StatefulWidget {
-  final Category category;
+  final Subcategory category;
 
   const ProductsPage({super.key, required this.category});
 
@@ -119,8 +118,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 const SizedBox(height: 16),
                 GestureDetector(
                   onTap: () => {
-                    BlocProvider.of<SearchBloc>(context)
-                        .add(const SearchEvent.getAllCategories()),
+                    BlocProvider.of<SearchBloc>(context).add(
+                        SearchEvent.getAllSubcategories(
+                            widget.category.parentId!)),
                     context.router.navigateBack()
                   },
                   child: Box(
@@ -174,6 +174,9 @@ class _ProductsPageState extends State<ProductsPage> {
                       },
                       productsLoaded: (response) {
                         print("productsLoaded");
+                        print(
+                            "${response.response.products.length}count of products");
+
                         _products.clear();
                         _products.addAll(response.response.products);
                         return Expanded(

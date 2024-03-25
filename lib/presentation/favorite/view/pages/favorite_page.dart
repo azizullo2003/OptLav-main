@@ -13,8 +13,7 @@ import '../bloc/favorite_bloc.dart';
 import '../widgets/favorite_companies_widget.dart';
 import '../widgets/favorite_products_widget.dart';
 
-class FavoritePage extends StatefulWidget{
-
+class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
 
   @override
@@ -22,10 +21,8 @@ class FavoritePage extends StatefulWidget{
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-
   // Переменная состояния: 1 - Товары, 2 - Продавцы
   var current_state = 2;
-
 
   @override
   void initState() {
@@ -71,19 +68,20 @@ class _FavoritePageState extends State<FavoritePage> {
               children: [
                 GestureDetector(
                   onTap: () => {
-                    if (current_state == 2){
-                      setState(() {
-                        current_state = 1;
-                      })
-                    }
+                    if (current_state == 2)
+                      {
+                        setState(() {
+                          current_state = 1;
+                        })
+                      }
                   },
                   child: Text(
                     "Товары",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
-                        color: (){
-                          if (current_state == 2){
+                        color: () {
+                          if (current_state == 2) {
                             return colorTheme.greyText;
                           } else {
                             return colorTheme.blackText;
@@ -94,25 +92,25 @@ class _FavoritePageState extends State<FavoritePage> {
                 const SizedBox(width: 90),
                 GestureDetector(
                   onTap: () => {
-                    if (current_state == 1){
-                      setState(() {
-                        current_state = 2;
-                      })
-                    }
+                    if (current_state == 1)
+                      {
+                        setState(() {
+                          current_state = 2;
+                        })
+                      }
                   },
                   child: Text(
                     "Продавцы",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
-                        color: (){
-                          if (current_state == 1){
+                        color: () {
+                          if (current_state == 1) {
                             return colorTheme.greyText;
                           } else {
                             return colorTheme.blackText;
                           }
-                        }()
-                    ),
+                        }()),
                   ),
                 ),
               ],
@@ -123,9 +121,7 @@ class _FavoritePageState extends State<FavoritePage> {
               endIndent: 0,
               color: colorTheme.borderGray,
             ),
-
-            if (current_state == 1)
-               const FavoriteProductsWidget(),
+            if (current_state == 1) const FavoriteProductsWidget(),
             if (current_state == 2)
               FavoriteCompaniesWidget(
                 onCompanyCatalog: _onCompanyCatalog,
@@ -137,16 +133,16 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
 
-
-  void _onProducts(Category category) {
-    context.router.push(
-      ProductsRoute(category: category),
-    );
-  }
+  // void _onProducts(Category category) {
+  //   context.router.push(
+  //     ProductsRoute(category: category),
+  //   );
+  // }
 
   void _onCompanyCatalog(Company company) {
     context.pushRoute(MainRoute(children: [
-      CatalogsRoute(children: [CompanyCatalog(company: company, fromFavorite: true)]),
+      CatalogsRoute(
+          children: [CompanyCatalog(company: company, fromFavorite: true)]),
     ]));
   }
 
@@ -157,12 +153,11 @@ class _FavoritePageState extends State<FavoritePage> {
     context.pushRoute(MainRoute(children: [
       CatalogsRoute(children: [CompanyInfoRoute(company: company)]),
     ]));
-
   }
 
   void _sendActivity(BuildContext context) {
-    BlocProvider.of<SendActivityBloc>(context)
-        .add( const SendActivityEvent.sendActivity(
-        screenName: "Экран избранных товаров и продавцов"));
+    BlocProvider.of<SendActivityBloc>(context).add(
+        const SendActivityEvent.sendActivity(
+            screenName: "Экран избранных товаров и продавцов"));
   }
 }

@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Subcategory {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get count => throw _privateConstructorUsedError;
   String? get imagesUrl => throw _privateConstructorUsedError;
+  String? get parentId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubcategoryCopyWith<Subcategory> get copyWith =>
@@ -32,7 +32,7 @@ abstract class $SubcategoryCopyWith<$Res> {
           Subcategory value, $Res Function(Subcategory) then) =
       _$SubcategoryCopyWithImpl<$Res, Subcategory>;
   @useResult
-  $Res call({String id, String name, String count, String? imagesUrl});
+  $Res call({String id, String name, String? imagesUrl, String? parentId});
 }
 
 /// @nodoc
@@ -50,8 +50,8 @@ class _$SubcategoryCopyWithImpl<$Res, $Val extends Subcategory>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? count = null,
     Object? imagesUrl = freezed,
+    Object? parentId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -62,13 +62,13 @@ class _$SubcategoryCopyWithImpl<$Res, $Val extends Subcategory>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as String,
       imagesUrl: freezed == imagesUrl
           ? _value.imagesUrl
           : imagesUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentId: freezed == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -82,7 +82,7 @@ abstract class _$$SubcategoryImplCopyWith<$Res>
       __$$SubcategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String count, String? imagesUrl});
+  $Res call({String id, String name, String? imagesUrl, String? parentId});
 }
 
 /// @nodoc
@@ -98,8 +98,8 @@ class __$$SubcategoryImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? count = null,
     Object? imagesUrl = freezed,
+    Object? parentId = freezed,
   }) {
     return _then(_$SubcategoryImpl(
       id: null == id
@@ -110,13 +110,13 @@ class __$$SubcategoryImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as String,
       imagesUrl: freezed == imagesUrl
           ? _value.imagesUrl
           : imagesUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentId: freezed == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -128,21 +128,21 @@ class _$SubcategoryImpl implements _Subcategory {
   const _$SubcategoryImpl(
       {required this.id,
       required this.name,
-      required this.count,
-      required this.imagesUrl});
+      required this.imagesUrl,
+      required this.parentId});
 
   @override
   final String id;
   @override
   final String name;
   @override
-  final String count;
-  @override
   final String? imagesUrl;
+  @override
+  final String? parentId;
 
   @override
   String toString() {
-    return 'Subcategory(id: $id, name: $name, count: $count, imagesUrl: $imagesUrl)';
+    return 'Subcategory(id: $id, name: $name, imagesUrl: $imagesUrl, parentId: $parentId)';
   }
 
   @override
@@ -152,13 +152,14 @@ class _$SubcategoryImpl implements _Subcategory {
             other is _$SubcategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.count, count) || other.count == count) &&
             (identical(other.imagesUrl, imagesUrl) ||
-                other.imagesUrl == imagesUrl));
+                other.imagesUrl == imagesUrl) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, count, imagesUrl);
+  int get hashCode => Object.hash(runtimeType, id, name, imagesUrl, parentId);
 
   @JsonKey(ignore: true)
   @override
@@ -171,17 +172,17 @@ abstract class _Subcategory implements Subcategory {
   const factory _Subcategory(
       {required final String id,
       required final String name,
-      required final String count,
-      required final String? imagesUrl}) = _$SubcategoryImpl;
+      required final String? imagesUrl,
+      required final String? parentId}) = _$SubcategoryImpl;
 
   @override
   String get id;
   @override
   String get name;
   @override
-  String get count;
-  @override
   String? get imagesUrl;
+  @override
+  String? get parentId;
   @override
   @JsonKey(ignore: true)
   _$$SubcategoryImplCopyWith<_$SubcategoryImpl> get copyWith =>
