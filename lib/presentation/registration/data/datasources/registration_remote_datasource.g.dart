@@ -125,6 +125,7 @@ class _RegistrationApi implements RegistrationApi {
       'os': os,
       'key': key,
     };
+    print(_data);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AuthResponse>>(Options(
       method: 'POST',

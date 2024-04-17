@@ -112,8 +112,8 @@ class _ProductsPageState extends State<ProductsPage> {
       child: Scaffold(
         body: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
                 GestureDetector(
@@ -124,6 +124,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     context.router.navigateBack()
                   },
                   child: Box(
+                    alignment: Alignment.centerLeft,
                     child: Assets.images.back.svg(fit: BoxFit.cover),
                   ),
                 ),
@@ -179,8 +180,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
                         _products.clear();
                         _products.addAll(response.response.products);
-                        return Expanded(
-                            child: Padding(
+                        return Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Scrollbar(
                               child: GridView.builder(
@@ -217,12 +217,12 @@ class _ProductsPageState extends State<ProductsPage> {
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisSpacing: 8,
-                              crossAxisSpacing: 26,
-                              childAspectRatio: 1 / 2,
+                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 24,
+                              childAspectRatio: 1 / 2.45,
                             ),
                           )),
-                        ));
+                        );
                       },
                       productsFounded: (response) {
                         print("productsFounded");

@@ -15,14 +15,18 @@ class AddressPage extends StatefulWidget {
   final VoidCallback? citySelectListener;
   final Cities? city;
   final bool? readonly;
+  String cityString = "";
+  String address = "";
+  String comment = "";
 
   AddressPage(
-      {Key? key, required this.addressNumber, this.removeAddress, this.city, this.readonly, this.citySelectListener})
+      {Key? key,
+      required this.addressNumber,
+      this.removeAddress,
+      this.city,
+      this.readonly,
+      this.citySelectListener})
       : super(key: key);
-
-  var cityString = "";
-  var address = "";
-  var comment = "";
 
   @override
   State<AddressPage> createState() => _AddressPageState();
@@ -44,7 +48,7 @@ class _AddressPageState extends State<AddressPage> {
     super.initState();
     if (widget.city != null) {
       _cities.add(widget.city!);
-      cityController.text = widget.city!.name?? "";
+      cityController.text = widget.city!.name ?? "";
       addressController.text = widget.city!.adres ?? "";
       commentController.text = widget.city!.descrip ?? "";
       widget.cityString =
@@ -163,11 +167,11 @@ class _AddressPageState extends State<AddressPage> {
                 onSuggestionTap: (SearchFieldListItem<Cities> city) => {
                   //widget.citySelectListener;
                   widget.cityString =
-                  "${city.item!.country_id}|${city.item!.region_id}|${city.item!.id}",
+                      "${city.item!.country_id}|${city.item!.region_id}|${city.item!.id}",
 
                   setState(() {
                     widget.cityString =
-                    "${city.item!.country_id}|${city.item!.region_id}|${city.item!.id}";
+                        "${city.item!.country_id}|${city.item!.region_id}|${city.item!.id}";
                     // citySelected = true;
                     // checkFields();
                     // _selectedCity = city.item!;
@@ -178,7 +182,7 @@ class _AddressPageState extends State<AddressPage> {
           ),
           const SizedBox(height: 30),
           ProfileTextField(
-            readOnly:  widget.readonly,
+              readOnly: widget.readonly,
               labelText: "Адрес",
               length: 40,
               keyboardType: TextInputType.text,

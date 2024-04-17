@@ -27,8 +27,6 @@ class _EnterPageState extends State<EnterPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-
-
   var phoneMask = MaskTextInputFormatter(
       mask: '+7 (###) ###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
@@ -46,15 +44,14 @@ class _EnterPageState extends State<EnterPage> {
   var isPassword = true;
   var isCorrectFields = false;
   var os = 0;
-  static const List<String> _kOptions = <String>[];
 
   @override
   void initState() {
     super.initState();
     phoneController.addListener(() {
-     setState(() {
-       checkFields();
-     });
+      setState(() {
+        checkFields();
+      });
     });
 
     passwordController.addListener(() {
@@ -78,14 +75,13 @@ class _EnterPageState extends State<EnterPage> {
     }
     final colorTheme = AppTheme.of(context).colorTheme;
     return Scaffold(
-      bottomNavigationBar:  BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 5, left: 16),
           child: InkWell(
-            onTap: () => _onBack(context),
-              child: const Text('Назад')),
+              onTap: () => _onBack(context), child: const Text('Назад')),
         ),
       ),
       appBar: _buildAppBar(colorTheme),
@@ -94,7 +90,7 @@ class _EnterPageState extends State<EnterPage> {
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Container(
-          alignment: Alignment. center,
+          alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,40 +122,39 @@ class _EnterPageState extends State<EnterPage> {
                     keyboardType: TextInputType.number,
                     inputFormatters: digits,
                     validator: (value) {
-
                       if (passwordController.text.length < 5) {
                         return "Пароль состоит из 5 символов";
                       }
 
                       return null;
                     },
-                    function: () => setState((){
-                      if (isPassword){
-                        isPassword = false;
-                      } else {
-                        isPassword = true;
-                      }
-                    })
-                ),
+                    function: () => setState(() {
+                          if (isPassword) {
+                            isPassword = false;
+                          } else {
+                            isPassword = true;
+                          }
+                        })),
                 const SizedBox(height: 40),
                 Row(
-                  children:  [
+                  children: [
                     const Text(
                       "Запомнить меня",
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () => setState(() {
-                        if(!rememberMe) {
-                          rememberMe = true;
-                        } else {
-                          rememberMe = false;
-                        }
-                      }),
-                        child: rememberMe ?
-                        Assets.images.checked.svg() :
-                        Assets.images.unchecked.svg())
+                        onTap: () => setState(() {
+                              if (!rememberMe) {
+                                rememberMe = true;
+                              } else {
+                                rememberMe = false;
+                              }
+                            }),
+                        child: rememberMe
+                            ? Assets.images.checked.svg()
+                            : Assets.images.unchecked.svg())
                   ],
                 ),
                 GestureDetector(
@@ -172,9 +167,8 @@ class _EnterPageState extends State<EnterPage> {
                 ),
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    state.map(
-                        failure: (loaded) {
-                          Navigator.pop(context);
+                    state.map(failure: (loaded) {
+                      Navigator.pop(context);
                       Fluttertoast.showToast(
                           msg: "Ошибка ввода данных",
                           toastLength: Toast.LENGTH_LONG,
@@ -213,16 +207,17 @@ class _EnterPageState extends State<EnterPage> {
                             textColor: Colors.white,
                             fontSize: 16.0);
                       } else {
-                       if(response.response.user_info!.id.isNotEmpty) {
-                         _onSaveUserInfo(
-                            response.response.user_info!.id,
-                        response.response.user_info!.phone);
-                         SharedPrefsHelper.setName(response.response.user_info!.name);
-                         SharedPrefsHelper.setInn(response.response.user_info!.inn);
-                         if(response.response.user_info!.asres_odin != null){
-                           SharedPrefsHelper.setAddressExist(true);
-                         }
-                       }
+                        if (response.response.user_info!.id.isNotEmpty) {
+                          _onSaveUserInfo(response.response.user_info!.id,
+                              response.response.user_info!.phone);
+                          SharedPrefsHelper.setName(
+                              response.response.user_info!.name);
+                          SharedPrefsHelper.setInn(
+                              response.response.user_info!.inn);
+                          if (response.response.user_info!.asres_odin != null) {
+                            SharedPrefsHelper.setAddressExist(true);
+                          }
+                        }
                         _onSuccessAuth(context);
                       }
                     });
@@ -232,13 +227,15 @@ class _EnterPageState extends State<EnterPage> {
                       width: double.infinity,
                       padding: const Pad(horizontal: 16, top: 40),
                       child: ElevatedButton(
-                        onPressed: isCorrectFields ? () async => _onEnter(
-                            context,
-                        phoneController.text,
-                        passwordController.text) : null,
+                        onPressed: isCorrectFields
+                            ? () async => _onEnter(context,
+                                phoneController.text, passwordController.text)
+                            : null,
                         style: ElevatedButton.styleFrom(
-                            elevation: 0, backgroundColor: isCorrectFields ? const Color(0xFF5DB248) :
-                            const Color(0xFFAAABAD) ,
+                            elevation: 0,
+                            backgroundColor: isCorrectFields
+                                ? const Color(0xFF5DB248)
+                                : const Color(0xFFAAABAD),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -260,8 +257,8 @@ class _EnterPageState extends State<EnterPage> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: "Отправляя свои данные, вы соглашаетесь ",
-                          style:
-                              TextStyle(color: colorTheme.greyText, fontSize: 10),
+                          style: TextStyle(
+                              color: colorTheme.greyText, fontSize: 10),
                           children: <TextSpan>[
                             TextSpan(
                                 text: "\nс политикой конфедициальности",
@@ -281,9 +278,9 @@ class _EnterPageState extends State<EnterPage> {
     );
   }
 
-  void checkFields(){
-    if (phoneController.text.length == 18
-        && passwordController.text.length == 5) {
+  void checkFields() {
+    if (phoneController.text.length == 18 &&
+        passwordController.text.length == 5) {
       isCorrectFields = true;
     } else {
       isCorrectFields = false;
@@ -293,15 +290,12 @@ class _EnterPageState extends State<EnterPage> {
   void _onEnter(BuildContext context, String phone, String password) {
     final phone = phoneController.text.replaceAll(RegExp('[^0-9]'), '');
     BlocProvider.of<AuthBloc>(context).add(
-      AuthEvent.auth(
-          phone: phone,
-      password: password,
-      os: os),
+      AuthEvent.auth(phone: phone, password: password, os: os),
     );
   }
 
   void _onSuccessAuth(BuildContext context) {
-    if(rememberMe){
+    if (rememberMe) {
       _onRememberMe();
     }
     context.router.push(
@@ -312,8 +306,8 @@ class _EnterPageState extends State<EnterPage> {
   void _onRememberMe() async {
     await SharedPrefsHelper.rememberMe(true);
   }
-  
-  void _onForgotPassword (BuildContext context) {
+
+  void _onForgotPassword(BuildContext context) {
     context.router.push(
       const ForgotPasswordRoute(),
     );
@@ -362,5 +356,4 @@ class _EnterPageState extends State<EnterPage> {
       throw 'Could not launch $url';
     }
   }
-
 }

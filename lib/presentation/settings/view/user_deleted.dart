@@ -9,11 +9,8 @@ import '../../../app/theme/bloc/app_theme.dart';
 import '../../../app/utils/shared_preferences_helper.dart';
 import '../../../generated/assets.gen.dart';
 
-class UserDeletedPage extends StatelessWidget{
-
-  UserDeletedPage({Key? key}) : super(key: key);
-
-  late Timer _timer;
+class UserDeletedPage extends StatelessWidget {
+  const UserDeletedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,9 @@ class UserDeletedPage extends StatelessWidget{
                   fontWeight: FontWeight.w700,
                   color: colorTheme.blackText),
             ),
-            const SizedBox(height: 135,),
+            const SizedBox(
+              height: 135,
+            ),
             Center(
               child: Box(
                 child: Assets.images.confirm.svg(fit: BoxFit.cover),
@@ -48,19 +47,20 @@ class UserDeletedPage extends StatelessWidget{
 
   void startTimer(BuildContext context) {
     const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
+    late Timer timerController;
+    timerController = Timer.periodic(
       oneSec,
-          (Timer timer) async {
-        if(timer.tick == 1){
+      (Timer timer) async {
+        if (timer.tick == 1) {
           await SharedPrefsHelper.rememberMe(false);
-          _timer.cancel();
-          context.router.replace(
-            const RegistrationBegin(),
-          );
+          timerController.cancel();
+          if (context.mounted) {
+            context.router.replace(
+              const RegistrationBegin(),
+            );
+          }
         }
       },
     );
-
   }
-
 }

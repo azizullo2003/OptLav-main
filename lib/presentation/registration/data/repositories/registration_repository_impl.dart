@@ -59,17 +59,12 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
 
   @override
   Future<Either<DioError, StandartResponse>> register(
-    String phone,
-    String email,
-    String cityId,
-    String city,
-      int os
-  ) async {
+      String phone, String email, String cityId, String city, int os) async {
     try {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       String version = packageInfo.version;
-      final httpResponse = await remoteDatasource
-          .register(phone, email, cityId, city, os, version);
+      final httpResponse = await remoteDatasource.register(
+          phone, email, cityId, city, os, version);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
@@ -100,7 +95,6 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       }
       print("Auth Err");
       return Left(
-
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
@@ -108,7 +102,7 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } catch(e) {
+    } catch (e) {
       print("Auth Exe ");
       var f = DioError(
         error: "Пароль или логин неправильные",
@@ -142,8 +136,7 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
   }
 
   @override
-  Future<Either<DioError, String>> sendActivity(
-      String screenName) async {
+  Future<Either<DioError, String>> sendActivity(String screenName) async {
     try {
       var userId = "";
       var os = 0;
@@ -157,13 +150,12 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
         os = 1;
       }
 
-      if(userIdFromPrefs != null){
+      if (userIdFromPrefs != null) {
         userId = userIdFromPrefs;
       }
 
-
-      final httpResponse = await remoteDatasource.sendActivity
-        (userId, os, screenName, version);
+      final httpResponse =
+          await remoteDatasource.sendActivity(userId, os, screenName, version);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
@@ -187,5 +179,4 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
   //   handleDioError(() => remoteDatasource.citySearch(city));
   //   throw Error();
   // }
-
 }

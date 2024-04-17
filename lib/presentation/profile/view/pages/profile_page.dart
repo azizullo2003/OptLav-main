@@ -104,300 +104,300 @@ class _ProfilePageState extends State<ProfilePage> {
     final colorTheme = AppTheme.of(context).colorTheme;
     return SingleChildScrollView(
         child: Padding(
-        padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(children: [
-                 BlocListener<ProfileBloc, ProfileState>(
-                  listener: (context, state) {
-                    state.maybeMap(
-                      failure: (e) {
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(children: [
+            BlocListener<ProfileBloc, ProfileState>(
+              listener: (context, state) {
+                state.maybeMap(
+                    failure: (e) {
+                      Fluttertoast.showToast(
+                          msg: "Ошибка подключения ${e.error.message}",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    },
+                    loaded: (response) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        innCorrect = response.response.user_info.inn_correct;
+                        setState(() {
+                          for (var i = 0;
+                              i < response.response.locations.length;
+                              i++) {
+                            if (i == 0 &&
+                                response.response.locations[0].adres != null &&
+                                !isFirstAddressCitySelected) {
+                              var address = AddressPage(
+                                  //readonly: true,
+                                  citySelectListener: () =>
+                                      _onFirstAddressCitySelected(),
+                                  addressNumber: commentWidgets.length + 1,
+                                  removeAddress: () => _onRemoveAddress(),
+                                  city: response.response.locations[i]);
+                              commentWidgets.add(address);
+                              print("Add Exist Address");
+                              existWidgets.add(address);
+                              // commentWidgets.add(AddressPage(
+                              //   //readonly: true,
+                              //     citySelectListener: () =>
+                              //     _onFirstAddressCitySelected(),
+                              //     addressNumber: commentWidgets.length + 1,
+                              //     removeAddress: () => _onRemoveAddress(),
+                              //     city: response.response.locations[i])
+                              // );
+                            } else {
+                              var address = AddressPage(
+                                  addressNumber: commentWidgets.length + 1,
+                                  removeAddress: () => _onRemoveAddress(),
+                                  city: response.response.locations[i]);
+                              commentWidgets.add(address);
+                              existWidgets.add(address);
+                              // commentWidgets.add(AddressPage(
+                              //     addressNumber: commentWidgets.length + 1,
+                              //     removeAddress: () => _onRemoveAddress(),
+                              //     city: response.response.locations[i])
+                              // );
+                            }
+                          }
+                        });
+                        fillFieldsFromResponse(response.response.user_info);
+                      });
+                    },
+                    innLoaded: (response) {
+                      setState(() {
+                        _innInfo.clear();
+                        if (response.response.data != null) {
+                          _innInfo.add(response.response.data!);
+                        }
+                      });
+                    },
+                    dataChanged: (response) {
+                      if (response.response.result) {
                         Fluttertoast.showToast(
-                            msg: "Ошибка подключения ${e.error.message}",
+                            msg: "Данные успешно изменены",
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 1,
                             backgroundColor: Colors.grey,
                             textColor: Colors.white,
                             fontSize: 16.0);
-                      },
-                        loaded: (response) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            innCorrect = response.response.user_info.inn_correct;
-                            setState(() {
-                              for (var i = 0;
-                              i < response.response.locations.length;
-                              i++) {
-                                if(i == 0 && response.response.locations[0].adres != null && !isFirstAddressCitySelected){
-                                  var address = AddressPage(
-                                    //readonly: true,
-                                      citySelectListener: () =>
-                                          _onFirstAddressCitySelected(),
-                                      addressNumber: commentWidgets.length + 1,
-                                      removeAddress: () => _onRemoveAddress(),
-                                      city: response.response.locations[i]);
-                                  commentWidgets.add(address);
-                                  print("Add Exist Address");
-                                  existWidgets.add(address);
-                                  // commentWidgets.add(AddressPage(
-                                  //   //readonly: true,
-                                  //     citySelectListener: () =>
-                                  //     _onFirstAddressCitySelected(),
-                                  //     addressNumber: commentWidgets.length + 1,
-                                  //     removeAddress: () => _onRemoveAddress(),
-                                  //     city: response.response.locations[i])
-                                  // );
-                                }else {
-                                  var address = AddressPage(
-                                      addressNumber: commentWidgets.length + 1,
-                                      removeAddress: () => _onRemoveAddress(),
-                                      city: response.response.locations[i]);
-                                  commentWidgets.add(address);
-                                  existWidgets.add(address);
-                                  // commentWidgets.add(AddressPage(
-                                  //     addressNumber: commentWidgets.length + 1,
-                                  //     removeAddress: () => _onRemoveAddress(),
-                                  //     city: response.response.locations[i])
-                                  // );
-                                }
-
-                              }
-                            });
-                            fillFieldsFromResponse(response.response.user_info);
-                          });
-                        },
-                        innLoaded: (response) {
-                          setState(() {
-                            _innInfo.clear();
-                            if (response.response.data != null) {
-                              _innInfo.add(response.response.data!);
+                        context.router.push(
+                          const MainRoute(),
+                        );
+                      }
+                    },
+                    orElse: () {});
+              },
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 16),
+                    InkWell(
+                      onTap: () => context.router.push(
+                        const MainRoute(),
+                      ),
+                      child: Box(
+                        child: Assets.images.back.svg(fit: BoxFit.cover),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "Ваши данные",
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.blackText),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "Данные юр. лица",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.blackText),
+                    ),
+                    const SizedBox(height: 30),
+                    ProfileTextField(
+                        inputFormatters: singleFormat,
+                        labelText: "Наименование организации",
+                        keyboardType: TextInputType.text,
+                        controller: organizationController,
+                        function: () => organizationController.clear()),
+                    const SizedBox(height: 30),
+                    (() {
+                      if (innCorrect == "0") {
+                        return Form(
+                            child: SearchField(
+                          controller: innController,
+                          suggestions: _innInfo
+                              .map((inn) =>
+                                  SearchFieldListItem(inn.name, item: inn))
+                              .toList(),
+                          suggestionAction: SuggestionAction.unfocus,
+                          textInputAction: TextInputAction.next,
+                          searchStyle: TextStyle(
+                            fontSize: 17,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          validator: (x) {
+                            if (!_innInfo.contains(x) || x!.isEmpty) {
+                              return 'Please Enter a valid State';
                             }
-                          });
-                        },
-                        dataChanged: (response) {
-                          if(response.response.result){
-                            Fluttertoast.showToast(
-                                msg: "Данные успешно изменены",
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
-                            context.router.push(
-                              const MainRoute(),
-                            );
-                          }
-                        },
-                        orElse: () {});
-                  },
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 16),
-                        InkWell(
-                          onTap: () => context.router.push(
-                            const MainRoute(),
-                          ),
-                          child: Box(
-                            child: Assets.images.back.svg(fit: BoxFit.cover),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          "Ваши данные",
-                          style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w700,
-                              color: colorTheme.blackText),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          "Данные юр. лица",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: colorTheme.blackText),
-                        ),
-                        const SizedBox(height: 30),
-
-                        ProfileTextField(
-                            inputFormatters: singleFormat,
-                            labelText: "Наименование организации",
-                            keyboardType: TextInputType.text,
-                            controller: organizationController,
-                            function: () => organizationController.clear()),
-                        const SizedBox(height: 30),
-                        (() {
-                          if (innCorrect == "0"){
-                          return Form(
-                              child: SearchField(
-                                controller: innController,
-                                suggestions: _innInfo
-                                    .map((inn) =>
-                                    SearchFieldListItem(inn.name, item: inn))
-                                    .toList(),
-                                suggestionAction: SuggestionAction.unfocus,
-                                textInputAction: TextInputAction.next,
-                                searchStyle: TextStyle(
+                            return null;
+                          },
+                          onSuggestionTap:
+                              (SearchFieldListItem<UserInnInfo> inn) {
+                            setState(() {
+                              innCorrect = "1";
+                              innController.text = inn.item!.inn;
+                              ogrnController.text = inn.item!.ogrn;
+                              organizationController.text = inn.item!.name;
+                            });
+                          },
+                          searchInputDecoration: InputDecoration(
+                              suffixIconConstraints: const BoxConstraints(
+                                  minHeight: 20, minWidth: 20),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: colorTheme.borderGray)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: colorTheme.borderGray)),
+                              labelText: "ИНН",
+                              labelStyle: TextStyle(
+                                  color: colorTheme.greyText,
                                   fontSize: 17,
-                                  color: Colors.black.withOpacity(0.8),
-                                ),
-                                validator: (x) {
-                                  if (!_innInfo.contains(x) || x!.isEmpty) {
-                                    return 'Please Enter a valid State';
-                                  }
-                                  return null;
-                                },
-                                onSuggestionTap:
-                                    (SearchFieldListItem<UserInnInfo> inn) {
-                                  setState(() {
-                                    innCorrect = "1";
-                                    innController.text = inn.item!.inn;
-                                    ogrnController.text = inn.item!.ogrn;
-                                    organizationController.text = inn.item!.name;
-                                  });
-                                },
-                                searchInputDecoration: InputDecoration(
-                                    suffixIconConstraints: const BoxConstraints(
-                                        minHeight: 20, minWidth: 20),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                        BorderSide(color: colorTheme.borderGray)),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                        BorderSide(color: colorTheme.borderGray)),
-                                    labelText: "ИНН",
-                                    labelStyle: TextStyle(
-                                        color: colorTheme.greyText,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.normal)),
-                                maxSuggestionsInViewPort: 5,
-                                itemHeight: 40,
-                              ));}
-                          else {
-                            return ProfileTextField(
-                              readOnly: true,
-                                labelText: "ИНН",
-                                keyboardType: TextInputType.phone,
-                                inputFormatters: digitsFormat,
-                                controller:  innController,
-                                function: () => ogrnController.clear());
-                          }
-                        }()),
-                        const SizedBox(height: 30),
-                        ProfileTextField(
-                          readOnly: innCorrect == "1",
-                            labelText: "ОГРН",
+                                  fontWeight: FontWeight.normal)),
+                          maxSuggestionsInViewPort: 5,
+                          itemHeight: 40,
+                        ));
+                      } else {
+                        return ProfileTextField(
+                            readOnly: true,
+                            labelText: "ИНН",
                             keyboardType: TextInputType.phone,
                             inputFormatters: digitsFormat,
-                            controller: ogrnController,
-                            function: () => ogrnController.clear()),
-                        const SizedBox(height: 30),
-                        Text(
-                          "Контакты",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: colorTheme.blackText),
-                        ),
-                        const SizedBox(height: 30),
-                        ProfileTextField(
-                            labelText: "Телефон",
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: phoneMask,
-                            controller: phoneController,
-                            function: () => phoneController.clear()),
-                        const SizedBox(height: 30),
-                        ProfileTextField(
-                            labelText: "Доп. телефон",
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: phoneMask,
-                            controller: addPhoneController,
-                            function: () => addPhoneController.clear()),
-                        const SizedBox(height: 30),
-                        ProfileTextField(
-                            labelText: "Электронная почта",
-                            keyboardType: TextInputType.emailAddress,
-                            inputFormatters: emailMask,
-                            controller: emailController,
-                            function: () => emailController.clear()),
-                        const SizedBox(height: 30),
-                        Text(
-                          "Города и адреса доставки",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: colorTheme.blackText),
-                        ),
-                        const SizedBox(height: 30),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: commentWidgets,
-                        ),
-                        const SizedBox(height: 15),
-                        if(commentWidgets.length <= 4)
-                        Box(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () => {
-                              if (commentWidgets.length <= 4)
-                                {
-                                  setState(() {
-                                    commentWidgets.add(AddressPage(
-                                      addressNumber: commentWidgets.length + 1,
-                                      removeAddress: _onRemoveAddress,
-                                    ));
-                                  })
-                                }
-                            },
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0, backgroundColor: colorTheme.borderGray,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 8),
-                                textStyle: const TextStyle(
-                                    fontSize: 13, fontWeight: FontWeight.w400)),
-                            child: Text(
-                              'Добавить адрес',
-                              style: TextStyle(
-                                color: colorTheme.blackText,
+                            controller: innController,
+                            function: () => ogrnController.clear());
+                      }
+                    }()),
+                    const SizedBox(height: 30),
+                    ProfileTextField(
+                        readOnly: innCorrect == "1",
+                        labelText: "ОГРН",
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: digitsFormat,
+                        controller: ogrnController,
+                        function: () => ogrnController.clear()),
+                    const SizedBox(height: 30),
+                    Text(
+                      "Контакты",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.blackText),
+                    ),
+                    const SizedBox(height: 30),
+                    ProfileTextField(
+                        labelText: "Телефон",
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: phoneMask,
+                        controller: phoneController,
+                        function: () => phoneController.clear()),
+                    const SizedBox(height: 30),
+                    ProfileTextField(
+                        labelText: "Доп. телефон",
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: phoneMask,
+                        controller: addPhoneController,
+                        function: () => addPhoneController.clear()),
+                    const SizedBox(height: 30),
+                    ProfileTextField(
+                        labelText: "Электронная почта",
+                        keyboardType: TextInputType.emailAddress,
+                        inputFormatters: emailMask,
+                        controller: emailController,
+                        function: () => emailController.clear()),
+                    const SizedBox(height: 30),
+                    Text(
+                      "Города и адреса доставки",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.blackText),
+                    ),
+                    const SizedBox(height: 30),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: commentWidgets,
+                    ),
+                    const SizedBox(height: 15),
+                    if (commentWidgets.length <= 4)
+                      Box(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            if (commentWidgets.length <= 4)
+                              {
+                                setState(() {
+                                  commentWidgets.add(AddressPage(
+                                    addressNumber: commentWidgets.length + 1,
+                                    removeAddress: _onRemoveAddress,
+                                  ));
+                                })
+                              }
+                          },
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor: colorTheme.borderGray,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
                               ),
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              textStyle: const TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.w400)),
+                          child: Text(
+                            'Добавить адрес',
+                            style: TextStyle(
+                              color: colorTheme.blackText,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        Box(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () => _onSaveUserData(),
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0, backgroundColor: colorTheme.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                textStyle: const TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.w600)),
-                            child: const Text(
-                              'Сохранить',
+                      ),
+                    const SizedBox(height: 16),
+                    Box(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => _onSaveUserData(),
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: colorTheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                          ),
-                        )
-                      ]),
-                ),
-              ])),
-        ));
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            textStyle: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600)),
+                        child: const Text(
+                          'Сохранить',
+                        ),
+                      ),
+                    )
+                  ]),
+            ),
+          ])),
+    ));
   }
 
   void _onRemoveAddress() {
-
     setState(() {
       commentWidgets.removeLast();
     });
-
   }
 
   void _onFirstAddressCitySelected() {
@@ -407,9 +407,7 @@ class _ProfilePageState extends State<ProfilePage> {
     //BlocProvider.of<UserBloc>(context).add(const UserEvent.getUserData());
   }
 
-  void _onSaveUserData() async{
-    DateTime now = DateTime.now();
-
+  void _onSaveUserData() async {
     await SharedPrefsHelper.setName(organizationController.text);
     await SharedPrefsHelper.setInn(innController.text);
     _fields.add("name");
@@ -426,19 +424,18 @@ class _ProfilePageState extends State<ProfilePage> {
     _values.add(addPhoneController.text.replaceAll(RegExp('[^0-9]'), ''));
     _values.add(emailController.text);
     _values.add(innCorrect);
-     for (var element in commentWidgets) {
-      if(element.address.isNotEmpty && element.cityString.isNotEmpty){
+    for (var element in commentWidgets) {
+      if (element.address.isNotEmpty && element.cityString.isNotEmpty) {
         isAddressExist = true;
         print("Exist add ${element.address}");
-        _regions.add(
-            "${element.cityString}|${element.address}|${element.comment}");
-      }else{
+        _regions
+            .add("${element.cityString}|${element.address}|${element.comment}");
+      } else {
         isAddressExist = false;
       }
-
     }
     await SharedPrefsHelper.setAddressExist(isAddressExist);
-    if(isAddressExist!) {
+    if (isAddressExist!) {
       await _interstitialAD.load(adRequest: const AdRequest());
       await _interstitialAD.show();
       await _interstitialAD.waitForDismiss();
@@ -471,11 +468,11 @@ class _ProfilePageState extends State<ProfilePage> {
     if (user.email != null) {
       emailController.text = user.email!;
     }
-    if(user.inn != null){
+    if (user.inn != null) {
       innController.text = user.inn!;
     }
 
-    organizationController.text = user.name?? "";
+    organizationController.text = user.name ?? "";
     if (user.ogrn != null) {
       ogrnController.text = user.ogrn!;
     }

@@ -31,7 +31,7 @@ import 'injector.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -41,10 +41,8 @@ void main() async{
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   await initializeDependencies();
-  runApp( MyApp());
+  runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -83,18 +81,15 @@ class MyApp extends StatelessWidget {
           title: 'OptLove',
           theme: ThemeData(
             primarySwatch: Colors.blue,
-
             textSelectionTheme: const TextSelectionThemeData(
               cursorColor: AppPallete.grayText,
             ),
           ),
           //home: MainPage(),
           routerDelegate: _appRouter.delegate(
-              navigatorObservers: () => [AutoRouteObserver()]
-          ),
+              navigatorObservers: () => [AutoRouteObserver()]),
           routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
         ));
   }
 }
-

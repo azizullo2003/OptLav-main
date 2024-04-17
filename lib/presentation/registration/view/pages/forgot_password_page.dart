@@ -22,8 +22,6 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController phoneController = TextEditingController();
 
-
-
   var phoneMask = MaskTextInputFormatter(
       mask: '+7 (###) ###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
@@ -40,7 +38,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   var rememberMe = false;
   var isPassword = true;
   var isCorrectFields = false;
-  static const List<String> _kOptions = <String>[];
 
   @override
   void initState() {
@@ -61,14 +58,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     final colorTheme = AppTheme.of(context).colorTheme;
     return Scaffold(
-      bottomNavigationBar:  BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 5, left: 16),
-          child: InkWell
-            (onTap: () => _onBack(context),
-              child: const Text('Назад')),
+          child: InkWell(
+              onTap: () => _onBack(context), child: const Text('Назад')),
         ),
       ),
       appBar: _buildAppBar(colorTheme),
@@ -147,12 +143,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     width: double.infinity,
                     padding: const Pad(horizontal: 16, top: 40),
                     child: ElevatedButton(
-                      onPressed: isCorrectFields ? () async => _onEnter(
-                          context,
-                          phoneController.text) : null,
+                      onPressed: isCorrectFields
+                          ? () async => _onEnter(context, phoneController.text)
+                          : null,
                       style: ElevatedButton.styleFrom(
-                          elevation: 0, backgroundColor: isCorrectFields ? const Color(0xFF404247) :
-                          const Color(0xFFAAABAD) ,
+                          elevation: 0,
+                          backgroundColor: isCorrectFields
+                              ? const Color(0xFF404247)
+                              : const Color(0xFFAAABAD),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -160,10 +158,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           textStyle: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.bold)),
                       child: const Text(
-                          'Восстановить пароль',
-                      style: TextStyle(
-                        color: Colors.white
-                      ),),
+                        'Восстановить пароль',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   );
                 },
@@ -179,7 +176,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       text: TextSpan(
                         text: "Отправляя свои данные, вы соглашаетесь ",
                         style:
-                        TextStyle(color: colorTheme.greyText, fontSize: 10),
+                            TextStyle(color: colorTheme.greyText, fontSize: 10),
                         children: <TextSpan>[
                           TextSpan(
                               text: "\nс политикой конфедициальности",
@@ -198,21 +195,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  void checkFields(){
+  void checkFields() {
     if (phoneController.text.length == 18) {
       isCorrectFields = true;
     } else {
       isCorrectFields = false;
     }
-
-
   }
 
   void _onEnter(BuildContext context, String phone) {
     final phone = phoneController.text.replaceAll(RegExp('[^0-9]'), '');
     BlocProvider.of<RegistrationBloc>(context).add(
-      RegistrationEvent.restorePass(
-          phone: phone),
+      RegistrationEvent.restorePass(phone: phone),
     );
   }
 
@@ -231,7 +225,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       elevation: 0,
       title: Column(
         children: [
-          const Text('Восстановление пароля', style: TextStyle(color: Colors.black)),
+          const Text('Восстановление пароля',
+              style: TextStyle(color: Colors.black)),
           const SizedBox(
             height: 3,
           ),
@@ -260,5 +255,4 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       throw 'Could not launch $url';
     }
   }
-
 }
