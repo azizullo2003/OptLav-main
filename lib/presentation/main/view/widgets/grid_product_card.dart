@@ -32,9 +32,7 @@ class _GridProductCardState extends State<GridProductCard> {
     final double imageContainerHeight = (width - 26 - 32) / 2;
     final colorTheme = AppTheme.of(context).colorTheme;
 
-    final String productName = widget.product.name.length > 60
-        ? "${widget.product.name.substring(0, 60)}..."
-        : widget.product.name;
+    final String productName = widget.product.name;
     final String firmName = widget.product.firm_name.length > 19
         ? "${widget.product.firm_name.substring(0, 19)}..."
         : widget.product.firm_name;
@@ -118,18 +116,20 @@ class _GridProductCardState extends State<GridProductCard> {
               fontSize: 12, color: Color.fromRGBO(135, 153, 168, 1)),
         ),
         const SizedBox(height: 10),
-        AutoSizeText(
-          productName,
-          // maxLines: 1,
-          textAlign: TextAlign.left,
-          style: TextStyle(
+        Expanded(
+          child: AutoSizeText(
+            productName,
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.left,
+            style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
-              color: colorTheme.blackText),
-          maxFontSize: 18,
-          minFontSize: 14,
+              color: colorTheme.blackText,
+            ),
+            maxFontSize: 18,
+            minFontSize: 14,
+          ),
         ),
-        const Spacer(),
         AutoSizeText(
           firmName,
           maxLines: 1,

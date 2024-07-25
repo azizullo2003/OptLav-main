@@ -121,29 +121,17 @@ class _ProductsInfoPageState extends State<ProductsInfoPage> {
                 Text(
                   widget.product.name,
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: colorTheme.blackText),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  widget.product.opisanie ?? '',
-                  style: const TextStyle(
-                    color: Color(0xFF2B2D33),
-                    fontSize: 10,
-                    fontFamily: 'SF Pro Text',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: colorTheme.blackText,
                   ),
                 ),
-                const SizedBox(height: 12),
                 Divider(
                   height: 25,
                   thickness: 1,
                   endIndent: 0,
                   color: colorTheme.borderGray,
                 ),
-                const SizedBox(height: 12),
                 Text(
                   widget.product.opisanie ?? '',
                   style: const TextStyle(
