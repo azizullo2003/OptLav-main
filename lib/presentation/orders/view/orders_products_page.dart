@@ -49,7 +49,15 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
   bool isStatusOne = false;
   final List<OrderProducts> _orderProductsList = <OrderProducts>[];
 
-  late final _interstitialAD;
+  // late final _interstitialAD;
+
+  late var adUnitId = getYandexInterstitialID();
+  InterstitialAd? _ad;
+  late final Future<InterstitialAdLoader> _adLoader =
+      _createInterstitialAdLoader();
+  var adRequest = const AdRequest();
+  late var _adRequestConfiguration = AdRequestConfiguration(adUnitId: adUnitId);
+  var isLoading = false;
 
   @override
   void initState() {
@@ -60,14 +68,69 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
         SendActivityEvent.sendActivity(
             screenName: "Экран заявки №${widget.order.id}"));
 
-    _initInterstitialAD();
+    _loadInterstitialAd();
   }
 
-  _initInterstitialAD() async {
-    _interstitialAD = await InterstitialAd.create(
-      adUnitId: getYandexInterstitialID(),
-      onAdLoaded: () {},
-      onAdFailedToLoad: (error) {},
+  // _initInterstitialAD() async {
+  //   _interstitialAD = await InterstitialAd.create(
+  //     adUnitId: getYandexInterstitialID(),
+  //     onAdLoaded: () {},
+  //     onAdFailedToLoad: (error) {},
+  //   );
+  // }
+
+  Future<void> _loadInterstitialAd() async {
+    final adLoader = await _adLoader;
+    setState(() => isLoading = true);
+    await adLoader.loadAd(adRequestConfiguration: _adRequestConfiguration);
+  }
+
+  Future<void> showInterstitialAd() async {
+    final ad = _ad;
+    if (ad != null) {
+      _setAdEventListener(ad);
+      await ad.show();
+      await ad.waitForDismiss();
+      setState(() => _ad = null);
+    }
+  }
+
+  void _setAdEventListener(InterstitialAd ad) {
+    ad.setAdEventListener(
+        eventListener: InterstitialAdEventListener(
+            onAdFailedToShow: (error) {},
+            onAdClicked: () {},
+            onAdDismissed: () {},
+            onAdImpression: (data) {}));
+  }
+
+  Future<InterstitialAdLoader> _createInterstitialAdLoader() {
+    return InterstitialAdLoader.create(
+      onAdLoaded: (InterstitialAd interstitialAd) {
+        setState(() {
+          _ad = interstitialAd;
+          isLoading = false;
+        });
+      },
+      onAdFailedToLoad: (error) {
+        setState(() {
+          _ad = null;
+          isLoading = false;
+        });
+      },
+    );
+  }
+
+  void _updateAdRequestConfiguration(String adUnitId, AdRequest configuration) {
+    _adRequestConfiguration = AdRequestConfiguration(
+      adUnitId: adUnitId,
+      age: configuration.age,
+      contextQuery: configuration.contextQuery,
+      contextTags: configuration.contextTags,
+      gender: configuration.gender,
+      location: configuration.location,
+      parameters: configuration.parameters,
+      preferredTheme: configuration.preferredTheme,
     );
   }
 
@@ -231,11 +294,12 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
                             sum = double.parse(
                                 response.response.data[0].sum ?? "");
                             skidka = double.parse(
-                                response.response.data[0].summa_skidka ?? "0.0");
+                                response.response.data[0].summa_skidka ??
+                                    "0.0");
                             skidkaProcent = double.parse(
                                 response.response.data[0].raz_skidka ?? "0.0");
-                            if(skidka > 0){
-                              sumSkidka = sum - (sum * skidkaProcent/100);
+                            if (skidka > 0) {
+                              sumSkidka = sum - (sum * skidkaProcent / 100);
                             }
                             _orderProductsList
                                 .addAll(response.response.data[0].product);
@@ -430,7 +494,8 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
                                                       .greyBarBottomText),
                                             ),
                                             if (widget.order.summa_skidka !=
-                                                null && sum > skidka)
+                                                    null &&
+                                                sum > skidka)
                                               Text(
                                                 "Так как общая сумма превышает ${widget.order.summa_skidka} руб. вам положена скидка в размере ${widget.order.raz_skidka}%. Общая сумма будет $sumSkidka ₽",
                                                 maxLines: 4,
@@ -492,7 +557,8 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
                                         ]))
                                       },
                                       style: ElevatedButton.styleFrom(
-                                          elevation: 0, backgroundColor: colorTheme.primary,
+                                          elevation: 0,
+                                          backgroundColor: colorTheme.primary,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -620,8 +686,7 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
                       deliveries.addAll(response.response.deliveries);
                       deliveryAddresses = <DeliveryAddress>[];
                       deliveryAddresses.addAll(response.response.adres);
-                      print(
-                          "DSDSDWDWDW ${deliveryAddresses.length}");
+                      print("DSDSDWDWDW ${deliveryAddresses.length}");
                       deliveryAddress = response.response.adres[0];
                       return SingleChildScrollView(
                         child: Container(
@@ -852,7 +917,8 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
                                         Navigator.pop(context)
                                       },
                                       style: ElevatedButton.styleFrom(
-                                          elevation: 0, backgroundColor: colorTheme.primary,
+                                          elevation: 0,
+                                          backgroundColor: colorTheme.primary,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -880,12 +946,14 @@ class _OrdersProductsState extends State<OrdersProductsPage> {
   }
 
   void _onCartSend() async {
-    print("Cart SEND  ${widget.order.id} ${selectedDeliveryAddress!.id!} ${selectedTypeOfDelivery!.id} ${selectedTypeOfPayment!.key}");
+    print(
+        "Cart SEND  ${widget.order.id} ${selectedDeliveryAddress!.id!} ${selectedTypeOfDelivery!.id} ${selectedTypeOfPayment!.key}");
 
-    await _interstitialAD.load(adRequest: const AdRequest());
-    await _interstitialAD.show();
-    await _interstitialAD.waitForDismiss();
-
+    if (_ad != null) {
+      await showInterstitialAd();
+    } else {
+      await _loadInterstitialAd();
+    }
     BlocProvider.of<OrdersBloc>(context).add(OrdersEvent.cartSendOrder(
         widget.order.id,
         selectedDeliveryAddress!.id!,

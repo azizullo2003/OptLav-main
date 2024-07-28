@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,23 +25,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           getUserData: () async => (await repository.getUserInfo()).fold(
                 (l) => emit(ProfileState.failure(l)),
                 (r) => emit(ProfileState.loaded(r)),
-          ),
-          changeUserInfo: (List<String> fields,
-              List<String> values, List<String> regions) async =>
-              (await repository.changeUserInfo(fields, values, regions))
-                  .fold(
-                    (l) => emit(ProfileState.failure(l)),
-                    (r) => emit(ProfileState.dataChanged(r)),
               ),
-
+          changeUserInfo: (List<String> fields, List<String> values,
+                  List<String> regions) async =>
+              (await repository.changeUserInfo(fields, values, regions)).fold(
+                (l) => emit(ProfileState.failure(l)),
+                (r) => emit(ProfileState.dataChanged(r)),
+              ),
           innSearch: (inn) async => (await repository.innSearch(inn)).fold(
                 (l) => emit(ProfileState.failure(l)),
                 (r) => emit(ProfileState.innLoaded(r)),
-          ),
+              ),
           deleteUser: () async => (await repository.deleteUser()).fold(
                 (l) => emit(ProfileState.failure(l)),
                 (r) => emit(ProfileState.userDeleted(r)),
-          ));
+              ));
     });
   }
 }

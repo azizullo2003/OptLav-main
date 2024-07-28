@@ -27,6 +27,7 @@ class _TopListPageState extends State<TopListPage> {
 
   @override
   void initState() {
+    super.initState();
 
     BlocProvider.of<TopBloc>(context).add(const TopEvent.getTop());
     _controller = ScrollController();
@@ -40,112 +41,100 @@ class _TopListPageState extends State<TopListPage> {
       listener: (context, state) {
         state.maybeMap(
             productAdded: (respone) => {
-              if (respone.response.result)
-                {
-                  Fluttertoast.showToast(
-                      msg:
-                      "Товар добавлен в избранное",
-                      toastLength:
-                      Toast.LENGTH_LONG,
-                      gravity:
-                      ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor:
-                      Colors.grey,
-                      textColor: Colors.white,
-                      fontSize: 16.0)
+                  if (respone.response.result)
+                    {
+                      Fluttertoast.showToast(
+                          msg: "Товар добавлен в избранное",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0)
+                    },
+                  BlocProvider.of<TopBloc>(context)
+                      .add(const TopEvent.getTop()),
+                  setState(() {})
                 },
-              BlocProvider.of<TopBloc>(context).add(const TopEvent.getTop()),
-              setState(() {
-
-              })
-            },
             productRemoved: (response) => {
-              if (response.response.result)
-                {
-                  Fluttertoast.showToast(
-                      msg:
-                      "Товар был удалён из избранного",
-                      toastLength:
-                      Toast.LENGTH_LONG,
-                      gravity:
-                      ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor:
-                      Colors.grey,
-                      textColor: Colors.white,
-                      fontSize: 16.0)
+                  if (response.response.result)
+                    {
+                      Fluttertoast.showToast(
+                          msg: "Товар был удалён из избранного",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0)
+                    },
+                  BlocProvider.of<TopBloc>(context)
+                      .add(const TopEvent.getTop()),
+                  setState(() {})
                 },
-              BlocProvider.of<TopBloc>(
-                  context)
-                  .add(const TopEvent.getTop()),
-              setState(() {
-
-              })
-            },
             orElse: () => {});
       },
       child: Scaffold(
           body: Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
-              child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () => {context.router.navigateBack()},
-                  child: Box(
-                    child: Assets.images.back.svg(fit: BoxFit.cover),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  "Топ товаров",
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: colorTheme.blackText),
-                ),
-                const SizedBox(height: 24),
-                BlocBuilder<TopBloc, TopState>(
-                  builder: (context, state) => state.maybeMap(
-                      failure: (_) => const Text("data"),
-                      loading: (_) {
-                        return const Center(child: CircularProgressIndicator());
-                      },
-
-                      orElse: () {
-                        return const Center(child: CircularProgressIndicator());
-                      },
-                      topLoaded: (response) {
-                        _products.clear();
-                        _products.addAll(response.response.prod_top);
-                        return Expanded(
-                          child: Scrollbar(
-                            controller: _controller,
-                            child: ListView.builder(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () => {context.router.navigateBack()},
+                      child: Box(
+                        child: Assets.images.back.svg(fit: BoxFit.cover),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "Топ товаров",
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.blackText),
+                    ),
+                    const SizedBox(height: 24),
+                    BlocBuilder<TopBloc, TopState>(
+                      builder: (context, state) => state.maybeMap(
+                          failure: (_) => const Text("data"),
+                          loading: (_) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          },
+                          orElse: () {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          },
+                          topLoaded: (response) {
+                            _products.clear();
+                            _products.addAll(response.response.prod_top);
+                            return Expanded(
+                              child: Scrollbar(
                                 controller: _controller,
-                                primary: false,
-                                shrinkWrap: true,
-                                itemCount: _products.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ProductCard(
-                                    addOrRemFav: () => _favorite(_products[index]),
-                                    action: null,
-                                    product: _products[index],
-                                    inCart: () => InCartDialog.inCart(
-                                        _products[index], context,
-                                        action: true),
-                                  );
-                                }),
-                          ),
-                        );
-                      }
-                  ),
-
-
-
-                ),
-              ]))),
+                                child: ListView.builder(
+                                    controller: _controller,
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    itemCount: _products.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return ProductCard(
+                                        addOrRemFav: () =>
+                                            _favorite(_products[index]),
+                                        action: null,
+                                        product: _products[index],
+                                        inCart: () => InCartDialog.inCart(
+                                            _products[index], context,
+                                            action: true),
+                                      );
+                                    }),
+                              ),
+                            );
+                          }),
+                    ),
+                  ]))),
     );
   }
 
@@ -158,6 +147,5 @@ class _TopListPageState extends State<TopListPage> {
       BlocProvider.of<FavoriteBloc>(context).add(
           FavoriteEvent.removeProductFromFavorite(product.firm_id, product.id));
     }
-
   }
 }

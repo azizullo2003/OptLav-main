@@ -17,7 +17,7 @@ class OrderProduct extends StatelessWidget {
       required this.orderProductInfo,
       required this.deleteCallback,
       required this.changeCallback,
-        required this.isStatusOne})
+      required this.isStatusOne})
       : super(key: key);
 
   @override
@@ -33,13 +33,8 @@ class OrderProduct extends StatelessWidget {
               fit: BoxFit.cover,
               width: 44,
               height: 44,
-              imageUrl: () {
-                if (orderProductInfo.image != null ) {
-                  return orderProductInfo.image;
-                } else {
-                  return "https://panel.optlav.ru/uploads/defolt.PNG";
-                }
-              }(),
+              imageUrl: orderProductInfo.image ??
+                  "https://panel.optlav.ru/uploads/defolt.PNG",
               imageBuilder: (context, imageProvider) => Container(
                 height: 44,
                 width: 44,
@@ -53,8 +48,7 @@ class OrderProduct extends StatelessWidget {
               ),
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => CachedNetworkImage(
-                  imageUrl:
-                      "https://panel.optlav.ru/uploads/defolt.PNG"),
+                  imageUrl: "https://panel.optlav.ru/uploads/defolt.PNG"),
             ),
             const SizedBox(
               width: 8,
@@ -85,28 +79,28 @@ class OrderProduct extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                if(isStatusOne)
-                GestureDetector(
-                  onTap: changeCallback,
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                      bottom: 0.5, // Space between underline and text
-                    ),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                      color: colorTheme.blueSochi,
-                      width: 1.0, // Underline thickness
-                    ))),
-                    child: Text(
-                      "Изменить",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13,
-                          color: colorTheme.blueSochi),
+                if (isStatusOne)
+                  GestureDetector(
+                    onTap: changeCallback,
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                        bottom: 0.5, // Space between underline and text
+                      ),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                        color: colorTheme.blueSochi,
+                        width: 1.0, // Underline thickness
+                      ))),
+                      child: Text(
+                        "Изменить",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
+                            color: colorTheme.blueSochi),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
             const Spacer(),
@@ -146,13 +140,13 @@ class OrderProduct extends StatelessWidget {
             const SizedBox(
               width: 12,
             ),
-            if(isStatusOne)
-            GestureDetector(
-              onTap: deleteCallback,
-              child: Box(
-                child: Assets.images.orders.deleteProduct.svg(),
-              ),
-            )
+            if (isStatusOne)
+              GestureDetector(
+                onTap: deleteCallback,
+                child: Box(
+                  child: Assets.images.orders.deleteProduct.svg(),
+                ),
+              )
           ],
         ),
         Divider(

@@ -1,15 +1,16 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:optlove/presentation/about/domain/response/about_response.dart';
 import 'package:optlove/presentation/main/domain/repositories/search_repository.dart';
 
+part 'about_bloc.freezed.dart';
 part 'about_event.dart';
 part 'about_state.dart';
-part 'about_bloc.freezed.dart';
 
 @injectable
 class AboutBloc extends Bloc<AboutEvent, AboutState> {
@@ -22,8 +23,7 @@ class AboutBloc extends Bloc<AboutEvent, AboutState> {
           getAbout: () async => (await repository.getAbout()).fold(
                 (l) => emit(AboutState.failure(l)),
                 (r) => emit(AboutState.loaded(r)),
-          )
-      );
+              ));
     });
   }
 }

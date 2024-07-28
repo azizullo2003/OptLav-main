@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -21,8 +21,8 @@ class SearchCityBloc extends Bloc<SearchCityEvent, SearchCityState> {
       emit(const SearchCityState.loading());
       await event.when<Future<void>>(
         searchCity: (city) async => (await repository.citySearch(city)).fold(
-              (l) => emit(SearchCityState.failure(l)),
-              (r) => emit(SearchCityState.loaded(r)),
+          (l) => emit(SearchCityState.failure(l)),
+          (r) => emit(SearchCityState.loaded(r)),
         ),
       );
     });

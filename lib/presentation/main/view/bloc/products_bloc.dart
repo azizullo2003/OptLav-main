@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -21,8 +21,8 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       await event.when<Future<void>>(
         getProductsByCategory: (catalogId) async =>
             (await repository.getProductsByCategory(catalogId)).fold(
-              (l) => emit(ProductsState.failure(l)),
-              (r) => emit(ProductsState.loaded(r)),
+          (l) => emit(ProductsState.failure(l)),
+          (r) => emit(ProductsState.loaded(r)),
         ),
       );
     });

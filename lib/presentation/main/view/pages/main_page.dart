@@ -83,7 +83,6 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
   @override
   void dispose() {
     _observer?.unsubscribe(this);
-
     super.dispose();
   }
 
@@ -118,10 +117,16 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
   }
 
   _showAd(bool isInitLoad) async {
-    int adWidth =
-        (MediaQueryData.fromView(WidgetsBinding.instance.window).size.width)
-            .toInt();
-    var adSize = AdSize.inline(width: adWidth, maxHeight: 60);
+    // int adWidth =
+    //     (MediaQueryData.fromView(WidgetsBinding.instance.window).size.width)
+    //         .toInt();
+    // var adSize = AdSize.inline(width: adWidth, maxHeight: 60);
+    final windowSize = MediaQuery.of(context).size;
+
+    final adSize = BannerAdSize.inline(
+      width: windowSize.width.toInt(),
+      maxHeight: 60,
+    );
 
     if (!isInitLoad) {
       setState(() {

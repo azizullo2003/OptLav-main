@@ -110,6 +110,7 @@ class _CatalogPageState extends State<CatalogPage> {
     final colorTheme = AppTheme.of(context).colorTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         controller: _controller,
         child: Padding(

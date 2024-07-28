@@ -6,6 +6,7 @@ import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/top_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/work_orders_bloc.dart';
+import 'package:optlove/presentation/main/view/pages/my_ads/my_products_page.dart';
 import 'package:optlove/presentation/main/view/widgets/about_us_widget.dart';
 import 'package:optlove/presentation/main/view/widgets/exists_order_widget.dart';
 import 'package:optlove/presentation/sendactivity/bloc/sendactivity_bloc.dart';
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
     final colorTheme = AppTheme.of(context).colorTheme;
     _sendActivity(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +102,103 @@ class _HomePageState extends State<HomePage> {
                   // GestureDetector(
                   //     onTap: () => _onProfile(context),
                   //     child: const ProfileWidget()),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
+                  GestureDetector(
+                    onTap: () {
+                      context.router.navigate(const FavoriteRoute());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          top: 1, bottom: 12, left: 1, right: 1),
+                      decoration: decorationOfBox(context),
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 16, bottom: 12, left: 12, right: 12),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Box(
+                              child: Icon(
+                                Icons.star_border,
+                                color: Color.fromRGBO(247, 231, 172, 1),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Box(
+                                  padding: const Pad(left: 12),
+                                  child: Text(
+                                    "Избранное",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w700,
+                                      color: colorTheme.blackText,
+                                    ),
+                                  ),
+                                ),
+                                Box(
+                                  padding: const Pad(left: 12, top: 8),
+                                  width: 200,
+                                  child: Text(
+                                    "Здесь сохранены понравившиеся вам товары",
+                                    style: TextStyle(
+                                        height: 1.5,
+                                        color: colorTheme.greyBarBottomText,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Spacer(),
+                            Box(
+                              child: Assets.images.about.arrow
+                                  .svg(fit: BoxFit.cover),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyProductsPage(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 70,
+                      color: Colors.white,
+                      width: double.infinity,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Box(
+                            child: Text(
+                              "Мои объявления",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                                color: colorTheme.blackText,
+                              ),
+                            ),
+                          ),
+                          Box(
+                            child: Assets.images.about.arrow
+                                .svg(fit: BoxFit.cover),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   GestureDetector(
                     onTap: () => _onOrders(context),
                     child: BlocBuilder<WorkOrdersBloc, WorkOrdersState>(
@@ -112,8 +210,9 @@ class _HomePageState extends State<HomePage> {
                               if (response.response.data.isNotEmpty) {
                                 return ExistOrdersWidget(
                                   data: response.response.data,
-                                  ordersInWork:
-                                      response.response.global_status?? "  ${response.response.title_status!}",
+                                  ordersInWork: response
+                                          .response.global_status ??
+                                      "  ${response.response.title_status!}",
                                 );
                               } else {
                                 return const EmptyOrdersWidget();
@@ -123,31 +222,30 @@ class _HomePageState extends State<HomePage> {
                               return const SizedBox();
                             })),
                   ),
-                  const SizedBox(height: 24),
                   BlocBuilder<TopBloc, TopState>(
                       builder: (context, state) => state.maybeMap(loading: (_) {
-                        return const Center(
-                            child: CircularProgressIndicator());
-                      }, topLoaded: (response) {
-                        if (response.response.prod_top.isNotEmpty) {
-                          return Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: SizedBox(
-                                      child: TopWidget(
-                                        products: response.response.prod_top,
-                                      ))),
-                            ],
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      }, orElse: () {
-                        print("orElse");
-                        return const SizedBox();
-                      })),
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }, topLoaded: (response) {
+                            if (response.response.prod_top.isNotEmpty) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: SizedBox(
+                                          child: TopWidget(
+                                    products: response.response.prod_top,
+                                  ))),
+                                ],
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          }, orElse: () {
+                            print("orElse");
+                            return const SizedBox();
+                          })),
                   const SizedBox(height: 4),
                   BlocBuilder<ActionsBloc, ActionsState>(
                       builder: (context, state) => state.maybeMap(loading: (_) {
@@ -162,8 +260,8 @@ class _HomePageState extends State<HomePage> {
                                   Expanded(
                                       child: SizedBox(
                                           child: ActionsWidget(
-                                            products: response.response.actions,
-                                          ))),
+                                    products: response.response.actions,
+                                  ))),
                                 ],
                               );
                             } else {
@@ -185,7 +283,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 12),
                   GestureDetector(
-                      onTap: () => _onAbout(context), child: const AboutUsWidget()),
+                      onTap: () => _onAbout(context),
+                      child: const AboutUsWidget()),
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: () => _onSupport(context),
@@ -319,5 +418,10 @@ class _HomePageState extends State<HomePage> {
     context.router.push(AboutRoute());
   }
 
-
+  BoxDecoration decorationOfBox(BuildContext context) {
+    return BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: Border.all(color: const Color.fromRGBO(247, 231, 172, 1)));
+  }
 }

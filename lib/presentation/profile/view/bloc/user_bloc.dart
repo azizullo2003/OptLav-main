@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -22,26 +22,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEvent>((event, emit) async {
       emit(const UserState.loading());
       await event.when<Future<void>>(
-        getUserData: () async => (await repository.getUserInfo()).fold(
-          (l) => emit(UserState.failure(l)),
-          (r) => emit(UserState.loaded(r)),
-        ),
-        changeUserInfo: (List<String> fields,
-                List<String> values, List<String> regions) async =>
-            (await repository.changeUserInfo(fields, values, regions))
-                .fold(
-          (l) => emit(UserState.failure(l)),
-          (r) => emit(UserState.dataChanged(r)),
-        ),
-
-        innSearch: (inn) async => (await repository.innSearch(inn)).fold(
-      (l) => emit(UserState.failure(l)),
-      (r) => emit(UserState.innLoaded(r)),
-      ),
+          getUserData: () async => (await repository.getUserInfo()).fold(
+                (l) => emit(UserState.failure(l)),
+                (r) => emit(UserState.loaded(r)),
+              ),
+          changeUserInfo: (List<String> fields, List<String> values,
+                  List<String> regions) async =>
+              (await repository.changeUserInfo(fields, values, regions)).fold(
+                (l) => emit(UserState.failure(l)),
+                (r) => emit(UserState.dataChanged(r)),
+              ),
+          innSearch: (inn) async => (await repository.innSearch(inn)).fold(
+                (l) => emit(UserState.failure(l)),
+                (r) => emit(UserState.innLoaded(r)),
+              ),
           deleteUser: () async => (await repository.deleteUser()).fold(
-      (l) => emit(UserState.failure(l)),
-      (r) => emit(UserState.userDeleted(r)),
-      ));
+                (l) => emit(UserState.failure(l)),
+                (r) => emit(UserState.userDeleted(r)),
+              ));
     });
   }
 }

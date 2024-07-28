@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/routes/router.gr.dart';
 import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
-import '../../../main/ data/models/category.dart';
 import '../../../main/ data/models/company.dart';
 import '../../../sendactivity/bloc/sendactivity_bloc.dart';
 import '../bloc/favorite_bloc.dart';

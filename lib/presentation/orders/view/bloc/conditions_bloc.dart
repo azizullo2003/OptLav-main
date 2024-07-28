@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -20,11 +20,11 @@ class ConditionsBloc extends Bloc<ConditionsEvent, ConditionsState> {
     on<ConditionsEvent>((event, emit) async {
       emit(const ConditionsState.loading());
       await event.when<Future<void>>(
-        getConditions: (firmId) async => (await repository.getConditions(firmId)).fold(
-              (l) => emit(ConditionsState.failure(l)),
-              (r) => emit(ConditionsState.loaded(r)),
-        )
-      );
+          getConditions: (firmId) async =>
+              (await repository.getConditions(firmId)).fold(
+                (l) => emit(ConditionsState.failure(l)),
+                (r) => emit(ConditionsState.loaded(r)),
+              ));
     });
   }
 }

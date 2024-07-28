@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -20,9 +20,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {
       emit(const AuthState.loading());
       await event.when<Future<void>>(
-        auth: (login,password, os) async => (await repository.auth(login,password, os)).fold(
-              (l) => emit(AuthState.failure(l)),
-              (r) => emit(AuthState.loaded(r)),
+        auth: (login, password, os) async =>
+            (await repository.auth(login, password, os)).fold(
+          (l) => emit(AuthState.failure(l)),
+          (r) => emit(AuthState.loaded(r)),
         ),
       );
     });

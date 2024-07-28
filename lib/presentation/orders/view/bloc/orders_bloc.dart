@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -23,7 +23,6 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
           (l) => emit(OrdersState.failure(l)),
           (r) => emit(OrdersState.loaded(r)),
         ),
-
         getWorkingOrders: () async =>
             (await repository.getWorkingOrders()).fold(
           (l) => emit(OrdersState.failure(l)),
@@ -46,10 +45,12 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
                 .fold(
           (l) => emit(OrdersState.failure(l)),
           (r) => emit(OrdersState.orderSent(r)),
-        ), getOrdersByStatus: (status) async => (await repository.getOrdersByStatus(status)).fold(
-            (l) => emit(OrdersState.failure(l)),
-            (r) => emit(OrdersState.loaded(r)),
-      ),
+        ),
+        getOrdersByStatus: (status) async =>
+            (await repository.getOrdersByStatus(status)).fold(
+          (l) => emit(OrdersState.failure(l)),
+          (r) => emit(OrdersState.loaded(r)),
+        ),
       );
     });
   }

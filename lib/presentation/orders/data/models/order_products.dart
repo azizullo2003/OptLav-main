@@ -8,7 +8,7 @@ class OrderProducts {
   final String count;
   final String sum;
   final String? name_user;
-  final String image;
+  final String? image;
   final String price_prod;
   final String un_name;
   final String count_from;
@@ -25,7 +25,7 @@ class OrderProducts {
     required this.user_id,
     required this.count,
     this.name_user,
-    required this.image,
+    this.image,
     required this.count_from,
   });
 

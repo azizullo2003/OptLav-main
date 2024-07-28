@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -19,11 +19,10 @@ class UserExistBloc extends Bloc<UserExistEvent, UserExistState> {
     on<UserExistEvent>((event, emit) async {
       emit(const UserExistState.loading());
       await event.when<Future<void>>(
-        getUserExist: () async =>
-          (await repository.getUserExist()).fold(
-                (l) => emit(UserExistState.failure(l)),
-                (r) => emit(UserExistState.isUserExist(r)),
-          ),
+        getUserExist: () async => (await repository.getUserExist()).fold(
+          (l) => emit(UserExistState.failure(l)),
+          (r) => emit(UserExistState.isUserExist(r)),
+        ),
       );
     });
   }

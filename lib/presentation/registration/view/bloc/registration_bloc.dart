@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:optlove/core/standart_post_response.dart';
 import 'package:optlove/presentation/registration/domain/repositories/registration_repository.dart';
-
 
 part 'registration_event.dart';
 part 'registration_state.dart';
@@ -25,11 +24,11 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
                 (l) => emit(RegistrationState.failure(l)),
                 (r) => emit(RegistrationState.loaded(r)),
               ),
-          restorePass: (phone) async => (await repository.restorePass(phone)).fold(
+          restorePass: (phone) async =>
+              (await repository.restorePass(phone)).fold(
                 (l) => emit(RegistrationState.failure(l)),
                 (r) => emit(RegistrationState.loaded(r)),
-          )
-      );
+              ));
     });
   }
 }

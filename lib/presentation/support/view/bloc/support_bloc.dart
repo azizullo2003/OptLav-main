@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -20,10 +20,10 @@ class SupportBloc extends Bloc<SupportEvent, SupportState> {
     on<SupportEvent>((event, emit) async {
       emit(const SupportState.loading());
       await event.when<Future<void>>(
-        sendMessage: (String email, String message) async => (
-            await repository.sendMessage(email,message)).fold(
-              (l) => emit(SupportState.failure(l)),
-              (r) => emit(SupportState.messageSent(r)),
+        sendMessage: (String email, String message) async =>
+            (await repository.sendMessage(email, message)).fold(
+          (l) => emit(SupportState.failure(l)),
+          (r) => emit(SupportState.messageSent(r)),
         ),
       );
     });

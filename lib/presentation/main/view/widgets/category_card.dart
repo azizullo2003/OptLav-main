@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:optlove/presentation/main/%20data/models/category.dart';
@@ -32,12 +33,15 @@ class CategoryCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AutoSizeText(
               category.name,
               style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: colorTheme.blackText),
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                color: colorTheme.blackText,
+              ),
+              minFontSize: 12,
+              maxLines: 2,
             ),
             const Spacer(),
             Text(

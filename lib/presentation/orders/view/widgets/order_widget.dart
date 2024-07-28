@@ -1,24 +1,32 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
+
 import 'package:optlove/presentation/orders/data/models/order_info.dart';
 import 'package:optlove/presentation/orders/view/widgets/status_widget.dart';
 
 import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
 
-class OrderWidget extends StatelessWidget {
+class OrderWidget extends StatefulWidget {
   final OrderInfo orderInfo;
   final VoidCallback onOrderInfo;
   final VoidCallback onConditions;
 
-  OrderWidget(
-      {Key? key,
-      required this.orderInfo,
-      required this.onOrderInfo,
-      required this.onConditions})
-      : super(key: key);
+  const OrderWidget({
+    Key? key,
+    required this.orderInfo,
+    required this.onOrderInfo,
+    required this.onConditions,
+  }) : super(key: key);
 
+  @override
+  State<OrderWidget> createState() => _OrderWidgetState();
+}
+
+class _OrderWidgetState extends State<OrderWidget> {
   String statusText = "";
+
   Color selectedColor = Colors.white;
 
   @override
@@ -32,7 +40,7 @@ class OrderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Заявка № ${orderInfo.id}",
+            "Заявка № ${widget.orderInfo.id}",
             style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
@@ -60,7 +68,7 @@ class OrderWidget extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                orderInfo.count_sum ?? "",
+                widget.orderInfo.count_sum ?? "",
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
@@ -78,7 +86,7 @@ class OrderWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            orderInfo.name_user ?? "",
+            widget.orderInfo.name_user ?? "",
             style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -98,7 +106,7 @@ class OrderWidget extends StatelessWidget {
                 color: colorTheme.blackText),
           ),
           Text(
-            "${orderInfo.sum?? ""} ₽",
+            "${widget.orderInfo.sum ?? ""} ₽",
             style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -106,7 +114,7 @@ class OrderWidget extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           GestureDetector(
-            onTap: onOrderInfo,
+            onTap: widget.onOrderInfo,
             child: Row(
               children: [
                 Box(
@@ -154,22 +162,22 @@ class OrderWidget extends StatelessWidget {
 
   void _chooseColorAndTextStatus(BuildContext context) {
     final colorTheme = AppTheme.of(context).colorTheme;
-    switch (orderInfo.status) {
+    switch (widget.orderInfo.status) {
       case "1":
         selectedColor = colorTheme.blueSochi;
-        statusText = orderInfo.statuss.type_1;
+        statusText = widget.orderInfo.statuss.type_1;
         break;
       case "2":
         selectedColor = colorTheme.greenText;
-        statusText = orderInfo.statuss.type_2;
+        statusText = widget.orderInfo.statuss.type_2;
         break;
       case "3":
         selectedColor = colorTheme.orange;
-        statusText = orderInfo.statuss.type_3;
+        statusText = widget.orderInfo.statuss.type_3;
         break;
       case "4":
         selectedColor = colorTheme.redText;
-        statusText = orderInfo.statuss.type_4;
+        statusText = widget.orderInfo.statuss.type_4;
         break;
     }
   }

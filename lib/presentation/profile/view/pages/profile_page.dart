@@ -62,7 +62,15 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController addPhoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
-  late final _interstitialAD;
+  // late final _interstitialAD;
+
+  late var adUnitId = getYandexInterstitialID();
+  InterstitialAd? _ad;
+  late final Future<InterstitialAdLoader> _adLoader =
+      _createInterstitialAdLoader();
+  var adRequest = const AdRequest();
+  late var _adRequestConfiguration = AdRequestConfiguration(adUnitId: adUnitId);
+  var isLoading = false;
 
   @override
   void initState() {
@@ -81,22 +89,80 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     });
 
-    _initInterstitialAD();
+    _loadInterstitialAd();
   }
 
-  _initInterstitialAD() async {
-    _interstitialAD = await InterstitialAd.create(
-      adUnitId: getYandexInterstitialID(),
-      onAdLoaded: () {},
-      onAdFailedToLoad: (error) {},
+  // Future<void> _initInterstitialAD() async {
+  //   await InterstitialAdLoader.create(
+  //     onAdLoaded: (InterstitialAd interstitialAd) {
+  //       setState(() {
+  //         _interstitialAD = interstitialAd;
+  //       });
+  //     },
+  //     onAdFailedToLoad: (error) {},
+  //   );
+  // }
+
+  Future<void> _loadInterstitialAd() async {
+    final adLoader = await _adLoader;
+    setState(() => isLoading = true);
+    await adLoader.loadAd(adRequestConfiguration: _adRequestConfiguration);
+  }
+
+  Future<void> showInterstitialAd() async {
+    final ad = _ad;
+    if (ad != null) {
+      _setAdEventListener(ad);
+      await ad.show();
+      await ad.waitForDismiss();
+      setState(() => _ad = null);
+    }
+  }
+
+  void _setAdEventListener(InterstitialAd ad) {
+    ad.setAdEventListener(
+        eventListener: InterstitialAdEventListener(
+            onAdFailedToShow: (error) {},
+            onAdClicked: () {},
+            onAdDismissed: () {},
+            onAdImpression: (data) {}));
+  }
+
+  Future<InterstitialAdLoader> _createInterstitialAdLoader() {
+    return InterstitialAdLoader.create(
+      onAdLoaded: (InterstitialAd interstitialAd) {
+        setState(() {
+          _ad = interstitialAd;
+          isLoading = false;
+        });
+      },
+      onAdFailedToLoad: (error) {
+        setState(() {
+          _ad = null;
+          isLoading = false;
+        });
+      },
     );
   }
 
-  // @override
-  // void dispose() {
-  //   print("dispose Profile");
-  //   super.dispose();
-  // }
+  void _updateAdRequestConfiguration(String adUnitId, AdRequest configuration) {
+    _adRequestConfiguration = AdRequestConfiguration(
+      adUnitId: adUnitId,
+      age: configuration.age,
+      contextQuery: configuration.contextQuery,
+      contextTags: configuration.contextTags,
+      gender: configuration.gender,
+      location: configuration.location,
+      parameters: configuration.parameters,
+      preferredTheme: configuration.preferredTheme,
+    );
+  }
+
+  @override
+  void dispose() {
+    print("dispose Profile");
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -436,9 +502,15 @@ class _ProfilePageState extends State<ProfilePage> {
     }
     await SharedPrefsHelper.setAddressExist(isAddressExist);
     if (isAddressExist!) {
-      await _interstitialAD.load(adRequest: const AdRequest());
-      await _interstitialAD.show();
-      await _interstitialAD.waitForDismiss();
+      // await _interstitialAD.load(adRequest: const AdRequest());
+      // await _interstitialAD.show();
+      // await _interstitialAD.waitForDismiss();
+
+      if (_ad != null) {
+        await showInterstitialAd();
+      } else {
+        await _loadInterstitialAd();
+      }
 
       BlocProvider.of<ProfileBloc>(context)
           .add(ProfileEvent.changeUserInfo(_fields, _values, _regions));

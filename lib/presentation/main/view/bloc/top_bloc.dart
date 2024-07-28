@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -19,11 +19,10 @@ class TopBloc extends Bloc<TopEvent, TopState> {
     on<TopEvent>((event, emit) async {
       emit(const TopState.loading());
       await event.when<Future<void>>(
-        getTop: () async =>
-            (await repository.getTop()).fold(
-                  (l) => emit(TopState.failure(l)),
-                  (r) => emit(TopState.topLoaded(r)),
-            ),
+        getTop: () async => (await repository.getTop()).fold(
+          (l) => emit(TopState.failure(l)),
+          (r) => emit(TopState.topLoaded(r)),
+        ),
       );
     });
   }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -21,9 +21,9 @@ class WorkOrdersBloc extends Bloc<WorkOrdersEvent, WorkOrdersState> {
       await event.when<Future<void>>(
         getWorkingOrders: () async =>
             (await repository.getWorkingOrders()).fold(
-                  (l) => emit(WorkOrdersState.failure(l)),
-                  (r) => emit(WorkOrdersState.workingOrdersLoaded(r)),
-            ),
+          (l) => emit(WorkOrdersState.failure(l)),
+          (r) => emit(WorkOrdersState.workingOrdersLoaded(r)),
+        ),
       );
     });
   }

@@ -268,7 +268,7 @@ class _ProductsInfoPageState extends State<ProductsInfoPage> {
                               //   ),
                               // ),
                               Text(
-                                "${widget.product.price_before ?? 0} ₽",
+                                "${widget.product.price_before} ₽",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,

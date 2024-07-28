@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +29,7 @@ import 'app/routes/router.gr.dart';
 import 'injector.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,41 +55,44 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => AppThemeBloc()),
-          BlocProvider(create: (context) => GetIt.I<RegistrationBloc>()),
-          BlocProvider(create: (context) => GetIt.I<AuthBloc>()),
-          BlocProvider(create: (context) => GetIt.I<SearchCityBloc>()),
-          BlocProvider(create: (context) => GetIt.I<SearchBloc>()),
-          BlocProvider(create: (context) => GetIt.I<ProductsBloc>()),
-          BlocProvider(create: (context) => GetIt.I<SendActivityBloc>()),
-          BlocProvider(create: (context) => GetIt.I<UserBloc>()),
-          BlocProvider(create: (context) => GetIt.I<CartBloc>()),
-          BlocProvider(create: (context) => GetIt.I<OrdersBloc>()),
-          BlocProvider(create: (context) => GetIt.I<ConditionsBloc>()),
-          BlocProvider(create: (context) => GetIt.I<AboutBloc>()),
-          BlocProvider(create: (context) => GetIt.I<StaticBloc>()),
-          BlocProvider(create: (context) => GetIt.I<WorkOrdersBloc>()),
-          BlocProvider(create: (context) => GetIt.I<ActionsBloc>()),
-          BlocProvider(create: (context) => GetIt.I<FavoriteBloc>()),
-          BlocProvider(create: (context) => GetIt.I<UserExistBloc>()),
-          BlocProvider(create: (context) => GetIt.I<SupportBloc>()),
-          BlocProvider(create: (context) => GetIt.I<ProfileBloc>()),
-          BlocProvider(create: (context) => GetIt.I<TopBloc>()),
-        ],
-        child: MaterialApp.router(
-          title: 'OptLove',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textSelectionTheme: const TextSelectionThemeData(
-              cursorColor: AppPallete.grayText,
-            ),
+      providers: [
+        BlocProvider(create: (context) => AppThemeBloc()),
+        BlocProvider(create: (context) => GetIt.I<RegistrationBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AuthBloc>()),
+        BlocProvider(create: (context) => GetIt.I<SearchCityBloc>()),
+        BlocProvider(create: (context) => GetIt.I<SearchBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ProductsBloc>()),
+        BlocProvider(create: (context) => GetIt.I<SendActivityBloc>()),
+        BlocProvider(create: (context) => GetIt.I<UserBloc>()),
+        BlocProvider(create: (context) => GetIt.I<CartBloc>()),
+        BlocProvider(create: (context) => GetIt.I<OrdersBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ConditionsBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AboutBloc>()),
+        BlocProvider(create: (context) => GetIt.I<StaticBloc>()),
+        BlocProvider(create: (context) => GetIt.I<WorkOrdersBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ActionsBloc>()),
+        BlocProvider(create: (context) => GetIt.I<FavoriteBloc>()),
+        BlocProvider(create: (context) => GetIt.I<UserExistBloc>()),
+        BlocProvider(create: (context) => GetIt.I<SupportBloc>()),
+        BlocProvider(create: (context) => GetIt.I<ProfileBloc>()),
+        BlocProvider(create: (context) => GetIt.I<TopBloc>()),
+      ],
+      child: MaterialApp.router(
+        title: 'OptLove',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: AppPallete.grayText,
           ),
-          //home: MainPage(),
-          routerDelegate: _appRouter.delegate(
-              navigatorObservers: () => [AutoRouteObserver()]),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          debugShowCheckedModeBanner: false,
-        ));
+        ),
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [
+            AutoRouteObserver(),
+          ],
+        ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        debugShowCheckedModeBanner: false,
+      ),
+    );
   }
 }

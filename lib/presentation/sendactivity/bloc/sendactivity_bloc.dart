@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -19,9 +19,10 @@ class SendActivityBloc extends Bloc<SendActivityEvent, SendActivityState> {
     on<SendActivityEvent>((event, emit) async {
       emit(const SendActivityState.loading());
       await event.when<Future<void>>(
-        sendActivity: (screenName) async => (await repository.sendActivity(screenName)).fold(
-              (l) => emit(SendActivityState.failure(l)),
-              (r) => emit(const SendActivityState.loaded()),
+        sendActivity: (screenName) async =>
+            (await repository.sendActivity(screenName)).fold(
+          (l) => emit(SendActivityState.failure(l)),
+          (r) => emit(const SendActivityState.loaded()),
         ),
       );
     });
