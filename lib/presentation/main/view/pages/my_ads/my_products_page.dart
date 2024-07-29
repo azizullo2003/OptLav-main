@@ -89,28 +89,51 @@ class _MyProductsPageState extends State<MyProductsPage> {
                       color: colorTheme.blackText),
                 ),
                 const SizedBox(height: 12),
-                TextField(
-                  controller: _searchProductController,
-                  decoration: InputDecoration(
-                    prefixIcon: Assets.images.search.svg(fit: BoxFit.none),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
-                    filled: true,
-                    fillColor: colorTheme.borderGray,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xF3F3F3FF), width: 0.0),
-                        borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xF3F3F3FF), width: 0.0),
-                        borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    hintText: 'Поиск объявления',
-                    hintStyle: TextStyle(
-                      color: colorTheme.greyText,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _searchProductController,
+                        decoration: InputDecoration(
+                          prefixIcon:
+                              Assets.images.search.svg(fit: BoxFit.none),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 15.0),
+                          filled: true,
+                          fillColor: colorTheme.borderGray,
+                          enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xF3F3F3FF), width: 0.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(18.0))),
+                          focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xF3F3F3FF), width: 0.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16.0))),
+                          hintText: 'Поиск объявления',
+                          hintStyle: TextStyle(
+                            color: colorTheme.greyText,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      width: 26,
+                      height: 26,
+                      color: Colors.white,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(left: 14),
+                      child: Image.asset(
+                        "assets/images/filter.png",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

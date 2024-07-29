@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB9m9YDJuBKVGGolSe2FJu8ibvqUeySI1s',
-    appId: '1:713978211809:android:1a62b0f9eb098827f436a0',
-    messagingSenderId: '713978211809',
-    projectId: 'optlav-64105',
-    storageBucket: 'optlav-64105.appspot.com',
+    apiKey: 'AIzaSyDg9l-6usK4t4YvdSccCKLlqiZ5EybrZyU',
+    appId: '1:661983485653:android:8994361a7c57aab3e44c5c',
+    messagingSenderId: '661983485653',
+    projectId: 'optlav',
+    storageBucket: 'optlav.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAE4pVQLU8DqYjBKpy6v6GvHH51ZvTlmWI',
-    appId: '1:713978211809:ios:d3a6a51b3a341283f436a0',
-    messagingSenderId: '713978211809',
-    projectId: 'optlav-64105',
-    storageBucket: 'optlav-64105.appspot.com',
-    iosClientId: '713978211809-r60o868431rmj4rkr0q6aar6h78enlfr.apps.googleusercontent.com',
-    iosBundleId: 'com.example.optlove',
+    apiKey: 'AIzaSyCA89zvJrZoC89Cy1QzX2cTLXK3h6l0qmM',
+    appId: '1:661983485653:ios:4d050d5ac4622e1be44c5c',
+    messagingSenderId: '661983485653',
+    projectId: 'optlav',
+    storageBucket: 'optlav.appspot.com',
+    iosBundleId: 'optlav.ru',
   );
+
 }

@@ -169,97 +169,99 @@ class _ProfilePageState extends State<ProfilePage> {
     print("build Profile");
     final colorTheme = AppTheme.of(context).colorTheme;
     return SingleChildScrollView(
-        child: Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Container(
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
           padding: const EdgeInsets.all(16),
-          child: Column(children: [
-            BlocListener<ProfileBloc, ProfileState>(
-              listener: (context, state) {
-                state.maybeMap(
-                    failure: (e) {
-                      Fluttertoast.showToast(
-                          msg: "Ошибка подключения ${e.error.message}",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.grey,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                    },
-                    loaded: (response) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        innCorrect = response.response.user_info.inn_correct;
-                        setState(() {
-                          for (var i = 0;
-                              i < response.response.locations.length;
-                              i++) {
-                            if (i == 0 &&
-                                response.response.locations[0].adres != null &&
-                                !isFirstAddressCitySelected) {
-                              var address = AddressPage(
-                                  //readonly: true,
-                                  citySelectListener: () =>
-                                      _onFirstAddressCitySelected(),
-                                  addressNumber: commentWidgets.length + 1,
-                                  removeAddress: () => _onRemoveAddress(),
-                                  city: response.response.locations[i]);
-                              commentWidgets.add(address);
-                              print("Add Exist Address");
-                              existWidgets.add(address);
-                              // commentWidgets.add(AddressPage(
-                              //   //readonly: true,
-                              //     citySelectListener: () =>
-                              //     _onFirstAddressCitySelected(),
-                              //     addressNumber: commentWidgets.length + 1,
-                              //     removeAddress: () => _onRemoveAddress(),
-                              //     city: response.response.locations[i])
-                              // );
-                            } else {
-                              var address = AddressPage(
-                                  addressNumber: commentWidgets.length + 1,
-                                  removeAddress: () => _onRemoveAddress(),
-                                  city: response.response.locations[i]);
-                              commentWidgets.add(address);
-                              existWidgets.add(address);
-                              // commentWidgets.add(AddressPage(
-                              //     addressNumber: commentWidgets.length + 1,
-                              //     removeAddress: () => _onRemoveAddress(),
-                              //     city: response.response.locations[i])
-                              // );
-                            }
-                          }
-                        });
-                        fillFieldsFromResponse(response.response.user_info);
-                      });
-                    },
-                    innLoaded: (response) {
-                      setState(() {
-                        _innInfo.clear();
-                        if (response.response.data != null) {
-                          _innInfo.add(response.response.data!);
-                        }
-                      });
-                    },
-                    dataChanged: (response) {
-                      if (response.response.result) {
+          child: Column(
+            children: [
+              BlocListener<ProfileBloc, ProfileState>(
+                listener: (context, state) {
+                  state.maybeMap(
+                      failure: (e) {
                         Fluttertoast.showToast(
-                            msg: "Данные успешно изменены",
+                            msg: "Ошибка подключения ${e.error.message}",
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 1,
                             backgroundColor: Colors.grey,
                             textColor: Colors.white,
                             fontSize: 16.0);
-                        context.router.push(
-                          const MainRoute(),
-                        );
-                      }
-                    },
-                    orElse: () {});
-              },
-              child: Column(
+                      },
+                      loaded: (response) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          innCorrect = response.response.user_info.inn_correct;
+                          setState(() {
+                            for (var i = 0;
+                                i < response.response.locations.length;
+                                i++) {
+                              if (i == 0 &&
+                                  response.response.locations[0].adres !=
+                                      null &&
+                                  !isFirstAddressCitySelected) {
+                                var address = AddressPage(
+                                    //readonly: true,
+                                    citySelectListener: () =>
+                                        _onFirstAddressCitySelected(),
+                                    addressNumber: commentWidgets.length + 1,
+                                    removeAddress: () => _onRemoveAddress(),
+                                    city: response.response.locations[i]);
+                                commentWidgets.add(address);
+                                print("Add Exist Address");
+                                existWidgets.add(address);
+                                // commentWidgets.add(AddressPage(
+                                //   //readonly: true,
+                                //     citySelectListener: () =>
+                                //     _onFirstAddressCitySelected(),
+                                //     addressNumber: commentWidgets.length + 1,
+                                //     removeAddress: () => _onRemoveAddress(),
+                                //     city: response.response.locations[i])
+                                // );
+                              } else {
+                                var address = AddressPage(
+                                    addressNumber: commentWidgets.length + 1,
+                                    removeAddress: () => _onRemoveAddress(),
+                                    city: response.response.locations[i]);
+                                commentWidgets.add(address);
+                                existWidgets.add(address);
+                                // commentWidgets.add(AddressPage(
+                                //     addressNumber: commentWidgets.length + 1,
+                                //     removeAddress: () => _onRemoveAddress(),
+                                //     city: response.response.locations[i])
+                                // );
+                              }
+                            }
+                          });
+                          fillFieldsFromResponse(response.response.user_info);
+                        });
+                      },
+                      innLoaded: (response) {
+                        setState(() {
+                          _innInfo.clear();
+                          if (response.response.data != null) {
+                            _innInfo.add(response.response.data!);
+                          }
+                        });
+                      },
+                      dataChanged: (response) {
+                        if (response.response.result) {
+                          Fluttertoast.showToast(
+                              msg: "Данные успешно изменены",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.grey,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                          context.router.push(
+                            const MainRoute(),
+                          );
+                        }
+                      },
+                      orElse: () {});
+                },
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16),
@@ -453,11 +455,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           'Сохранить',
                         ),
                       ),
-                    )
-                  ]),
-            ),
-          ])),
-    ));
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   void _onRemoveAddress() {
