@@ -13,7 +13,7 @@ import '../bloc/action_bloc.dart';
 import '../widgets/product_card.dart';
 
 class ActionListPage extends StatefulWidget {
-  const ActionListPage({Key? key}) : super(key: key);
+  const ActionListPage({super.key});
 
   @override
   State<ActionListPage> createState() => _ActionListPageState();

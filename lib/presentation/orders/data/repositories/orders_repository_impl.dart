@@ -20,12 +20,12 @@ class OrdersRepositoryImpl implements OrdersRepository {
     this.remoteDatasource,
   );
 
-  Future<Either<Failure<void>, T>> handleDioError<T>(
+  Future<Either<Failure<void>, T>> handleDioException<T>(
     Future<T> Function() function,
   ) async {
     try {
       return Right(await function());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Left(
         await handleStandardDioError<void>(error)
             .fold((l) => l, (r) => Failure.unknownFailure(r.message)),
@@ -34,7 +34,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
   }
 
   @override
-  Future<Either<DioError, OrdersResponse>> gerOrders() async {
+  Future<Either<DioException, OrdersResponse>> gerOrders() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,20 +50,21 @@ class OrdersRepositoryImpl implements OrdersRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, OrdersResponse>> getOrdersByStatus(String status) async {
+  Future<Either<DioException, OrdersResponse>> getOrdersByStatus(
+      String status) async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -73,26 +74,27 @@ class OrdersRepositoryImpl implements OrdersRepository {
         userId = userIdPrefs;
       }
       print("DKSMDKSDMSK $userId");
-      final httpResponse = await remoteDatasource.getOrdersByStatus(userId, status);
+      final httpResponse =
+          await remoteDatasource.getOrdersByStatus(userId, status);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, OrdersResponse>> getWorkingOrders() async {
+  Future<Either<DioException, OrdersResponse>> getWorkingOrders() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -104,25 +106,24 @@ class OrdersRepositoryImpl implements OrdersRepository {
       final httpResponse = await remoteDatasource.getWorkingOrders(userId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-
         return Right(httpResponse.data);
       }
       return Left(
-
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, OrdersResponse>> getOrderById(String orderId) async {
+  Future<Either<DioException, OrdersResponse>> getOrderById(
+      String orderId) async {
     print("getOrderById $orderId");
     try {
       String userId = "";
@@ -135,25 +136,23 @@ class OrdersRepositoryImpl implements OrdersRepository {
       final httpResponse = await remoteDatasource.getOrderById(userId, orderId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
-
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> deleteProductFromOrder(
+  Future<Either<DioException, StandartResponse>> deleteProductFromOrder(
       String productId, String orderId) async {
     try {
       String userId = "";
@@ -165,8 +164,8 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
       print("Del prod $userId $productId $orderId");
 
-      final httpResponse =
-          await remoteDatasource.deleteProductFromOrder(userId, productId, orderId);
+      final httpResponse = await remoteDatasource.deleteProductFromOrder(
+          userId, productId, orderId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
@@ -174,21 +173,21 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
       print("DELETEsss error");
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print("DELETEsss ${e.message}");
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ConditionsResponse>> getConditions(
+  Future<Either<DioException, ConditionsResponse>> getConditions(
       String firmId) async {
     try {
       String userId = "";
@@ -202,26 +201,25 @@ class OrdersRepositoryImpl implements OrdersRepository {
       final httpResponse = await remoteDatasource.getConditions(userId, firmId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-
         return Right(httpResponse.data);
       }
 
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print("DELETEsss ${e.message}");
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> addToCart(String idProduct,
+  Future<Either<DioException, StandartResponse>> addToCart(String idProduct,
       String count, String name, String firmId, String price) async {
     try {
       String userId = "";
@@ -240,20 +238,20 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
       print("DELETEsss error");
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> cartSendOrder(String orderId,
+  Future<Either<DioException, StandartResponse>> cartSendOrder(String orderId,
       String addressId, String deliveryId, String paymentId) async {
     try {
       String userId = "";
@@ -265,8 +263,8 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
       print("Cart SEND $userId $orderId $addressId $deliveryId $paymentId");
 
-      final httpResponse = await remoteDatasource.cartSendOrder
-        (userId, orderId, addressId, deliveryId, paymentId);
+      final httpResponse = await remoteDatasource.cartSendOrder(
+          userId, orderId, addressId, deliveryId, paymentId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
@@ -274,14 +272,14 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
       print("DELETEsss error");
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print("DELETEsss ${e.message}");
       return Left(e);
     }

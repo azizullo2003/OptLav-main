@@ -27,7 +27,7 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
   ) async {
     try {
       return Right(await function());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Left(
         await handleStandardDioError<void>(error)
             .fold((l) => l, (r) => Failure.unknownFailure(r.message)),
@@ -36,7 +36,7 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
   }
 
   @override
-  Future<Either<DioError, CitiesResponse>> citySearch(String city) async {
+  Future<Either<DioException, CitiesResponse>> citySearch(String city) async {
     try {
       await remoteDatasource.about();
       final httpResponse = await remoteDatasource.citySearch(city);
@@ -45,20 +45,20 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> register(
+  Future<Either<DioException, StandartResponse>> register(
       String phone, String email, String cityId, String city, int os) async {
     try {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -71,20 +71,20 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       }
 
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, AuthResponse>> auth(
+  Future<Either<DioException, AuthResponse>> auth(
       String phone, String password, int os) async {
     try {
       final httpResponse =
@@ -95,18 +95,18 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       }
       print("Auth Err");
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
     } catch (e) {
       print("Auth Exe ");
-      var f = DioError(
+      var f = DioException(
         error: "Пароль или логин неправильные",
-        type: DioErrorType.response,
+        type: DioExceptionType.badResponse,
         requestOptions: RequestOptions(path: "path"),
       );
       return Left(f);
@@ -114,7 +114,8 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> restorePass(String phone) async {
+  Future<Either<DioException, StandartResponse>> restorePass(
+      String phone) async {
     try {
       final httpResponse = await remoteDatasource.restorePass(phone);
 
@@ -123,20 +124,20 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       }
 
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, String>> sendActivity(String screenName) async {
+  Future<Either<DioException, String>> sendActivity(String screenName) async {
     try {
       var userId = "";
       var os = 0;
@@ -162,14 +163,14 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       }
 
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }

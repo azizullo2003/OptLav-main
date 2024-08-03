@@ -74,10 +74,10 @@ class _GridProductCardState extends State<GridProductCard> {
                   margin: const EdgeInsets.only(top: 6, right: 6),
                   child: () {
                     if (widget.product.prod_favorites == "1") {
-                      return Assets.images.cart.newFillFav
+                      return Assets.images.cart.fillFavPng
                           .image(fit: BoxFit.cover);
                     } else {
-                      return Assets.images.cart.newFav.image(fit: BoxFit.cover);
+                      return Assets.images.cart.favPng.image(fit: BoxFit.cover);
                     }
                   }(),
                 ),

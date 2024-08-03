@@ -6,7 +6,7 @@ part of 'registration_remote_datasource.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _RegistrationApi implements RegistrationApi {
   _RegistrationApi(
@@ -21,8 +21,8 @@ class _RegistrationApi implements RegistrationApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<CitiesResponse>> citySearch(city) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<CitiesResponse>> citySearch(String city) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'city': city};
@@ -39,22 +39,26 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CitiesResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = CitiesResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> register(
-    phone,
-    email,
-    cityId,
-    city,
-    os,
-    version,
+    String phone,
+    String email,
+    String cityId,
+    String city,
+    int os,
+    String version,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -78,15 +82,19 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<StandartResponse>> restorePass(phone) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<StandartResponse>> restorePass(String phone) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'phone': phone};
@@ -103,20 +111,24 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<AuthResponse>> auth(
-    login,
-    password,
-    os,
-    key,
+    String login,
+    String password,
+    int os,
+    String key,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -125,7 +137,6 @@ class _RegistrationApi implements RegistrationApi {
       'os': os,
       'key': key,
     };
-    print(_data);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AuthResponse>>(Options(
       method: 'POST',
@@ -139,20 +150,24 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AuthResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<String>> sendActivity(
-    userId,
-    os,
-    home,
-    version,
+    String userId,
+    int os,
+    String home,
+    String version,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -174,18 +189,22 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = _result.data!;
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ABoutResponse>> about() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ABoutResponse>>(Options(
       method: 'GET',
@@ -198,9 +217,13 @@ class _RegistrationApi implements RegistrationApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ABoutResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ABoutResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
@@ -215,5 +238,22 @@ class _RegistrationApi implements RegistrationApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

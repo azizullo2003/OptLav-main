@@ -82,7 +82,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   void initState() {
     super.initState();
     cityController.addListener(() {
-
       if (cityController.text.length > 2) {
         setState(() {
           showSuggestion = true;
@@ -95,7 +94,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
           _cities.clear();
           showSuggestion = false;
         });
-
       }
       if (cityController.text.length != _selectedCity?.name?.length) {
         setState(() {
@@ -117,7 +115,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     });
 
     // Hide keyboards btn iOS
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       // _keyboardUtils.add(
       //     listener: keyboardListener.KeyboardListener(willHideKeyboard: () {
       //       removeOverlay();
@@ -131,7 +129,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   void dispose() {
     // keyboards btn iOS
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       // _keyboardUtils.removeAllKeyboardListeners();
     }
     // END keyboards btn iOS
@@ -164,7 +162,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Container(
-          alignment: Alignment. center,
+          alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -207,11 +205,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       //offset: const Offset(0,-50),
                       controller: cityController,
                       suggestions: _cities
-                          .map((city) =>
-                              SearchFieldListItem("  ${city.name!}", item: city))
+                          .map((city) => SearchFieldListItem("  ${city.name!}",
+                              item: city))
                           .toList(),
-                      suggestionState:
-                          showSuggestion ? Suggestion.hidden : Suggestion.expand,
+                      suggestionState: showSuggestion
+                          ? Suggestion.hidden
+                          : Suggestion.expand,
                       suggestionAction: SuggestionAction.unfocus,
                       textInputAction: TextInputAction.next,
                       searchStyle: TextStyle(
@@ -229,7 +228,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               const BoxConstraints(minHeight: 20, minWidth: 20),
                           suffixIcon: focus
                               ? Box(
-                                  child: Assets.images.startReg.clearField.svg(),
+                                  child:
+                                      Assets.images.startReg.clearField.svg(),
                                 )
                               : null,
                           enabledBorder: UnderlineInputBorder(
@@ -252,8 +252,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           _selectedCity = city.item!;
                         });
                       },
-                    )
-                    );
+                    ));
                   },
                 ),
                 const SizedBox(height: 25),
@@ -318,11 +317,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       padding: const Pad(horizontal: 16, top: 40),
                       child: ElevatedButton(
                         onPressed: isCorrectFields
-                            ? () async => _onEnter(context, phoneController.text,
-                                emailController.text, _selectedCity!)
+                            ? () async => _onEnter(
+                                context,
+                                phoneController.text,
+                                emailController.text,
+                                _selectedCity!)
                             : null,
                         style: ElevatedButton.styleFrom(
-                            elevation: 0, backgroundColor: isCorrectFields
+                            elevation: 0,
+                            backgroundColor: isCorrectFields
                                 ? const Color(0xFF5DB248)
                                 : const Color(0xFFAAABAD),
                             shape: RoundedRectangleBorder(
@@ -346,8 +349,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: "Отправляя свои данные, вы соглашаетесь ",
-                          style:
-                              TextStyle(color: colorTheme.greyText, fontSize: 10),
+                          style: TextStyle(
+                              color: colorTheme.greyText, fontSize: 10),
                           children: <TextSpan>[
                             TextSpan(
                                 text: "\nс политикой конфедициальности",
@@ -374,7 +377,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           phone: phone,
           email: email,
           city_id: city.id,
-          city: city.name?? "",
+          city: city.name ?? "",
           os: os),
     );
   }

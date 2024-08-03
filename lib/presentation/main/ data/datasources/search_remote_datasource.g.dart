@@ -6,7 +6,7 @@ part of 'search_remote_datasource.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _SearchApi implements SearchApi {
   _SearchApi(
@@ -22,10 +22,10 @@ class _SearchApi implements SearchApi {
 
   @override
   Future<HttpResponse<CategoriesResponse>> getAllCategories() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<CategoriesResponse>>(Options(
       method: 'POST',
@@ -39,19 +39,23 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CategoriesResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = CategoriesResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<SubcategoriesResponse>> getAllSubcategories(
-      categoryId) async {
-    const _extra = <String, dynamic>{};
+      String categoryId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'category_id': categoryId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<SubcategoriesResponse>>(Options(
       method: 'POST',
@@ -65,24 +69,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SubcategoriesResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = SubcategoriesResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<List<CompaniesResponse>>> getAllCompanies(
-    phone,
-    userId,
+    String phone,
+    String userId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'phone': phone,
       r'user_id': userId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<CompaniesResponse>>>(Options(
       method: 'POST',
@@ -96,27 +104,31 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
         .map((dynamic i) =>
             CompaniesResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    final httpResponse = HttpResponse(value, _result);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> getProductsByCategory(
-    catalogId,
-    userId,
+    String catalogId,
+    String userId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id_cat': catalogId,
       r'user_id': userId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'POST',
@@ -130,24 +142,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<List<CompaniesResponse>>> searchCompanyById(
-    phone,
-    firmId,
+    String phone,
+    String firmId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'phone': phone,
       r'firm_id': firmId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<CompaniesResponse>>>(Options(
       method: 'POST',
@@ -161,19 +177,23 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
         .map((dynamic i) =>
             CompaniesResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    final httpResponse = HttpResponse(value, _result);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<List<CompaniesResponse>>> companySearch(
-      searchText) async {
-    const _extra = <String, dynamic>{};
+      String searchText) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'phone': searchText};
@@ -190,21 +210,26 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
         .map((dynamic i) =>
             CompaniesResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    final httpResponse = HttpResponse(value, _result);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<CategoriesResponse>> getCompanyCatalog(companyId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<CategoriesResponse>> getCompanyCatalog(
+      String companyId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': companyId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<CategoriesResponse>>(Options(
       method: 'GET',
@@ -217,24 +242,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CategoriesResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = CategoriesResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> getCompanyProductsByCategory(
-    categoryId,
-    companyId,
+    String categoryId,
+    String companyId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'cat_id': categoryId,
       r'user_id': companyId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'GET',
@@ -247,24 +276,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> searchProducts(
-    request,
-    firmId,
+    String request,
+    String firmId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'request': request,
       r'user_id': firmId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'GET',
@@ -277,24 +310,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> searchProductsByCompany(
-    request,
-    companyId,
+    String request,
+    String companyId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'request': request,
       r'firm_id': companyId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'GET',
@@ -307,24 +344,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> searchProductsByCategory(
-    request,
-    categoryId,
+    String request,
+    String categoryId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'request': request,
       r'cat_id': categoryId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'GET',
@@ -337,26 +378,30 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ProductsResponse>> searchProductsByCompanyAndCategory(
-    request,
-    companyId,
-    categoryId,
+    String request,
+    String companyId,
+    String categoryId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'request': request,
       r'firm_id': companyId,
       r'cat_id': categoryId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductsResponse>>(Options(
       method: 'GET',
@@ -369,18 +414,22 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<AboutResponse>> about() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AboutResponse>>(Options(
       method: 'GET',
@@ -393,18 +442,22 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AboutResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AboutResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StaticResponse>> getStatic() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<StaticResponse>>(Options(
       method: 'GET',
@@ -417,18 +470,22 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StaticResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StaticResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<ActionsResponse>> getActions(userId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<ActionsResponse>> getActions(String userId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ActionsResponse>>(Options(
       method: 'GET',
@@ -441,18 +498,22 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ActionsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ActionsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<TopResponse>> getTop(userId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<TopResponse>> getTop(String userId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TopResponse>>(Options(
       method: 'GET',
@@ -465,24 +526,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TopResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = TopResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<FavoriteResponse>> getFavoriteCompanies(
-    userId,
-    get,
+    String userId,
+    int get,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'firm_id': userId,
       r'get': get,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<FavoriteResponse>>(Options(
       method: 'GET',
@@ -495,24 +560,28 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = FavoriteResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = FavoriteResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<FavoriteProductsResponse>> getFavoriteProducts(
-    userId,
-    get,
+    String userId,
+    int get,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user_id': userId,
       r'get': get,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<FavoriteProductsResponse>>(Options(
       method: 'GET',
@@ -525,9 +594,13 @@ class _SearchApi implements SearchApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = FavoriteProductsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = FavoriteProductsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
@@ -542,5 +615,22 @@ class _SearchApi implements SearchApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

@@ -254,9 +254,9 @@ class _ProductCardState extends State<ProductCard> {
                 onTap: widget.addOrRemFav,
                 child: () {
                   if (widget.product.prod_favorites == "1") {
-                    return Assets.images.cart.fillFav.svg(fit: BoxFit.cover);
+                    return Assets.images.cart.fillFavSvg.svg(fit: BoxFit.cover);
                   } else {
-                    return Assets.images.cart.fav.svg(fit: BoxFit.cover);
+                    return Assets.images.cart.favSvg.svg(fit: BoxFit.cover);
                   }
                 }(),
               )

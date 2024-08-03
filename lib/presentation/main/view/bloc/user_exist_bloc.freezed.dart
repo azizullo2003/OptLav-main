@@ -168,21 +168,21 @@ abstract class _GetUserExist implements UserExistEvent {
 mixin _$UserExistState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(StandartResponse response) isUserExist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(StandartResponse response)? isUserExist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(StandartResponse response)? isUserExist,
     required TResult orElse(),
@@ -236,7 +236,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DioError error});
+  $Res call({DioException error});
 }
 
 /// @nodoc
@@ -256,7 +256,7 @@ class __$$FailureImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as DioError,
+              as DioException,
     ));
   }
 }
@@ -267,7 +267,7 @@ class _$FailureImpl implements _Failure {
   const _$FailureImpl(this.error);
 
   @override
-  final DioError error;
+  final DioException error;
 
   @override
   String toString() {
@@ -294,7 +294,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(StandartResponse response) isUserExist,
   }) {
@@ -304,7 +304,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(StandartResponse response)? isUserExist,
   }) {
@@ -314,7 +314,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(StandartResponse response)? isUserExist,
     required TResult orElse(),
@@ -361,9 +361,9 @@ class _$FailureImpl implements _Failure {
 }
 
 abstract class _Failure implements UserExistState {
-  const factory _Failure(final DioError error) = _$FailureImpl;
+  const factory _Failure(final DioException error) = _$FailureImpl;
 
-  DioError get error;
+  DioException get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -407,7 +407,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(StandartResponse response) isUserExist,
   }) {
@@ -417,7 +417,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(StandartResponse response)? isUserExist,
   }) {
@@ -427,7 +427,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(StandartResponse response)? isUserExist,
     required TResult orElse(),
@@ -542,7 +542,7 @@ class _$IsUserExistImpl implements _IsUserExist {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(StandartResponse response) isUserExist,
   }) {
@@ -552,7 +552,7 @@ class _$IsUserExistImpl implements _IsUserExist {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(StandartResponse response)? isUserExist,
   }) {
@@ -562,7 +562,7 @@ class _$IsUserExistImpl implements _IsUserExist {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(StandartResponse response)? isUserExist,
     required TResult orElse(),

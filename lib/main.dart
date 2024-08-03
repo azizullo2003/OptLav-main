@@ -6,6 +6,10 @@ import 'package:get_it/get_it.dart';
 import 'package:optlove/app/theme/bloc/app_theme_bloc.dart';
 import 'package:optlove/app/theme/models/app_pallete.dart';
 import 'package:optlove/presentation/about/view/bloc/about_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/add_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/cart/view/bloc/cart_bloc.dart';
 import 'package:optlove/presentation/favorite/view/bloc/favorite_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
@@ -45,7 +49,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
   final _appRouter = AppRouter();
 
   @override
@@ -76,6 +80,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GetIt.I<SupportBloc>()),
         BlocProvider(create: (context) => GetIt.I<ProfileBloc>()),
         BlocProvider(create: (context) => GetIt.I<TopBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AdsCategoryBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AdsSubcategoryBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AddAdBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AdsBloc>()),
       ],
       child: MaterialApp.router(
         title: 'OptLove',

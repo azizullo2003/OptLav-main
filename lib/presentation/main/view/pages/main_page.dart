@@ -42,17 +42,13 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
 
   @override
   void initState() {
+    super.initState();
     print("initStateMainPages");
     BlocProvider.of<UserBloc>(context).add(const UserEvent.getUserData());
     BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrders());
     BlocProvider.of<UserExistBloc>(context)
         .add(const UserExistEvent.getUserExist());
     refreshNotifier.addListener(() {
-      if (refreshNotifier.value == 4) {
-        context.router.replace(
-          CatalogRoute(),
-        );
-      }
       if (refreshNotifier.value == 0) {
         context.router.replace(
           const ProfileRoute(),
@@ -70,14 +66,22 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
       }
       if (refreshNotifier.value == 3) {
         context.router.replace(
+          const AdsMainRoute(),
+        );
+      }
+      if (refreshNotifier.value == 4) {
+        context.router.replace(
           const FavoriteRoute(),
+        );
+      }
+      if (refreshNotifier.value == 5) {
+        context.router.replace(
+          CatalogRoute(),
         );
       }
     });
 
     _showAd(true);
-
-    super.initState();
   }
 
   @override
@@ -117,12 +121,7 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
   }
 
   _showAd(bool isInitLoad) async {
-    // int adWidth =
-    //     (MediaQueryData.fromView(WidgetsBinding.instance.window).size.width)
-    //         .toInt();
-    // var adSize = AdSize.inline(width: adWidth, maxHeight: 60);
     final windowSize = MediaQuery.of(context).size;
-
     final adSize = BannerAdSize.inline(
       width: windowSize.width.toInt(),
       maxHeight: 60,
@@ -134,17 +133,14 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
       });
     }
 
-    Future.delayed(const Duration(milliseconds: 200)).then((value) {
-      setState(() {
-        _bannerAd = BannerAd(
-          adUnitId: getYandexBannerID(),
-          adSize: adSize,
-          adRequest: const AdRequest(),
-          onAdLoaded: () {},
-          onAdFailedToLoad: (error) {},
-        );
-      });
-    });
+    _bannerAd = BannerAd(
+      adUnitId: getYandexBannerID(),
+      adSize: adSize,
+      adRequest: const AdRequest(),
+      onAdLoaded: () {},
+      onAdFailedToLoad: (error) {},
+    );
+    setState(() {});
   }
 
   @override
@@ -249,6 +245,7 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
                         ProfileRoute(),
                         OrdersPageRoute(),
                         HomePageRoute(),
+                        AdsMainPageRoute(),
                         FavoriteRoute(),
                         CatalogsRoute(),
                       ],
@@ -292,6 +289,12 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
                                 icon: Assets.images.bottomNav.home
                                     .svg(fit: BoxFit.cover),
                                 label: "Главная"),
+                            BottomNavigationBarItem(
+                                activeIcon: Assets.images.bottomNav.megaphoneact
+                                    .svg(fit: BoxFit.cover),
+                                icon: Assets.images.bottomNav.megaphone
+                                    .svg(fit: BoxFit.cover),
+                                label: "Объявления"),
                             BottomNavigationBarItem(
                                 activeIcon: Assets.images.bottomNav.favoriteact
                                     .svg(fit: BoxFit.cover),
@@ -588,18 +591,21 @@ PreferredSizeWidget shortAppBar(AppColorTheme colorTheme, String name,
             GestureDetector(
               onTap: onCart,
               child: Container(
-                  height: 55,
-                  width: 55,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 1, color: Colors.white)),
-                  child: Stack(
-                    children: [
-                      Center(
-                          child: Assets.images.cartIcon.svg(fit: BoxFit.cover)),
-                    ],
-                  )),
+                height: 55,
+                width: 55,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 1, color: Colors.white),
+                ),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Assets.images.cartIcon.svg(fit: BoxFit.cover),
+                    ),
+                  ],
+                ),
+              ),
             ),
         ],
       ),

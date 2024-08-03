@@ -6,7 +6,7 @@ part of 'user_remote_datasource.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _UserApi implements UserApi {
   _UserApi(
@@ -22,17 +22,17 @@ class _UserApi implements UserApi {
 
   @override
   Future<HttpResponse<UserInfoResponse>> getUserInfo(
-    phone,
-    userId,
+    String? phone,
+    String userId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'phone': phone,
       r'user_id': userId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserInfoResponse>>(Options(
       method: 'POST',
@@ -46,18 +46,22 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserInfoResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = UserInfoResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<StandartResponse>> getUserExist(userId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<StandartResponse>> getUserExist(String userId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': userId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<StandartResponse>>(Options(
       method: 'GET',
@@ -70,20 +74,24 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<UserChangeResponse>> changeUserInfo(
-    userId,
-    fields,
-    values,
-    regions,
+    String? userId,
+    List<String> fields,
+    List<String> values,
+    List<String> regions,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -107,24 +115,28 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserChangeResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = UserChangeResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<UserChangeResponse>> deleteUser(
-    userId,
-    secretPass,
+    String userId,
+    String secretPass,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': userId,
       r'secret_pass': secretPass,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<UserChangeResponse>>(Options(
       method: 'POST',
@@ -138,19 +150,23 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserChangeResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = UserChangeResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> addToFavorite(
-    userId,
-    firmId,
-    values,
+    String userId,
+    String firmId,
+    int values,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -171,20 +187,24 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> addProductToFavorite(
-    userId,
-    productId,
-    firmId,
-    values,
+    String userId,
+    String productId,
+    String firmId,
+    int values,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -206,20 +226,24 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> removeProductFromFavorite(
-    userId,
-    productId,
-    firmId,
-    values,
+    String userId,
+    String productId,
+    String firmId,
+    int values,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -241,19 +265,23 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> removeFromFavorite(
-    userId,
-    firmId,
-    del,
+    String userId,
+    String firmId,
+    int del,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -274,20 +302,24 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> sendMessage(
-    phone,
-    userId,
-    email,
-    message,
+    String phone,
+    String userId,
+    String email,
+    String message,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -309,18 +341,22 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<InnResponse>> innSearch(inn) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<InnResponse>> innSearch(String inn) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'inn_id': inn};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<InnResponse>>(Options(
       method: 'GET',
@@ -333,9 +369,13 @@ class _UserApi implements UserApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = InnResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = InnResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
@@ -350,5 +390,22 @@ class _UserApi implements UserApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

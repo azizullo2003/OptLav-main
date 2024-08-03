@@ -27,7 +27,7 @@ class UserRepositoryImpl implements UserRepository {
   ) async {
     try {
       return Right(await function());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Left(
         await handleStandardDioError<void>(error)
             .fold((l) => l, (r) => Failure.unknownFailure(r.message)),
@@ -36,7 +36,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<DioError, UserInfoResponse>> getUserInfo() async {
+  Future<Either<DioException, UserInfoResponse>> getUserInfo() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? phone = prefs.getString('phone');
@@ -52,20 +52,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, UserChangeResponse>> changeUserInfo(
+  Future<Either<DioException, UserChangeResponse>> changeUserInfo(
       List<String> fields, List<String> values, List<String> regions) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -80,20 +80,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, InnResponse>> innSearch(String inn) async {
+  Future<Either<DioException, InnResponse>> innSearch(String inn) async {
     try {
       final httpResponse = await remoteDatasource.innSearch(inn);
 
@@ -101,20 +101,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, UserChangeResponse>> deleteUser() async {
+  Future<Either<DioException, UserChangeResponse>> deleteUser() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -129,20 +129,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> addToFavorite(
+  Future<Either<DioException, StandartResponse>> addToFavorite(
       String firmId) async {
     try {
       String userId = "";
@@ -158,20 +158,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> removeFromFavorite(
+  Future<Either<DioException, StandartResponse>> removeFromFavorite(
       String firmId) async {
     try {
       String userId = "";
@@ -187,20 +187,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> addProductToFavorite(
+  Future<Either<DioException, StandartResponse>> addProductToFavorite(
       String firmId, String productId) async {
     try {
       String userId = "";
@@ -217,20 +217,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> removeProductFromFavorite(
+  Future<Either<DioException, StandartResponse>> removeProductFromFavorite(
       String firmId, String productId) async {
     try {
       String userId = "";
@@ -246,20 +246,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> getUserExist() async {
+  Future<Either<DioException, StandartResponse>> getUserExist() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -275,20 +275,20 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StandartResponse>> sendMessage(
+  Future<Either<DioException, StandartResponse>> sendMessage(
       String email, String message) async {
     try {
       String userId = "";
@@ -307,14 +307,14 @@ class UserRepositoryImpl implements UserRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }

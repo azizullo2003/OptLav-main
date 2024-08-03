@@ -35,6 +35,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   void initState() {
+    super.initState();
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
     print("PROD cat id ${widget.category.id}");
@@ -54,7 +55,6 @@ class _ProductsPageState extends State<ProductsPage> {
         }
       }
     });
-    super.initState();
   }
 
   _scrollListener() {
@@ -110,6 +110,7 @@ class _ProductsPageState extends State<ProductsPage> {
             orElse: () => {});
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: ListView(

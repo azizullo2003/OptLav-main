@@ -1,6 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:optlove/presentation/about/view/bloc/about_bloc.dart';
+import 'package:optlove/presentation/ads/data/datasources/ads_remote_datasource.dart';
+import 'package:optlove/presentation/ads/data/repositories/ads_category_repository_impl.dart';
+import 'package:optlove/presentation/ads/domain/repositories/ads_category_repository.dart';
+import 'package:optlove/presentation/ads/view/bloc/add_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/cart/view/bloc/cart_bloc.dart';
 import 'package:optlove/presentation/favorite/view/bloc/favorite_bloc.dart';
 import 'package:optlove/presentation/main/%20data/datasources/search_remote_datasource.dart';
@@ -43,21 +50,19 @@ Future<void> initializeDependencies() async {
   // Dio client
   injector.registerSingleton<Dio>(Dio());
 
-  injector.registerSingleton<RegistrationApi>(
-      RegistrationApi(injector()));
+  injector.registerSingleton<RegistrationApi>(RegistrationApi(injector()));
 
-  injector.registerSingleton<SearchApi>(
-      SearchApi(injector()));
+  injector.registerSingleton<SearchApi>(SearchApi(injector()));
 
-  injector.registerSingleton<ProductsApi>(
-      ProductsApi(injector()));
+  injector.registerSingleton<ProductsApi>(ProductsApi(injector()));
 
-  injector.registerSingleton<UserApi>(
-      UserApi(injector()));
+  injector.registerSingleton<UserApi>(UserApi(injector()));
 
-  injector.registerSingleton<OrdersApi>(
-      OrdersApi(injector()));
+  injector.registerSingleton<OrdersApi>(OrdersApi(injector()));
 
+  injector.registerSingleton<AdsRemoteApi>(AdsRemoteApi(injector()));
+
+  // Datasources
   injector.registerSingleton<RegistrationRemoteDatasource>(
       RegistrationRemoteDatasource(injector()));
 
@@ -73,93 +78,85 @@ Future<void> initializeDependencies() async {
   injector.registerSingleton<OrdersRemoteDatasource>(
       OrdersRemoteDatasource(injector()));
 
+  injector
+      .registerSingleton<AdsRemoteDatasource>(AdsRemoteDatasource(injector()));
+
+  //Repositories
   injector.registerSingleton<RegistrationRepository>(
       RegistrationRepositoryImpl(injector()));
 
-  injector.registerSingleton<SearchRepository>(
-      SearchRepositoryImpl(injector()));
+  injector
+      .registerSingleton<SearchRepository>(SearchRepositoryImpl(injector()));
 
   injector.registerSingleton<ProductsRepository>(
       ProductsRepositoryImpl(injector()));
 
-  injector.registerSingleton<UserRepository>(
-      UserRepositoryImpl(injector()));
+  injector.registerSingleton<UserRepository>(UserRepositoryImpl(injector()));
 
-  injector.registerSingleton<OrdersRepository>(
-      OrdersRepositoryImpl(injector()));
+  injector
+      .registerSingleton<OrdersRepository>(OrdersRepositoryImpl(injector()));
+
+  injector
+      .registerSingleton<AdsRepository>(AdsCategoryRepositoryImpl(injector()));
 
   // Blocs
   injector.registerFactory<RegistrationBloc>(
-        () => RegistrationBloc(injector()),
+    () => RegistrationBloc(injector()),
   );
 
   injector.registerFactory<AuthBloc>(
-        () => AuthBloc(injector()),
+    () => AuthBloc(injector()),
   );
 
   injector.registerFactory<SearchCityBloc>(
-        () => SearchCityBloc(injector()),
+    () => SearchCityBloc(injector()),
   );
 
   injector.registerFactory<SearchBloc>(
-        () => SearchBloc(injector()),
+    () => SearchBloc(injector()),
   );
 
   injector.registerFactory<ProductsBloc>(
-        () => ProductsBloc(injector()),
+    () => ProductsBloc(injector()),
   );
 
   injector.registerFactory<SendActivityBloc>(
-        () => SendActivityBloc(injector()),
+    () => SendActivityBloc(injector()),
   );
 
   injector.registerFactory<UserBloc>(
-        () => UserBloc(injector()),
+    () => UserBloc(injector()),
   );
 
-  injector.registerFactory<CartBloc>(
-        () => CartBloc(injector())
-  );
+  injector.registerFactory<CartBloc>(() => CartBloc(injector()));
 
-  injector.registerFactory<OrdersBloc>(
-          () => OrdersBloc(injector())
-  );
+  injector.registerFactory<OrdersBloc>(() => OrdersBloc(injector()));
 
-  injector.registerFactory<ConditionsBloc>(
-          () => ConditionsBloc(injector())
-  );
+  injector.registerFactory<ConditionsBloc>(() => ConditionsBloc(injector()));
 
-  injector.registerFactory<AboutBloc>(
-          () => AboutBloc(injector())
-  );
+  injector.registerFactory<AboutBloc>(() => AboutBloc(injector()));
 
-  injector.registerFactory<StaticBloc>(
-          () => StaticBloc(injector())
-  );
+  injector.registerFactory<StaticBloc>(() => StaticBloc(injector()));
 
-  injector.registerFactory<WorkOrdersBloc>(
-          () => WorkOrdersBloc(injector())
-  );
+  injector.registerFactory<WorkOrdersBloc>(() => WorkOrdersBloc(injector()));
 
-  injector.registerFactory<ActionsBloc>(
-          () => ActionsBloc(injector())
-  );
+  injector.registerFactory<ActionsBloc>(() => ActionsBloc(injector()));
 
   injector.registerFactory<FavoriteBloc>(
-          () => FavoriteBloc(injector(), injector())
-  );
+      () => FavoriteBloc(injector(), injector()));
 
-  injector.registerFactory<UserExistBloc>(
-          () => UserExistBloc(injector())
-  );
+  injector.registerFactory<UserExistBloc>(() => UserExistBloc(injector()));
 
-  injector.registerFactory<SupportBloc>(
-          () => SupportBloc(injector())
-  );
-  injector.registerFactory<ProfileBloc>(
-          () => ProfileBloc(injector())
-  );
-  injector.registerFactory<TopBloc>(
-          () => TopBloc(injector())
-  );
+  injector.registerFactory<SupportBloc>(() => SupportBloc(injector()));
+  injector.registerFactory<ProfileBloc>(() => ProfileBloc(injector()));
+  injector.registerFactory<TopBloc>(() => TopBloc(injector()));
+
+  injector.registerFactory<AdsCategoryBloc>(() => AdsCategoryBloc(injector()));
+
+  injector.registerFactory<AdsSubcategoryBloc>(
+      () => AdsSubcategoryBloc(injector()));
+
+  injector.registerFactory<AddAdBloc>(() => AddAdBloc(injector()));
+
+  injector.registerFactory<AdsBloc>(() => AdsBloc(injector()));
 }

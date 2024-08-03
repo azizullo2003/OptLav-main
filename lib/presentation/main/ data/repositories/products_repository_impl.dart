@@ -15,15 +15,15 @@ class ProductsRepositoryImpl implements ProductsRepository {
   final ProductsRemoteDatasource remoteDatasource;
 
   ProductsRepositoryImpl(
-      this.remoteDatasource,
-      );
+    this.remoteDatasource,
+  );
 
-  Future<Either<Failure<void>, T>> handleDioError<T>(
-      Future<T> Function() function,
-      ) async {
+  Future<Either<Failure<void>, T>> handleDioException<T>(
+    Future<T> Function() function,
+  ) async {
     try {
       return Right(await function());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Left(
         await handleStandardDioError<void>(error)
             .fold((l) => l, (r) => Failure.unknownFailure(r.message)),
@@ -32,7 +32,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> getProductsByCategory(
+  Future<Either<DioException, ProductsResponse>> getProductsByCategory(
       String catalogId) async {
     try {
       final httpResponse = await remoteDatasource.getProductsById(catalogId);
@@ -42,18 +42,15 @@ class ProductsRepositoryImpl implements ProductsRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
-
-
-
 }

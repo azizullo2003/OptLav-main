@@ -5,20 +5,30 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/about
   $AssetsImagesAboutGen get about => const $AssetsImagesAboutGen();
 
   /// File path: assets/images/app_logo.png
   AssetGenImage get appLogo =>
       const AssetGenImage('assets/images/app_logo.png');
+
+  /// File path: assets/images/arrow_bottom.svg
+  SvgGenImage get arrowBottom =>
+      const SvgGenImage('assets/images/arrow_bottom.svg');
+
+  /// File path: assets/images/arrow_right.png
+  AssetGenImage get arrowRight =>
+      const AssetGenImage('assets/images/arrow_right.png');
 
   /// File path: assets/images/back.svg
   SvgGenImage get back => const SvgGenImage('assets/images/back.svg');
@@ -26,19 +36,33 @@ class $AssetsImagesGen {
   /// File path: assets/images/barcode.svg
   SvgGenImage get barcode => const SvgGenImage('assets/images/barcode.svg');
 
+  /// Directory path: assets/images/bottom_nav
   $AssetsImagesBottomNavGen get bottomNav => const $AssetsImagesBottomNavGen();
 
   /// File path: assets/images/bus.svg
   SvgGenImage get bus => const SvgGenImage('assets/images/bus.svg');
 
+  /// Directory path: assets/images/cart
   $AssetsImagesCartGen get cart => const $AssetsImagesCartGen();
 
   /// File path: assets/images/cart_icon.svg
   SvgGenImage get cartIcon => const SvgGenImage('assets/images/cart_icon.svg');
 
+  /// File path: assets/images/catalog.png
+  AssetGenImage get catalogPng =>
+      const AssetGenImage('assets/images/catalog.png');
+
+  /// File path: assets/images/catalog.svg
+  SvgGenImage get catalogSvg => const SvgGenImage('assets/images/catalog.svg');
+
+  /// File path: assets/images/category.png
+  AssetGenImage get category =>
+      const AssetGenImage('assets/images/category.png');
+
   /// File path: assets/images/checked.svg
   SvgGenImage get checked => const SvgGenImage('assets/images/checked.svg');
 
+  /// Directory path: assets/images/company_card
   $AssetsImagesCompanyCardGen get companyCard =>
       const $AssetsImagesCompanyCardGen();
 
@@ -52,6 +76,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/images/exit.svg');
 
+  /// File path: assets/images/filter.png
+  AssetGenImage get filter => const AssetGenImage('assets/images/filter.png');
+
   /// File path: assets/images/first_dots.svg
   SvgGenImage get firstDots =>
       const SvgGenImage('assets/images/first_dots.svg');
@@ -63,12 +90,16 @@ class $AssetsImagesGen {
   SvgGenImage get fourthDots =>
       const SvgGenImage('assets/images/fourth_dots.svg');
 
+  /// Directory path: assets/images/home
   $AssetsImagesHomeGen get home => const $AssetsImagesHomeGen();
+
+  /// Directory path: assets/images/main
   $AssetsImagesMainGen get main => const $AssetsImagesMainGen();
 
   /// File path: assets/images/main_logo.svg
   SvgGenImage get mainLogo => const SvgGenImage('assets/images/main_logo.svg');
 
+  /// Directory path: assets/images/orders
   $AssetsImagesOrdersGen get orders => const $AssetsImagesOrdersGen();
 
   /// File path: assets/images/search.svg
@@ -78,7 +109,10 @@ class $AssetsImagesGen {
   SvgGenImage get secondDots =>
       const SvgGenImage('assets/images/second_dots.svg');
 
+  /// Directory path: assets/images/start_reg
   $AssetsImagesStartRegGen get startReg => const $AssetsImagesStartRegGen();
+
+  /// Directory path: assets/images/support
   $AssetsImagesSupportGen get support => const $AssetsImagesSupportGen();
 
   /// File path: assets/images/third_dots.svg
@@ -97,14 +131,20 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
         appLogo,
+        arrowBottom,
+        arrowRight,
         back,
         barcode,
         bus,
         cartIcon,
+        catalogPng,
+        catalogSvg,
+        category,
         checked,
         confirm,
         dialogHeader,
         exit,
+        filter,
         firstDots,
         fithDots,
         fourthDots,
@@ -161,6 +201,14 @@ class $AssetsImagesBottomNavGen {
   SvgGenImage get homeact =>
       const SvgGenImage('assets/images/bottom_nav/homeact.svg');
 
+  /// File path: assets/images/bottom_nav/megaphone.svg
+  SvgGenImage get megaphone =>
+      const SvgGenImage('assets/images/bottom_nav/megaphone.svg');
+
+  /// File path: assets/images/bottom_nav/megaphoneact.svg
+  SvgGenImage get megaphoneact =>
+      const SvgGenImage('assets/images/bottom_nav/megaphoneact.svg');
+
   /// File path: assets/images/bottom_nav/profile.svg
   SvgGenImage get profile =>
       const SvgGenImage('assets/images/bottom_nav/profile.svg');
@@ -185,6 +233,8 @@ class $AssetsImagesBottomNavGen {
         favoriteact,
         home,
         homeact,
+        megaphone,
+        megaphoneact,
         profile,
         profileact,
         zayavki,
@@ -199,24 +249,22 @@ class $AssetsImagesCartGen {
   SvgGenImage get cartIcon =>
       const SvgGenImage('assets/images/cart/cart_icon.svg');
 
-  /// File path: assets/images/cart/fav.svg
-  SvgGenImage get fav => const SvgGenImage('assets/images/cart/fav.svg');
-
-  /// File path: assets/images/cart/fill_fav.svg
-  SvgGenImage get fillFav =>
-      const SvgGenImage('assets/images/cart/fill_fav.svg');
-
   /// File path: assets/images/cart/fav.png
-  AssetGenImage get newFav => const AssetGenImage('assets/images/cart/fav.png');
+  AssetGenImage get favPng => const AssetGenImage('assets/images/cart/fav.png');
+
+  /// File path: assets/images/cart/fav.svg
+  SvgGenImage get favSvg => const SvgGenImage('assets/images/cart/fav.svg');
 
   /// File path: assets/images/cart/fill_fav.png
-  AssetGenImage get newFillFav =>
+  AssetGenImage get fillFavPng =>
       const AssetGenImage('assets/images/cart/fill_fav.png');
+
+  /// File path: assets/images/cart/fill_fav.svg
+  SvgGenImage get fillFavSvg =>
+      const SvgGenImage('assets/images/cart/fill_fav.svg');
 
   /// File path: assets/images/cart/in_cart.svg
   SvgGenImage get inCart => const SvgGenImage('assets/images/cart/in_cart.svg');
-
-  SvgGenImage get catalog => const SvgGenImage('assets/images/catalog.svg');
 
   /// File path: assets/images/cart/info.svg
   SvgGenImage get info => const SvgGenImage('assets/images/cart/info.svg');
@@ -228,8 +276,17 @@ class $AssetsImagesCartGen {
   SvgGenImage get plus => const SvgGenImage('assets/images/cart/plus.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [cartIcon, fav, fillFav, inCart, info, minus, plus, catalog];
+  List<dynamic> get values => [
+        cartIcon,
+        favPng,
+        favSvg,
+        fillFavPng,
+        fillFavSvg,
+        inCart,
+        info,
+        minus,
+        plus
+      ];
 }
 
 class $AssetsImagesCompanyCardGen {
@@ -420,9 +477,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -477,7 +541,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -485,9 +558,22 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(this._assetName);
+  const SvgGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = false;
+
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = true;
 
   final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
 
   SvgPicture svg({
     Key? key,
@@ -500,35 +586,50 @@ class SvgGenImage {
     AlignmentGeometry alignment = Alignment.center,
     bool allowDrawingOutsideViewBox = false,
     WidgetBuilder? placeholderBuilder,
-    Color? color,
-    BlendMode colorBlendMode = BlendMode.srcIn,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    Clip clipBehavior = Clip.hardEdge,
-    bool cacheColorFilter = false,
     SvgTheme? theme,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
   }) {
-    return SvgPicture.asset(
-      _assetName,
+    final BytesLoader loader;
+    if (_isVecFormat) {
+      loader = AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+      );
+    }
+    return SvgPicture(
+      loader,
       key: key,
       matchTextDirection: matchTextDirection,
-      bundle: bundle,
-      package: package,
       width: width,
       height: height,
       fit: fit,
       alignment: alignment,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
-      color: color,
-      colorBlendMode: colorBlendMode,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
+      colorFilter: colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
-      theme: theme,
     );
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }

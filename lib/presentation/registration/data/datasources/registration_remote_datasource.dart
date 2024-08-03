@@ -17,36 +17,29 @@ class RegistrationRemoteDatasource {
 
   RegistrationRemoteDatasource(this.api);
 
-  Future<HttpResponse<StandartResponse>> register(
-      String phone,
-      String email,
-      String cityId,
-      String cty,
-      int os,
-      String version
-      ) => api.register(phone, email, cityId, cty, os, version);
+  Future<HttpResponse<StandartResponse>> register(String phone, String email,
+          String cityId, String cty, int os, String version) =>
+      api.register(phone, email, cityId, cty, os, version);
 
-  Future<HttpResponse<StandartResponse>> restorePass(String phone)
-  => api.restorePass(phone);
+  Future<HttpResponse<StandartResponse>> restorePass(String phone) =>
+      api.restorePass(phone);
 
   Future<HttpResponse<AuthResponse>> auth(
-      String login,
-      String password,
-      int os,
-      String key,
-      ) => api.auth(login, password, os, key);
+    String login,
+    String password,
+    int os,
+    String key,
+  ) =>
+      api.auth(login, password, os, key);
 
-  Future<HttpResponse<CitiesResponse>> citySearch(String city) => api.citySearch(city);
+  Future<HttpResponse<CitiesResponse>> citySearch(String city) =>
+      api.citySearch(city);
 
   Future<HttpResponse<ABoutResponse>> about() => api.about();
 
   Future<HttpResponse<String>> sendActivity(
-      String userId,
-      int os,
-      String home,
-      String version
-      ) => api.sendActivity(userId, os, home, version);
-
+          String userId, int os, String home, String version) =>
+      api.sendActivity(userId, os, home, version);
 }
 
 @RestApi(baseUrl: apiBaseUrl)
@@ -57,7 +50,7 @@ abstract class RegistrationApi {
 
   @POST('api4.php?action=find_city&city=Ейск')
   @FormUrlEncoded()
-  Future<HttpResponse<CitiesResponse>> citySearch( @Field("city")String city);
+  Future<HttpResponse<CitiesResponse>> citySearch(@Field("city") String city);
 
   @POST('api4.php?action=register')
   @FormUrlEncoded()
@@ -90,7 +83,6 @@ abstract class RegistrationApi {
       @Field("home") String home,
       @Field("version") String version);
 
-   @GET('api4.php?action=about')
-   Future<HttpResponse<ABoutResponse>> about();
-
+  @GET('api4.php?action=about')
+  Future<HttpResponse<ABoutResponse>> about();
 }

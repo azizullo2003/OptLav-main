@@ -40,6 +40,7 @@ class _SubcatalogPageState extends State<SubcatalogPage> {
   Widget build(BuildContext context) {
     final colorTheme = AppTheme.of(context).colorTheme;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Column(

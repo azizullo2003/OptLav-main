@@ -2,6 +2,11 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:optlove/presentation/about/view/pages/about_info_page.dart';
 import 'package:optlove/presentation/about/view/pages/about_page.dart';
+import 'package:optlove/presentation/ads/view/pages/ads_category_page.dart';
+import 'package:optlove/presentation/ads/view/pages/ads_main_page.dart';
+import 'package:optlove/presentation/ads/view/pages/ads_subcategory_page.dart';
+import 'package:optlove/presentation/ads/view/pages/my_ads/add_ads_page.dart';
+import 'package:optlove/presentation/ads/view/pages/my_ads/my_products_page.dart';
 import 'package:optlove/presentation/favorite/view/pages/favorite_page.dart';
 import 'package:optlove/presentation/main/view/pages/action_list_page.dart';
 import 'package:optlove/presentation/main/view/pages/catalog_page.dart';
@@ -61,6 +66,8 @@ import '../../presentation/support/view/pages/support_request_sent.dart';
               AutoRoute(page: TopListPage, path: 'top_list'),
               AutoRoute(page: SupportPage, path: 'support'),
               AutoRoute(page: SupportRequestSent, path: 'support_sent'),
+              AutoRoute(page: MyProductsPage, path: 'my_ads'),
+              AutoRoute(page: AddNewAdsPage, path: 'add_ads_page'),
             ]),
         AutoRoute(page: EmptyRouterPage, name: "CatalogsRoute", children: [
           AutoRoute(page: CatalogPage, path: ''),
@@ -81,6 +88,22 @@ import '../../presentation/support/view/pages/support_request_sent.dart';
             ]),
         AutoRoute(page: ProfilePage),
         AutoRoute(page: FavoritePage),
+        AutoRoute(
+          page: EmptyRouterPage,
+          path: 'adsRoute',
+          name: "AdsMainPageRoute",
+          children: [
+            AutoRoute(page: AdsMainPage, path: ''),
+            AutoRoute(page: AdsCategoryPage, path: 'ads_category'),
+            AutoRoute(page: AdsSubCategoryPage, path: 'ads_subcategory'),
+            AutoRoute(page: SubcatalogPage, path: 'subcatalog'),
+            AutoRoute(page: ProductsPage, path: 'products'),
+            AutoRoute(page: CompanyCatalog, path: 'company_catalog'),
+            AutoRoute(page: CompanyProducts, path: 'company_products'),
+            AutoRoute(page: CompanyInfoPage, path: 'company_info'),
+            AutoRoute(page: ProductsInfoPage, path: 'products_info'),
+          ],
+        ),
       ],
     ),
   ],

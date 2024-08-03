@@ -33,7 +33,7 @@ class SearchRepositoryImpl implements SearchRepository {
   ) async {
     try {
       return Right(await function());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Left(
         await handleStandardDioError<void>(error)
             .fold((l) => l, (r) => Failure.unknownFailure(r.message)),
@@ -42,7 +42,7 @@ class SearchRepositoryImpl implements SearchRepository {
   }
 
   @override
-  Future<Either<DioError, CategoriesResponse>> getAllCategories() async {
+  Future<Either<DioException, CategoriesResponse>> getAllCategories() async {
     try {
       final httpResponse = await remoteDatasource.getAllCategories();
 
@@ -51,20 +51,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, SubcategoriesResponse>> getAllSubcategories(
+  Future<Either<DioException, SubcategoriesResponse>> getAllSubcategories(
       String categoryId) async {
     print("subcategory loading");
     try {
@@ -76,20 +76,21 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, List<CompaniesResponse>>> getAllCompanies() async {
+  Future<Either<DioException, List<CompaniesResponse>>>
+      getAllCompanies() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -104,20 +105,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, List<CompaniesResponse>>> companySearch(
+  Future<Either<DioException, List<CompaniesResponse>>> companySearch(
       String searchText) async {
     try {
       final httpResponse = await remoteDatasource.companySearch(searchText);
@@ -127,20 +128,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, CategoriesResponse>> getCompanyCatalog(
+  Future<Either<DioException, CategoriesResponse>> getCompanyCatalog(
       String companyId) async {
     try {
       final httpResponse = await remoteDatasource.getCompanyCatalog(companyId);
@@ -149,20 +150,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> getCompanyProductsByCategory(
+  Future<Either<DioException, ProductsResponse>> getCompanyProductsByCategory(
       String categoryId, String companyId) async {
     try {
       final httpResponse = await remoteDatasource.getCompanyProductsByCategory(
@@ -172,20 +173,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> searchProducts(
+  Future<Either<DioException, ProductsResponse>> searchProducts(
       String request) async {
     try {
       String userId = "";
@@ -201,20 +202,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> searchProductsByCompany(
+  Future<Either<DioException, ProductsResponse>> searchProductsByCompany(
       String request, String companyId) async {
     try {
       final httpResponse =
@@ -224,21 +225,22 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> searchProductsByCompanyAndCategory(
-      String request, String companyId, String categoryId) async {
+  Future<Either<DioException, ProductsResponse>>
+      searchProductsByCompanyAndCategory(
+          String request, String companyId, String categoryId) async {
     try {
       final httpResponse = await remoteDatasource
           .searchProductsByCompanyAndCategory(request, companyId, categoryId);
@@ -247,20 +249,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> searchProductsByCategory(
+  Future<Either<DioException, ProductsResponse>> searchProductsByCategory(
       String request, String categoryId) async {
     try {
       final httpResponse =
@@ -270,20 +272,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ProductsResponse>> getProductsByCategory(
+  Future<Either<DioException, ProductsResponse>> getProductsByCategory(
       String categoryId) async {
     try {
       print("CAT ID$categoryId");
@@ -300,20 +302,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, AboutResponse>> getAbout() async {
+  Future<Either<DioException, AboutResponse>> getAbout() async {
     try {
       final httpResponse = await remoteDatasource.about();
 
@@ -321,20 +323,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, StaticResponse>> getStatic() async {
+  Future<Either<DioException, StaticResponse>> getStatic() async {
     try {
       final httpResponse = await remoteDatasource.getStatic();
 
@@ -342,20 +344,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, ActionsResponse>> getActions() async {
+  Future<Either<DioException, ActionsResponse>> getActions() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -369,20 +371,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, FavoriteResponse>> getFavoriteCompanies() async {
+  Future<Either<DioException, FavoriteResponse>> getFavoriteCompanies() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -402,21 +404,21 @@ class SearchRepositoryImpl implements SearchRepository {
       }
       print("getFavoriteCompanies Left ");
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print("getFavoriteCompanies Err  ${e.message}");
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, FavoriteProductsResponse>>
+  Future<Either<DioException, FavoriteProductsResponse>>
       getFavoriteProducts() async {
     try {
       String userId = "";
@@ -435,20 +437,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, List<CompaniesResponse>>> searchCompanyById(
+  Future<Either<DioException, List<CompaniesResponse>>> searchCompanyById(
       String firmId) async {
     try {
       print("SearchById $firmId");
@@ -460,20 +462,20 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }
 
   @override
-  Future<Either<DioError, TopResponse>> getTop() async {
+  Future<Either<DioException, TopResponse>> getTop() async {
     try {
       String userId = "";
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -487,14 +489,14 @@ class SearchRepositoryImpl implements SearchRepository {
         return Right(httpResponse.data);
       }
       return Left(
-        DioError(
+        DioException(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
-          type: DioErrorType.response,
+          type: DioExceptionType.badResponse,
           requestOptions: RequestOptions(path: "path"),
         ),
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Left(e);
     }
   }

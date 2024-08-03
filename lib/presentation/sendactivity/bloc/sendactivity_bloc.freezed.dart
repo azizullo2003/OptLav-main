@@ -225,21 +225,21 @@ abstract class _SendActivity implements SendActivityEvent {
 mixin _$SendActivityState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function() loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function()? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function()? loaded,
     required TResult orElse(),
@@ -293,7 +293,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DioError error});
+  $Res call({DioException error});
 }
 
 /// @nodoc
@@ -313,7 +313,7 @@ class __$$FailureImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as DioError,
+              as DioException,
     ));
   }
 }
@@ -324,7 +324,7 @@ class _$FailureImpl implements _Failure {
   const _$FailureImpl(this.error);
 
   @override
-  final DioError error;
+  final DioException error;
 
   @override
   String toString() {
@@ -351,7 +351,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function() loaded,
   }) {
@@ -361,7 +361,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function()? loaded,
   }) {
@@ -371,7 +371,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function()? loaded,
     required TResult orElse(),
@@ -418,9 +418,9 @@ class _$FailureImpl implements _Failure {
 }
 
 abstract class _Failure implements SendActivityState {
-  const factory _Failure(final DioError error) = _$FailureImpl;
+  const factory _Failure(final DioException error) = _$FailureImpl;
 
-  DioError get error;
+  DioException get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -464,7 +464,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function() loaded,
   }) {
@@ -474,7 +474,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function()? loaded,
   }) {
@@ -484,7 +484,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function()? loaded,
     required TResult orElse(),
@@ -572,7 +572,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function() loaded,
   }) {
@@ -582,7 +582,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function()? loaded,
   }) {
@@ -592,7 +592,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function()? loaded,
     required TResult orElse(),

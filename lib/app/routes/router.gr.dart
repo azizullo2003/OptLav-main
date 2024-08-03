@@ -11,33 +11,38 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i31;
+import 'package:auto_route/auto_route.dart' as _i36;
 import 'package:auto_route/empty_router_widgets.dart' as _i9;
-import 'package:flutter/material.dart' as _i32;
+import 'package:flutter/material.dart' as _i37;
 
-import '../../presentation/about/data/models/block_model.dart' as _i33;
+import '../../presentation/about/data/models/block_model.dart' as _i38;
 import '../../presentation/about/view/pages/about_info_page.dart' as _i17;
 import '../../presentation/about/view/pages/about_page.dart' as _i16;
+import '../../presentation/ads/view/pages/ads_category_page.dart' as _i34;
+import '../../presentation/ads/view/pages/ads_main_page.dart' as _i33;
+import '../../presentation/ads/view/pages/ads_subcategory_page.dart' as _i35;
+import '../../presentation/ads/view/pages/my_ads/add_ads_page.dart' as _i23;
+import '../../presentation/ads/view/pages/my_ads/my_products_page.dart' as _i22;
 import '../../presentation/favorite/view/pages/favorite_page.dart' as _i11;
-import '../../presentation/main/%20data/models/category.dart' as _i34;
-import '../../presentation/main/%20data/models/company.dart' as _i36;
-import '../../presentation/main/%20data/models/product.dart' as _i37;
-import '../../presentation/main/%20data/models/subcategory.dart' as _i35;
+import '../../presentation/main/%20data/models/category.dart' as _i39;
+import '../../presentation/main/%20data/models/company.dart' as _i41;
+import '../../presentation/main/%20data/models/product.dart' as _i42;
+import '../../presentation/main/%20data/models/subcategory.dart' as _i40;
 import '../../presentation/main/view/pages/action_list_page.dart' as _i18;
-import '../../presentation/main/view/pages/catalog_page.dart' as _i22;
-import '../../presentation/main/view/pages/company_catalog.dart' as _i25;
-import '../../presentation/main/view/pages/company_info_page.dart' as _i27;
-import '../../presentation/main/view/pages/company_products.dart' as _i26;
+import '../../presentation/main/view/pages/catalog_page.dart' as _i24;
+import '../../presentation/main/view/pages/company_catalog.dart' as _i27;
+import '../../presentation/main/view/pages/company_info_page.dart' as _i29;
+import '../../presentation/main/view/pages/company_products.dart' as _i28;
 import '../../presentation/main/view/pages/home_page.dart' as _i12;
 import '../../presentation/main/view/pages/main_page.dart' as _i8;
-import '../../presentation/main/view/pages/product_info.dart' as _i28;
-import '../../presentation/main/view/pages/products_page.dart' as _i24;
-import '../../presentation/main/view/pages/subcatalog_page.dart' as _i23;
+import '../../presentation/main/view/pages/product_info.dart' as _i30;
+import '../../presentation/main/view/pages/products_page.dart' as _i26;
+import '../../presentation/main/view/pages/subcatalog_page.dart' as _i25;
 import '../../presentation/main/view/pages/top_list_page.dart' as _i19;
 import '../../presentation/onboarding/view/pages/onboarding_page.dart' as _i2;
-import '../../presentation/orders/data/models/order_info.dart' as _i38;
-import '../../presentation/orders/view/orders_page.dart' as _i29;
-import '../../presentation/orders/view/orders_products_page.dart' as _i30;
+import '../../presentation/orders/data/models/order_info.dart' as _i43;
+import '../../presentation/orders/view/orders_page.dart' as _i31;
+import '../../presentation/orders/view/orders_products_page.dart' as _i32;
 import '../../presentation/profile/view/pages/profile_page.dart' as _i10;
 import '../../presentation/registration/view/pages/enter_page.dart' as _i7;
 import '../../presentation/registration/view/pages/enter_pin.dart' as _i6;
@@ -54,45 +59,45 @@ import '../../presentation/support/view/pages/support_page.dart' as _i20;
 import '../../presentation/support/view/pages/support_request_sent.dart'
     as _i21;
 
-class AppRouter extends _i31.RootStackRouter {
-  AppRouter([_i32.GlobalKey<_i32.NavigatorState>? navigatorKey])
+class AppRouter extends _i36.RootStackRouter {
+  AppRouter([_i37.GlobalKey<_i37.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i31.PageFactory> pagesMap = {
+  final Map<String, _i36.PageFactory> pagesMap = {
     SplashScreen.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.SplashScreen(),
       );
     },
     OnboardingRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.OnboardingPage(),
       );
     },
     RegistrationBegin.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.RegistrationBegin(),
       );
     },
     RegistrationRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.RegistrationPage(),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.ForgotPasswordPage(),
       );
     },
     EnterPinCodeRoute.name: (routeData) {
       final args = routeData.argsAs<EnterPinCodeRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.EnterPinCodePage(
           key: args.key,
@@ -101,84 +106,86 @@ class AppRouter extends _i31.RootStackRouter {
       );
     },
     EnterRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i7.EnterPage(),
       );
     },
     MainRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i8.MainPage(),
       );
     },
     HomePageRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.EmptyRouterPage(),
       );
     },
     CatalogsRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.EmptyRouterPage(),
       );
     },
     OrdersPageRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.EmptyRouterPage(),
       );
     },
     ProfileRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i10.ProfilePage(),
       );
     },
     FavoriteRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i11.FavoritePage(),
       );
     },
+    AdsMainPageRoute.name: (routeData) {
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i9.EmptyRouterPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i12.HomePage(),
       );
     },
     SettingsRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i13.SettingsPage(),
       );
     },
     ConfirmDeleteUserRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.ConfirmDeleteUserPage(),
       );
     },
     UserDeletedRoute.name: (routeData) {
-      final args = routeData.argsAs<UserDeletedRouteArgs>(
-          orElse: () => const UserDeletedRouteArgs());
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.UserDeletedPage(key: args.key),
+        child: const _i15.UserDeletedPage(),
       );
     },
     AboutRoute.name: (routeData) {
-      final args = routeData.argsAs<AboutRouteArgs>(
-          orElse: () => const AboutRouteArgs());
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i16.AboutPage(key: args.key),
+        child: const _i16.AboutPage(),
       );
     },
     AboutInfoRoute.name: (routeData) {
       final args = routeData.argsAs<AboutInfoRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i17.AboutInfoPage(
           key: args.key,
@@ -187,35 +194,47 @@ class AppRouter extends _i31.RootStackRouter {
       );
     },
     ActionListRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i18.ActionListPage(),
       );
     },
     TopListRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i19.TopListPage(),
       );
     },
     SupportRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i20.SupportPage(),
       );
     },
     SupportRequestSent.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i21.SupportRequestSent(),
+      );
+    },
+    MyProductsRoute.name: (routeData) {
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i22.MyProductsPage(),
+      );
+    },
+    AddNewAdsRoute.name: (routeData) {
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i23.AddNewAdsPage(),
       );
     },
     CatalogRoute.name: (routeData) {
       final args = routeData.argsAs<CatalogRouteArgs>(
           orElse: () => const CatalogRouteArgs());
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i22.CatalogPage(
+        child: _i24.CatalogPage(
           key: args.key,
           companyId: args.companyId,
           fromCompanyCatalog: args.fromCompanyCatalog,
@@ -224,9 +243,9 @@ class AppRouter extends _i31.RootStackRouter {
     },
     SubcatalogRoute.name: (routeData) {
       final args = routeData.argsAs<SubcatalogRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i23.SubcatalogPage(
+        child: _i25.SubcatalogPage(
           key: args.key,
           category: args.category,
         ),
@@ -234,9 +253,9 @@ class AppRouter extends _i31.RootStackRouter {
     },
     ProductsRoute.name: (routeData) {
       final args = routeData.argsAs<ProductsRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i24.ProductsPage(
+        child: _i26.ProductsPage(
           key: args.key,
           category: args.category,
         ),
@@ -244,9 +263,9 @@ class AppRouter extends _i31.RootStackRouter {
     },
     CompanyCatalog.name: (routeData) {
       final args = routeData.argsAs<CompanyCatalogArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i25.CompanyCatalog(
+        child: _i27.CompanyCatalog(
           key: args.key,
           company: args.company,
           fromFavorite: args.fromFavorite,
@@ -255,9 +274,9 @@ class AppRouter extends _i31.RootStackRouter {
     },
     CompanyProducts.name: (routeData) {
       final args = routeData.argsAs<CompanyProductsArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i26.CompanyProducts(
+        child: _i28.CompanyProducts(
           key: args.key,
           company: args.company,
           categoryId: args.categoryId,
@@ -268,9 +287,9 @@ class AppRouter extends _i31.RootStackRouter {
     },
     CompanyInfoRoute.name: (routeData) {
       final args = routeData.argsAs<CompanyInfoRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i27.CompanyInfoPage(
+        child: _i29.CompanyInfoPage(
           key: args.key,
           company: args.company,
         ),
@@ -278,198 +297,282 @@ class AppRouter extends _i31.RootStackRouter {
     },
     ProductsInfoRoute.name: (routeData) {
       final args = routeData.argsAs<ProductsInfoRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i28.ProductsInfoPage(
+        child: _i30.ProductsInfoPage(
           key: args.key,
           product: args.product,
         ),
       );
     },
     OrdersRoute.name: (routeData) {
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i29.OrdersPage(),
+        child: const _i31.OrdersPage(),
       );
     },
     OrdersProductsRoute.name: (routeData) {
       final args = routeData.argsAs<OrdersProductsRouteArgs>();
-      return _i31.MaterialPageX<dynamic>(
+      return _i36.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i30.OrdersProductsPage(
+        child: _i32.OrdersProductsPage(
           key: args.key,
           order: args.order,
+        ),
+      );
+    },
+    AdsMainRoute.name: (routeData) {
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i33.AdsMainPage(),
+      );
+    },
+    AdsCategoryRoute.name: (routeData) {
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i34.AdsCategoryPage(),
+      );
+    },
+    AdsSubCategoryRoute.name: (routeData) {
+      final args = routeData.argsAs<AdsSubCategoryRouteArgs>();
+      return _i36.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i35.AdsSubCategoryPage(
+          key: args.key,
+          categoryId: args.categoryId,
         ),
       );
     },
   };
 
   @override
-  List<_i31.RouteConfig> get routes => [
-        _i31.RouteConfig(
+  List<_i36.RouteConfig> get routes => [
+        _i36.RouteConfig(
           SplashScreen.name,
           path: '/',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           OnboardingRoute.name,
           path: '/onboarding-page',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           RegistrationBegin.name,
           path: '/registration-begin',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           RegistrationRoute.name,
           path: '/registration-page',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           ForgotPasswordRoute.name,
           path: '/forgot-password-page',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           EnterPinCodeRoute.name,
           path: '/enter-pin-code-page',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           EnterRoute.name,
           path: '/enter-page',
         ),
-        _i31.RouteConfig(
+        _i36.RouteConfig(
           MainRoute.name,
           path: 'mainpage',
           children: [
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               '#redirect',
               path: '',
               parent: MainRoute.name,
               redirectTo: 'homepageroute',
               fullMatch: true,
             ),
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               HomePageRoute.name,
               path: 'homepageroute',
               parent: MainRoute.name,
               children: [
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   HomeRoute.name,
                   path: '',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   SettingsRoute.name,
                   path: 'settings',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   ConfirmDeleteUserRoute.name,
                   path: 'confirm_delete',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   UserDeletedRoute.name,
                   path: 'user_deleted',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   AboutRoute.name,
                   path: 'about',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   AboutInfoRoute.name,
                   path: 'about_info',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   ActionListRoute.name,
                   path: 'actions_list',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   TopListRoute.name,
                   path: 'top_list',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   SupportRoute.name,
                   path: 'support',
                   parent: HomePageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   SupportRequestSent.name,
                   path: 'support_sent',
                   parent: HomePageRoute.name,
                 ),
+                _i36.RouteConfig(
+                  MyProductsRoute.name,
+                  path: 'my_ads',
+                  parent: HomePageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  AddNewAdsRoute.name,
+                  path: 'add_ads_page',
+                  parent: HomePageRoute.name,
+                ),
               ],
             ),
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               CatalogsRoute.name,
               path: 'empty-router-page',
               parent: MainRoute.name,
               children: [
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   CatalogRoute.name,
                   path: '',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   SubcatalogRoute.name,
                   path: 'subcatalog',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   ProductsRoute.name,
                   path: 'products',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   CompanyCatalog.name,
                   path: 'company_catalog',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   CompanyProducts.name,
                   path: 'company_products',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   CompanyInfoRoute.name,
                   path: 'company_info',
                   parent: CatalogsRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   ProductsInfoRoute.name,
                   path: 'products_info',
                   parent: CatalogsRoute.name,
                 ),
               ],
             ),
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               OrdersPageRoute.name,
               path: 'ordersRoute',
               parent: MainRoute.name,
               children: [
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   OrdersRoute.name,
                   path: '',
                   parent: OrdersPageRoute.name,
                 ),
-                _i31.RouteConfig(
+                _i36.RouteConfig(
                   OrdersProductsRoute.name,
                   path: 'orderProducts',
                   parent: OrdersPageRoute.name,
                 ),
               ],
             ),
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               ProfileRoute.name,
               path: 'profile-page',
               parent: MainRoute.name,
             ),
-            _i31.RouteConfig(
+            _i36.RouteConfig(
               FavoriteRoute.name,
               path: 'favorite-page',
               parent: MainRoute.name,
+            ),
+            _i36.RouteConfig(
+              AdsMainPageRoute.name,
+              path: 'adsRoute',
+              parent: MainRoute.name,
+              children: [
+                _i36.RouteConfig(
+                  AdsMainRoute.name,
+                  path: '',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  AdsCategoryRoute.name,
+                  path: 'ads_category',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  AdsSubCategoryRoute.name,
+                  path: 'ads_subcategory',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  SubcatalogRoute.name,
+                  path: 'subcatalog',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  ProductsRoute.name,
+                  path: 'products',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  CompanyCatalog.name,
+                  path: 'company_catalog',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  CompanyProducts.name,
+                  path: 'company_products',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  CompanyInfoRoute.name,
+                  path: 'company_info',
+                  parent: AdsMainPageRoute.name,
+                ),
+                _i36.RouteConfig(
+                  ProductsInfoRoute.name,
+                  path: 'products_info',
+                  parent: AdsMainPageRoute.name,
+                ),
+              ],
             ),
           ],
         ),
@@ -478,7 +581,7 @@ class AppRouter extends _i31.RootStackRouter {
 
 /// generated route for
 /// [_i1.SplashScreen]
-class SplashScreen extends _i31.PageRouteInfo<void> {
+class SplashScreen extends _i36.PageRouteInfo<void> {
   const SplashScreen()
       : super(
           SplashScreen.name,
@@ -490,7 +593,7 @@ class SplashScreen extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.OnboardingPage]
-class OnboardingRoute extends _i31.PageRouteInfo<void> {
+class OnboardingRoute extends _i36.PageRouteInfo<void> {
   const OnboardingRoute()
       : super(
           OnboardingRoute.name,
@@ -502,7 +605,7 @@ class OnboardingRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.RegistrationBegin]
-class RegistrationBegin extends _i31.PageRouteInfo<void> {
+class RegistrationBegin extends _i36.PageRouteInfo<void> {
   const RegistrationBegin()
       : super(
           RegistrationBegin.name,
@@ -514,7 +617,7 @@ class RegistrationBegin extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.RegistrationPage]
-class RegistrationRoute extends _i31.PageRouteInfo<void> {
+class RegistrationRoute extends _i36.PageRouteInfo<void> {
   const RegistrationRoute()
       : super(
           RegistrationRoute.name,
@@ -526,7 +629,7 @@ class RegistrationRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.ForgotPasswordPage]
-class ForgotPasswordRoute extends _i31.PageRouteInfo<void> {
+class ForgotPasswordRoute extends _i36.PageRouteInfo<void> {
   const ForgotPasswordRoute()
       : super(
           ForgotPasswordRoute.name,
@@ -538,9 +641,9 @@ class ForgotPasswordRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.EnterPinCodePage]
-class EnterPinCodeRoute extends _i31.PageRouteInfo<EnterPinCodeRouteArgs> {
+class EnterPinCodeRoute extends _i36.PageRouteInfo<EnterPinCodeRouteArgs> {
   EnterPinCodeRoute({
-    _i32.Key? key,
+    _i37.Key? key,
     required String phone,
   }) : super(
           EnterPinCodeRoute.name,
@@ -560,7 +663,7 @@ class EnterPinCodeRouteArgs {
     required this.phone,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
   final String phone;
 
@@ -572,7 +675,7 @@ class EnterPinCodeRouteArgs {
 
 /// generated route for
 /// [_i7.EnterPage]
-class EnterRoute extends _i31.PageRouteInfo<void> {
+class EnterRoute extends _i36.PageRouteInfo<void> {
   const EnterRoute()
       : super(
           EnterRoute.name,
@@ -584,8 +687,8 @@ class EnterRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.MainPage]
-class MainRoute extends _i31.PageRouteInfo<void> {
-  const MainRoute({List<_i31.PageRouteInfo>? children})
+class MainRoute extends _i36.PageRouteInfo<void> {
+  const MainRoute({List<_i36.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           path: 'mainpage',
@@ -597,8 +700,8 @@ class MainRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.EmptyRouterPage]
-class HomePageRoute extends _i31.PageRouteInfo<void> {
-  const HomePageRoute({List<_i31.PageRouteInfo>? children})
+class HomePageRoute extends _i36.PageRouteInfo<void> {
+  const HomePageRoute({List<_i36.PageRouteInfo>? children})
       : super(
           HomePageRoute.name,
           path: 'homepageroute',
@@ -610,8 +713,8 @@ class HomePageRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.EmptyRouterPage]
-class CatalogsRoute extends _i31.PageRouteInfo<void> {
-  const CatalogsRoute({List<_i31.PageRouteInfo>? children})
+class CatalogsRoute extends _i36.PageRouteInfo<void> {
+  const CatalogsRoute({List<_i36.PageRouteInfo>? children})
       : super(
           CatalogsRoute.name,
           path: 'empty-router-page',
@@ -623,8 +726,8 @@ class CatalogsRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.EmptyRouterPage]
-class OrdersPageRoute extends _i31.PageRouteInfo<void> {
-  const OrdersPageRoute({List<_i31.PageRouteInfo>? children})
+class OrdersPageRoute extends _i36.PageRouteInfo<void> {
+  const OrdersPageRoute({List<_i36.PageRouteInfo>? children})
       : super(
           OrdersPageRoute.name,
           path: 'ordersRoute',
@@ -636,7 +739,7 @@ class OrdersPageRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.ProfilePage]
-class ProfileRoute extends _i31.PageRouteInfo<void> {
+class ProfileRoute extends _i36.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
@@ -648,7 +751,7 @@ class ProfileRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.FavoritePage]
-class FavoriteRoute extends _i31.PageRouteInfo<void> {
+class FavoriteRoute extends _i36.PageRouteInfo<void> {
   const FavoriteRoute()
       : super(
           FavoriteRoute.name,
@@ -659,8 +762,21 @@ class FavoriteRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [_i9.EmptyRouterPage]
+class AdsMainPageRoute extends _i36.PageRouteInfo<void> {
+  const AdsMainPageRoute({List<_i36.PageRouteInfo>? children})
+      : super(
+          AdsMainPageRoute.name,
+          path: 'adsRoute',
+          initialChildren: children,
+        );
+
+  static const String name = 'AdsMainPageRoute';
+}
+
+/// generated route for
 /// [_i12.HomePage]
-class HomeRoute extends _i31.PageRouteInfo<void> {
+class HomeRoute extends _i36.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
@@ -672,7 +788,7 @@ class HomeRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.SettingsPage]
-class SettingsRoute extends _i31.PageRouteInfo<void> {
+class SettingsRoute extends _i36.PageRouteInfo<void> {
   const SettingsRoute()
       : super(
           SettingsRoute.name,
@@ -684,7 +800,7 @@ class SettingsRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.ConfirmDeleteUserPage]
-class ConfirmDeleteUserRoute extends _i31.PageRouteInfo<void> {
+class ConfirmDeleteUserRoute extends _i36.PageRouteInfo<void> {
   const ConfirmDeleteUserRoute()
       : super(
           ConfirmDeleteUserRoute.name,
@@ -696,58 +812,34 @@ class ConfirmDeleteUserRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.UserDeletedPage]
-class UserDeletedRoute extends _i31.PageRouteInfo<UserDeletedRouteArgs> {
-  UserDeletedRoute({_i32.Key? key})
+class UserDeletedRoute extends _i36.PageRouteInfo<void> {
+  const UserDeletedRoute()
       : super(
           UserDeletedRoute.name,
           path: 'user_deleted',
-          args: UserDeletedRouteArgs(key: key),
         );
 
   static const String name = 'UserDeletedRoute';
 }
 
-class UserDeletedRouteArgs {
-  const UserDeletedRouteArgs({this.key});
-
-  final _i32.Key? key;
-
-  @override
-  String toString() {
-    return 'UserDeletedRouteArgs{key: $key}';
-  }
-}
-
 /// generated route for
 /// [_i16.AboutPage]
-class AboutRoute extends _i31.PageRouteInfo<AboutRouteArgs> {
-  AboutRoute({_i32.Key? key})
+class AboutRoute extends _i36.PageRouteInfo<void> {
+  const AboutRoute()
       : super(
           AboutRoute.name,
           path: 'about',
-          args: AboutRouteArgs(key: key),
         );
 
   static const String name = 'AboutRoute';
 }
 
-class AboutRouteArgs {
-  const AboutRouteArgs({this.key});
-
-  final _i32.Key? key;
-
-  @override
-  String toString() {
-    return 'AboutRouteArgs{key: $key}';
-  }
-}
-
 /// generated route for
 /// [_i17.AboutInfoPage]
-class AboutInfoRoute extends _i31.PageRouteInfo<AboutInfoRouteArgs> {
+class AboutInfoRoute extends _i36.PageRouteInfo<AboutInfoRouteArgs> {
   AboutInfoRoute({
-    _i32.Key? key,
-    required _i33.BlockModel block,
+    _i37.Key? key,
+    required _i38.BlockModel block,
   }) : super(
           AboutInfoRoute.name,
           path: 'about_info',
@@ -766,9 +858,9 @@ class AboutInfoRouteArgs {
     required this.block,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i33.BlockModel block;
+  final _i38.BlockModel block;
 
   @override
   String toString() {
@@ -778,7 +870,7 @@ class AboutInfoRouteArgs {
 
 /// generated route for
 /// [_i18.ActionListPage]
-class ActionListRoute extends _i31.PageRouteInfo<void> {
+class ActionListRoute extends _i36.PageRouteInfo<void> {
   const ActionListRoute()
       : super(
           ActionListRoute.name,
@@ -790,7 +882,7 @@ class ActionListRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.TopListPage]
-class TopListRoute extends _i31.PageRouteInfo<void> {
+class TopListRoute extends _i36.PageRouteInfo<void> {
   const TopListRoute()
       : super(
           TopListRoute.name,
@@ -802,7 +894,7 @@ class TopListRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.SupportPage]
-class SupportRoute extends _i31.PageRouteInfo<void> {
+class SupportRoute extends _i36.PageRouteInfo<void> {
   const SupportRoute()
       : super(
           SupportRoute.name,
@@ -814,7 +906,7 @@ class SupportRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.SupportRequestSent]
-class SupportRequestSent extends _i31.PageRouteInfo<void> {
+class SupportRequestSent extends _i36.PageRouteInfo<void> {
   const SupportRequestSent()
       : super(
           SupportRequestSent.name,
@@ -825,10 +917,34 @@ class SupportRequestSent extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.CatalogPage]
-class CatalogRoute extends _i31.PageRouteInfo<CatalogRouteArgs> {
+/// [_i22.MyProductsPage]
+class MyProductsRoute extends _i36.PageRouteInfo<void> {
+  const MyProductsRoute()
+      : super(
+          MyProductsRoute.name,
+          path: 'my_ads',
+        );
+
+  static const String name = 'MyProductsRoute';
+}
+
+/// generated route for
+/// [_i23.AddNewAdsPage]
+class AddNewAdsRoute extends _i36.PageRouteInfo<void> {
+  const AddNewAdsRoute()
+      : super(
+          AddNewAdsRoute.name,
+          path: 'add_ads_page',
+        );
+
+  static const String name = 'AddNewAdsRoute';
+}
+
+/// generated route for
+/// [_i24.CatalogPage]
+class CatalogRoute extends _i36.PageRouteInfo<CatalogRouteArgs> {
   CatalogRoute({
-    _i32.Key? key,
+    _i37.Key? key,
     String? companyId,
     bool? fromCompanyCatalog,
   }) : super(
@@ -851,7 +967,7 @@ class CatalogRouteArgs {
     this.fromCompanyCatalog,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
   final String? companyId;
 
@@ -864,11 +980,11 @@ class CatalogRouteArgs {
 }
 
 /// generated route for
-/// [_i23.SubcatalogPage]
-class SubcatalogRoute extends _i31.PageRouteInfo<SubcatalogRouteArgs> {
+/// [_i25.SubcatalogPage]
+class SubcatalogRoute extends _i36.PageRouteInfo<SubcatalogRouteArgs> {
   SubcatalogRoute({
-    _i32.Key? key,
-    required _i34.Category category,
+    _i37.Key? key,
+    required _i39.Category category,
   }) : super(
           SubcatalogRoute.name,
           path: 'subcatalog',
@@ -887,9 +1003,9 @@ class SubcatalogRouteArgs {
     required this.category,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i34.Category category;
+  final _i39.Category category;
 
   @override
   String toString() {
@@ -898,11 +1014,11 @@ class SubcatalogRouteArgs {
 }
 
 /// generated route for
-/// [_i24.ProductsPage]
-class ProductsRoute extends _i31.PageRouteInfo<ProductsRouteArgs> {
+/// [_i26.ProductsPage]
+class ProductsRoute extends _i36.PageRouteInfo<ProductsRouteArgs> {
   ProductsRoute({
-    _i32.Key? key,
-    required _i35.Subcategory category,
+    _i37.Key? key,
+    required _i40.Subcategory category,
   }) : super(
           ProductsRoute.name,
           path: 'products',
@@ -921,9 +1037,9 @@ class ProductsRouteArgs {
     required this.category,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i35.Subcategory category;
+  final _i40.Subcategory category;
 
   @override
   String toString() {
@@ -932,11 +1048,11 @@ class ProductsRouteArgs {
 }
 
 /// generated route for
-/// [_i25.CompanyCatalog]
-class CompanyCatalog extends _i31.PageRouteInfo<CompanyCatalogArgs> {
+/// [_i27.CompanyCatalog]
+class CompanyCatalog extends _i36.PageRouteInfo<CompanyCatalogArgs> {
   CompanyCatalog({
-    _i32.Key? key,
-    required _i36.Company company,
+    _i37.Key? key,
+    required _i41.Company company,
     bool? fromFavorite,
   }) : super(
           CompanyCatalog.name,
@@ -958,9 +1074,9 @@ class CompanyCatalogArgs {
     this.fromFavorite,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i36.Company company;
+  final _i41.Company company;
 
   final bool? fromFavorite;
 
@@ -971,11 +1087,11 @@ class CompanyCatalogArgs {
 }
 
 /// generated route for
-/// [_i26.CompanyProducts]
-class CompanyProducts extends _i31.PageRouteInfo<CompanyProductsArgs> {
+/// [_i28.CompanyProducts]
+class CompanyProducts extends _i36.PageRouteInfo<CompanyProductsArgs> {
   CompanyProducts({
-    _i32.Key? key,
-    required _i36.Company company,
+    _i37.Key? key,
+    required _i41.Company company,
     required String categoryId,
     required String categoryName,
     bool? fromFavorite,
@@ -1003,9 +1119,9 @@ class CompanyProductsArgs {
     this.fromFavorite,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i36.Company company;
+  final _i41.Company company;
 
   final String categoryId;
 
@@ -1020,11 +1136,11 @@ class CompanyProductsArgs {
 }
 
 /// generated route for
-/// [_i27.CompanyInfoPage]
-class CompanyInfoRoute extends _i31.PageRouteInfo<CompanyInfoRouteArgs> {
+/// [_i29.CompanyInfoPage]
+class CompanyInfoRoute extends _i36.PageRouteInfo<CompanyInfoRouteArgs> {
   CompanyInfoRoute({
-    _i32.Key? key,
-    required _i36.Company company,
+    _i37.Key? key,
+    required _i41.Company company,
   }) : super(
           CompanyInfoRoute.name,
           path: 'company_info',
@@ -1043,9 +1159,9 @@ class CompanyInfoRouteArgs {
     required this.company,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i36.Company company;
+  final _i41.Company company;
 
   @override
   String toString() {
@@ -1054,11 +1170,11 @@ class CompanyInfoRouteArgs {
 }
 
 /// generated route for
-/// [_i28.ProductsInfoPage]
-class ProductsInfoRoute extends _i31.PageRouteInfo<ProductsInfoRouteArgs> {
+/// [_i30.ProductsInfoPage]
+class ProductsInfoRoute extends _i36.PageRouteInfo<ProductsInfoRouteArgs> {
   ProductsInfoRoute({
-    _i32.Key? key,
-    required _i37.Product product,
+    _i37.Key? key,
+    required _i42.Product product,
   }) : super(
           ProductsInfoRoute.name,
           path: 'products_info',
@@ -1077,9 +1193,9 @@ class ProductsInfoRouteArgs {
     required this.product,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i37.Product product;
+  final _i42.Product product;
 
   @override
   String toString() {
@@ -1088,8 +1204,8 @@ class ProductsInfoRouteArgs {
 }
 
 /// generated route for
-/// [_i29.OrdersPage]
-class OrdersRoute extends _i31.PageRouteInfo<void> {
+/// [_i31.OrdersPage]
+class OrdersRoute extends _i36.PageRouteInfo<void> {
   const OrdersRoute()
       : super(
           OrdersRoute.name,
@@ -1100,11 +1216,11 @@ class OrdersRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i30.OrdersProductsPage]
-class OrdersProductsRoute extends _i31.PageRouteInfo<OrdersProductsRouteArgs> {
+/// [_i32.OrdersProductsPage]
+class OrdersProductsRoute extends _i36.PageRouteInfo<OrdersProductsRouteArgs> {
   OrdersProductsRoute({
-    _i32.Key? key,
-    required _i38.OrderInfo order,
+    _i37.Key? key,
+    required _i43.OrderInfo order,
   }) : super(
           OrdersProductsRoute.name,
           path: 'orderProducts',
@@ -1123,12 +1239,70 @@ class OrdersProductsRouteArgs {
     required this.order,
   });
 
-  final _i32.Key? key;
+  final _i37.Key? key;
 
-  final _i38.OrderInfo order;
+  final _i43.OrderInfo order;
 
   @override
   String toString() {
     return 'OrdersProductsRouteArgs{key: $key, order: $order}';
+  }
+}
+
+/// generated route for
+/// [_i33.AdsMainPage]
+class AdsMainRoute extends _i36.PageRouteInfo<void> {
+  const AdsMainRoute()
+      : super(
+          AdsMainRoute.name,
+          path: '',
+        );
+
+  static const String name = 'AdsMainRoute';
+}
+
+/// generated route for
+/// [_i34.AdsCategoryPage]
+class AdsCategoryRoute extends _i36.PageRouteInfo<void> {
+  const AdsCategoryRoute()
+      : super(
+          AdsCategoryRoute.name,
+          path: 'ads_category',
+        );
+
+  static const String name = 'AdsCategoryRoute';
+}
+
+/// generated route for
+/// [_i35.AdsSubCategoryPage]
+class AdsSubCategoryRoute extends _i36.PageRouteInfo<AdsSubCategoryRouteArgs> {
+  AdsSubCategoryRoute({
+    _i37.Key? key,
+    required String categoryId,
+  }) : super(
+          AdsSubCategoryRoute.name,
+          path: 'ads_subcategory',
+          args: AdsSubCategoryRouteArgs(
+            key: key,
+            categoryId: categoryId,
+          ),
+        );
+
+  static const String name = 'AdsSubCategoryRoute';
+}
+
+class AdsSubCategoryRouteArgs {
+  const AdsSubCategoryRouteArgs({
+    this.key,
+    required this.categoryId,
+  });
+
+  final _i37.Key? key;
+
+  final String categoryId;
+
+  @override
+  String toString() {
+    return 'AdsSubCategoryRouteArgs{key: $key, categoryId: $categoryId}';
   }
 }

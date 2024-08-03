@@ -83,6 +83,7 @@ class _ProductsInfoPageState extends State<ProductsInfoPage> {
             orElse: () => {});
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: ListView(
@@ -325,10 +326,11 @@ class _ProductsInfoPageState extends State<ProductsInfoPage> {
                       },
                       child: () {
                         if (widget.product.prod_favorites == "1") {
-                          return Assets.images.cart.fillFav
+                          return Assets.images.cart.fillFavSvg
                               .svg(fit: BoxFit.cover);
                         } else {
-                          return Assets.images.cart.fav.svg(fit: BoxFit.cover);
+                          return Assets.images.cart.favSvg
+                              .svg(fit: BoxFit.cover);
                         }
                       }(),
                     )

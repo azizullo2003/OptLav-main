@@ -5,13 +5,13 @@ import 'package:either_dart/either.dart';
 
 import '../failure.dart';
 
-Either<Failure<T>, DioError> handleStandardDioError<T>(DioError error) {
+Either<Failure<T>, DioException> handleStandardDioError<T>(DioException error) {
   if ([
-    DioErrorType.cancel,
-    DioErrorType.connectTimeout,
-    DioErrorType.receiveTimeout,
-    DioErrorType.sendTimeout,
-  ].contains(error.type) ||
+        DioExceptionType.cancel,
+        DioExceptionType.connectionTimeout,
+        DioExceptionType.receiveTimeout,
+        DioExceptionType.sendTimeout,
+      ].contains(error.type) ||
       error.error is SocketException ||
       error.error is HttpException) {
     return const Left(ConnectionFailure());

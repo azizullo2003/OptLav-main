@@ -6,8 +6,7 @@ import '../../../../app/routes/router.gr.dart';
 import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
 
-class SupportRequestSent extends StatelessWidget{
-
+class SupportRequestSent extends StatelessWidget {
   const SupportRequestSent({Key? key}) : super(key: key);
 
   @override
@@ -59,7 +58,8 @@ class SupportRequestSent extends StatelessWidget{
                   )
                 },
                 style: ElevatedButton.styleFrom(
-                    elevation: 0, backgroundColor: colorTheme.primary,
+                    elevation: 0,
+                    backgroundColor: colorTheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -74,6 +74,4 @@ class SupportRequestSent extends StatelessWidget{
       ),
     );
   }
-
-
 }

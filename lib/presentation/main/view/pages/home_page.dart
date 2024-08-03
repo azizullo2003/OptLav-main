@@ -6,7 +6,6 @@ import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/top_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/work_orders_bloc.dart';
-import 'package:optlove/presentation/main/view/pages/my_ads/my_products_page.dart';
 import 'package:optlove/presentation/main/view/widgets/about_us_widget.dart';
 import 'package:optlove/presentation/main/view/widgets/exists_order_widget.dart';
 import 'package:optlove/presentation/sendactivity/bloc/sendactivity_bloc.dart';
@@ -166,12 +165,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyProductsPage(),
-                        ),
-                      );
+                      context.router.push(const MyProductsRoute());
                     },
                     child: Container(
                       height: 70,

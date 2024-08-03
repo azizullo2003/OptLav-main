@@ -6,8 +6,7 @@ import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
 import '../../data/models/block_model.dart';
 
-class AboutInfoPage extends StatelessWidget{
-
+class AboutInfoPage extends StatelessWidget {
   final BlockModel block;
 
   const AboutInfoPage({Key? key, required this.block}) : super(key: key);
@@ -21,8 +20,7 @@ class AboutInfoPage extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () =>
-                context.router.navigateBack(),
+            onTap: () => context.router.navigateBack(),
             child: Box(
               child: Assets.images.back.svg(fit: BoxFit.cover),
             ),
@@ -39,7 +37,7 @@ class AboutInfoPage extends StatelessWidget{
           Text(
             block.text,
             style: TextStyle(
-              height: 2,
+                height: 2,
                 fontSize: 17,
                 fontWeight: FontWeight.w400,
                 color: colorTheme.blackText),
@@ -48,5 +46,4 @@ class AboutInfoPage extends StatelessWidget{
       ),
     );
   }
-
 }

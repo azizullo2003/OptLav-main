@@ -1089,7 +1089,7 @@ abstract class _GetWorkingOrders implements OrdersEvent {
 mixin _$OrdersState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1100,7 +1100,7 @@ mixin _$OrdersState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1111,7 +1111,7 @@ mixin _$OrdersState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -1181,7 +1181,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DioError error});
+  $Res call({DioException error});
 }
 
 /// @nodoc
@@ -1201,7 +1201,7 @@ class __$$FailureImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as DioError,
+              as DioException,
     ));
   }
 }
@@ -1212,7 +1212,7 @@ class _$FailureImpl implements _Failure {
   const _$FailureImpl(this.error);
 
   @override
-  final DioError error;
+  final DioException error;
 
   @override
   String toString() {
@@ -1239,7 +1239,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1253,7 +1253,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1267,7 +1267,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -1330,9 +1330,9 @@ class _$FailureImpl implements _Failure {
 }
 
 abstract class _Failure implements OrdersState {
-  const factory _Failure(final DioError error) = _$FailureImpl;
+  const factory _Failure(final DioException error) = _$FailureImpl;
 
-  DioError get error;
+  DioException get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1376,7 +1376,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1390,7 +1390,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1404,7 +1404,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -1535,7 +1535,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1549,7 +1549,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1563,7 +1563,7 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -1699,7 +1699,7 @@ class _$OrderLoadedImpl implements _OrderLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1713,7 +1713,7 @@ class _$OrderLoadedImpl implements _OrderLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1727,7 +1727,7 @@ class _$OrderLoadedImpl implements _OrderLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -1863,7 +1863,7 @@ class _$DeletedImpl implements _Deleted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -1877,7 +1877,7 @@ class _$DeletedImpl implements _Deleted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -1891,7 +1891,7 @@ class _$DeletedImpl implements _Deleted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -2027,7 +2027,7 @@ class _$OrderSentImpl implements _OrderSent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -2041,7 +2041,7 @@ class _$OrderSentImpl implements _OrderSent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -2055,7 +2055,7 @@ class _$OrderSentImpl implements _OrderSent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,
@@ -2192,7 +2192,7 @@ class _$WorkingOrdersLoadedImpl implements _WorkingOrdersLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(OrdersResponse response) loaded,
     required TResult Function(OrdersResponse response) orderLoaded,
@@ -2206,7 +2206,7 @@ class _$WorkingOrdersLoadedImpl implements _WorkingOrdersLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(OrdersResponse response)? loaded,
     TResult? Function(OrdersResponse response)? orderLoaded,
@@ -2220,7 +2220,7 @@ class _$WorkingOrdersLoadedImpl implements _WorkingOrdersLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(OrdersResponse response)? loaded,
     TResult Function(OrdersResponse response)? orderLoaded,

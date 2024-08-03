@@ -6,7 +6,7 @@ part of 'orders_remote_datasource.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _OrdersApi implements OrdersApi {
   _OrdersApi(
@@ -21,11 +21,11 @@ class _OrdersApi implements OrdersApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<OrdersResponse>> getOrders(userId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<OrdersResponse>> getOrders(String userId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<OrdersResponse>>(Options(
       method: 'GET',
@@ -38,24 +38,28 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrdersResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = OrdersResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<OrdersResponse>> getOrdersByStatus(
-    userId,
-    status,
+    String userId,
+    String status,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user_id': userId,
       r'status_id': status,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<OrdersResponse>>(Options(
       method: 'GET',
@@ -68,18 +72,22 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrdersResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = OrdersResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<OrdersResponse>> getWorkingOrders(userId) async {
-    const _extra = <String, dynamic>{};
+  Future<HttpResponse<OrdersResponse>> getWorkingOrders(String userId) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<OrdersResponse>>(Options(
       method: 'GET',
@@ -92,24 +100,28 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrdersResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = OrdersResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<OrdersResponse>> getOrderById(
-    userId,
-    orderId,
+    String userId,
+    String orderId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user_id': userId,
       r'order_id': orderId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<OrdersResponse>>(Options(
       method: 'GET',
@@ -122,24 +134,28 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = OrdersResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = OrdersResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<ConditionsResponse>> getConditions(
-    userId,
-    firmId,
+    String userId,
+    String firmId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user_id': userId,
       r'firm_id': firmId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ConditionsResponse>>(Options(
       method: 'GET',
@@ -152,19 +168,23 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ConditionsResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ConditionsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> deleteProductFromOrder(
-    userId,
-    productId,
-    orderId,
+    String userId,
+    String productId,
+    String orderId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -185,22 +205,26 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> addToCart(
-    idProduct,
-    count,
-    name,
-    userId,
-    firmId,
-    price,
+    String idProduct,
+    String count,
+    String name,
+    String userId,
+    String firmId,
+    String price,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -224,21 +248,25 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<StandartResponse>> cartSendOrder(
-    userId,
-    orderId,
-    addressId,
-    deliveryId,
-    paymentId,
+    String userId,
+    String orderId,
+    String addressId,
+    String deliveryId,
+    String paymentId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user_id': userId,
       r'application_id': orderId,
@@ -247,7 +275,7 @@ class _OrdersApi implements OrdersApi {
       r'payment_id': paymentId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<StandartResponse>>(Options(
       method: 'POST',
@@ -261,9 +289,13 @@ class _OrdersApi implements OrdersApi {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StandartResponse.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = StandartResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
@@ -278,5 +310,22 @@ class _OrdersApi implements OrdersApi {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

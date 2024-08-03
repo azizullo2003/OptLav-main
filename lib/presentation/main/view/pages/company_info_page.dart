@@ -8,8 +8,7 @@ import '../../../../app/theme/bloc/app_theme.dart';
 import '../../../../generated/assets.gen.dart';
 import '../../../sendactivity/bloc/sendactivity_bloc.dart';
 
-class CompanyInfoPage extends StatelessWidget{
-
+class CompanyInfoPage extends StatelessWidget {
   final Company company;
 
   const CompanyInfoPage({Key? key, required this.company}) : super(key: key);
@@ -73,7 +72,7 @@ class CompanyInfoPage extends StatelessWidget{
             ),
             const SizedBox(height: 3),
             Text(
-              company.ogrn?? "",
+              company.ogrn ?? "",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -121,7 +120,7 @@ class CompanyInfoPage extends StatelessWidget{
             ),
             const SizedBox(height: 3),
             Text(
-              company.bic?? "",
+              company.bic ?? "",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -136,7 +135,8 @@ class CompanyInfoPage extends StatelessWidget{
                   color: colorTheme.blackText),
             ),
             const SizedBox(height: 3),
-            Text(company.cor_account?? "",
+            Text(
+              company.cor_account ?? "",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -151,7 +151,8 @@ class CompanyInfoPage extends StatelessWidget{
                   color: colorTheme.blackText),
             ),
             const SizedBox(height: 3),
-            Text(company.pay_account?? "",
+            Text(
+              company.pay_account ?? "",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -183,7 +184,7 @@ class CompanyInfoPage extends StatelessWidget{
             ),
             const SizedBox(height: 3),
             Text(
-              company.dostavka?? "",
+              company.dostavka ?? "",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -199,51 +200,50 @@ class CompanyInfoPage extends StatelessWidget{
             ),
             const SizedBox(height: 3),
             Text(
-              company.opisanie?? "Описание",
+              company.opisanie ?? "Описание",
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: colorTheme.greyText),
             ),
-            if(company.raz_skidka != null)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                Text(
-                  "Необходимая сумма для скидки",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: colorTheme.blackText),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  "${company.summa_skidka} руб." ,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: colorTheme.greyText),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  "Размер скидки",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: colorTheme.blackText),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  "${company.raz_skidka} %",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: colorTheme.greyText),
-                ),
-              ],
-            ),
-
+            if (company.raz_skidka != null)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  Text(
+                    "Необходимая сумма для скидки",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: colorTheme.blackText),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    "${company.summa_skidka} руб.",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: colorTheme.greyText),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Размер скидки",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: colorTheme.blackText),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    "${company.raz_skidka} %",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: colorTheme.greyText),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
@@ -251,9 +251,8 @@ class CompanyInfoPage extends StatelessWidget{
   }
 
   void _sendActivity(BuildContext context) {
-    BlocProvider.of<SendActivityBloc>(context)
-        .add( SendActivityEvent.sendActivity(
-        screenName: "Экран информации о продавце ${company.name}"));
+    BlocProvider.of<SendActivityBloc>(context).add(
+        SendActivityEvent.sendActivity(
+            screenName: "Экран информации о продавце ${company.name}"));
   }
-
 }

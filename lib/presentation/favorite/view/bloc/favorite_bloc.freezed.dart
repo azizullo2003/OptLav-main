@@ -1063,7 +1063,7 @@ abstract class _RemoveFromFavorite implements FavoriteEvent {
 mixin _$FavoriteState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1075,7 +1075,7 @@ mixin _$FavoriteState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1087,7 +1087,7 @@ mixin _$FavoriteState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1161,7 +1161,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DioError error});
+  $Res call({DioException error});
 }
 
 /// @nodoc
@@ -1181,7 +1181,7 @@ class __$$FailureImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as DioError,
+              as DioException,
     ));
   }
 }
@@ -1192,7 +1192,7 @@ class _$FailureImpl implements _Failure {
   const _$FailureImpl(this.error);
 
   @override
-  final DioError error;
+  final DioException error;
 
   @override
   String toString() {
@@ -1219,7 +1219,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1234,7 +1234,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1249,7 +1249,7 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1316,9 +1316,9 @@ class _$FailureImpl implements _Failure {
 }
 
 abstract class _Failure implements FavoriteState {
-  const factory _Failure(final DioError error) = _$FailureImpl;
+  const factory _Failure(final DioException error) = _$FailureImpl;
 
-  DioError get error;
+  DioException get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1362,7 +1362,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1377,7 +1377,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1392,7 +1392,7 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1528,7 +1528,7 @@ class _$CompaniesLoadedImpl implements _CompaniesLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1543,7 +1543,7 @@ class _$CompaniesLoadedImpl implements _CompaniesLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1558,7 +1558,7 @@ class _$CompaniesLoadedImpl implements _CompaniesLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1700,7 +1700,7 @@ class _$ProductsLoadedImpl implements _ProductsLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1715,7 +1715,7 @@ class _$ProductsLoadedImpl implements _ProductsLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1730,7 +1730,7 @@ class _$ProductsLoadedImpl implements _ProductsLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1871,7 +1871,7 @@ class _$CompanyAddedImpl implements _CompanyAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -1886,7 +1886,7 @@ class _$CompanyAddedImpl implements _CompanyAdded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -1901,7 +1901,7 @@ class _$CompanyAddedImpl implements _CompanyAdded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2042,7 +2042,7 @@ class _$ProductAddedImpl implements _ProductAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -2057,7 +2057,7 @@ class _$ProductAddedImpl implements _ProductAdded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2072,7 +2072,7 @@ class _$ProductAddedImpl implements _ProductAdded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2214,7 +2214,7 @@ class _$ProductRemovedImpl implements _ProductRemoved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -2229,7 +2229,7 @@ class _$ProductRemovedImpl implements _ProductRemoved {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2244,7 +2244,7 @@ class _$ProductRemovedImpl implements _ProductRemoved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2386,7 +2386,7 @@ class _$CompanyRemovedImpl implements _CompanyRemoved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DioError error) failure,
+    required TResult Function(DioException error) failure,
     required TResult Function() loading,
     required TResult Function(FavoriteResponse response) companiesLoaded,
     required TResult Function(FavoriteProductsResponse response) productsLoaded,
@@ -2401,7 +2401,7 @@ class _$CompanyRemovedImpl implements _CompanyRemoved {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DioError error)? failure,
+    TResult? Function(DioException error)? failure,
     TResult? Function()? loading,
     TResult? Function(FavoriteResponse response)? companiesLoaded,
     TResult? Function(FavoriteProductsResponse response)? productsLoaded,
@@ -2416,7 +2416,7 @@ class _$CompanyRemovedImpl implements _CompanyRemoved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DioError error)? failure,
+    TResult Function(DioException error)? failure,
     TResult Function()? loading,
     TResult Function(FavoriteResponse response)? companiesLoaded,
     TResult Function(FavoriteProductsResponse response)? productsLoaded,
