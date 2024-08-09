@@ -6,10 +6,14 @@ import 'package:get_it/get_it.dart';
 import 'package:optlove/app/theme/bloc/app_theme_bloc.dart';
 import 'package:optlove/app/theme/models/app_pallete.dart';
 import 'package:optlove/presentation/about/view/bloc/about_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/add_ad_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_category_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/add_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/delete_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/edit_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/category/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/city/ads_city_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_fetch_my_ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/cart/view/bloc/cart_bloc.dart';
 import 'package:optlove/presentation/favorite/view/bloc/favorite_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
@@ -84,6 +88,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GetIt.I<AdsSubcategoryBloc>()),
         BlocProvider(create: (context) => GetIt.I<AddAdBloc>()),
         BlocProvider(create: (context) => GetIt.I<AdsBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AdsFetchMyAdsBloc>()),
+        BlocProvider(create: (context) => GetIt.I<AdsCityBloc>()),
+        BlocProvider(create: (context) => GetIt.I<DeleteAdBloc>()),
+        BlocProvider(create: (context) => GetIt.I<EditAdBloc>()),
       ],
       child: MaterialApp.router(
         title: 'OptLove',

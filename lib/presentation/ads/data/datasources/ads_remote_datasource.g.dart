@@ -83,7 +83,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
       'email',
       email,
     ));
-    _data.files.addAll(images.map((i) => MapEntry('images', i)));
+    _data.files.addAll(images.map((i) => MapEntry('images[]', i)));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
       method: 'POST',
@@ -175,7 +175,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
       'email',
       email,
     ));
-    _data.files.addAll(images.map((i) => MapEntry('images', i)));
+    _data.files.addAll(images.map((i) => MapEntry('images[]', i)));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
       method: 'POST',
@@ -405,6 +405,35 @@ class _AdsRemoteApi implements AdsRemoteApi {
               baseUrl,
             ))));
     final _value = AdsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(_value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<AdsCityResponse>> getCityById({String? id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<AdsCityResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api4.php?action=сity_get',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AdsCityResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }

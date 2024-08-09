@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:optlove/presentation/ads/data/models/ads_category_model.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
 
 Future<AdsCategory?> showSelectAdsSubCategoryBottomSheet(
     BuildContext context, String categoryId) {

@@ -42,6 +42,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/bus.svg
   SvgGenImage get bus => const SvgGenImage('assets/images/bus.svg');
 
+  /// File path: assets/images/call.svg
+  SvgGenImage get call => const SvgGenImage('assets/images/call.svg');
+
   /// Directory path: assets/images/cart
   $AssetsImagesCartGen get cart => const $AssetsImagesCartGen();
 
@@ -93,6 +96,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/home
   $AssetsImagesHomeGen get home => const $AssetsImagesHomeGen();
 
+  /// File path: assets/images/mail.svg
+  SvgGenImage get mail => const SvgGenImage('assets/images/mail.svg');
+
   /// Directory path: assets/images/main
   $AssetsImagesMainGen get main => const $AssetsImagesMainGen();
 
@@ -136,6 +142,7 @@ class $AssetsImagesGen {
         back,
         barcode,
         bus,
+        call,
         cartIcon,
         catalogPng,
         catalogSvg,
@@ -148,6 +155,7 @@ class $AssetsImagesGen {
         firstDots,
         fithDots,
         fourthDots,
+        mail,
         mainLogo,
         search,
         secondDots,

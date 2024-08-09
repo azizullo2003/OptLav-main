@@ -5,9 +5,11 @@ import 'package:either_dart/either.dart';
 import 'package:injectable/injectable.dart';
 import 'package:optlove/presentation/ads/data/datasources/ads_remote_datasource.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_category_response.dart';
+import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_response.dart';
-import 'package:optlove/presentation/ads/domain/repositories/ads_category_repository.dart';
+import 'package:optlove/presentation/ads/domain/repositories/ads_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/failure.dart';
 import '../../../../core/utils/handle_standard_dio_error.dart';
@@ -276,6 +278,47 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
         my: my,
         userId: userId,
         poisk: poisk,
+      );
+      return Right(response.data);
+    } catch (e) {
+      print(e);
+      return Left(e as DioException);
+    }
+  }
+
+  // New method to fetch ads with optional filters
+  @override
+  Future<Either<DioException, AdsResponse>> getMyAds({
+    String? sort,
+    String? poisk,
+  }) async {
+    try {
+      String userId = "";
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? userIdPrefs = prefs.getString('userId');
+      if (userIdPrefs != null) {
+        userId = userIdPrefs;
+      }
+      final response = await remoteDatasource.getAds(
+        sort: sort,
+        my: true,
+        userId: userId,
+        poisk: poisk,
+      );
+      return Right(response.data);
+    } catch (e) {
+      print(e);
+      return Left(e as DioException);
+    }
+  }
+
+  @override
+  Future<Either<DioException, AdsCityResponse>> getCityById({
+    required String id,
+  }) async {
+    try {
+      final response = await remoteDatasource.getCityById(
+        id: id,
       );
       return Right(response.data);
     } catch (e) {

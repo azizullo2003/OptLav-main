@@ -1,14 +1,14 @@
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
 import 'package:optlove/generated/assets.gen.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/category/ads_category_bloc.dart';
 
 class AdsCategoryPage extends StatefulWidget {
-  const AdsCategoryPage({super.key});
+  final String sort;
+  final String type;
+  const AdsCategoryPage({super.key, required this.sort, required this.type});
 
   @override
   State<AdsCategoryPage> createState() => _AdsCategoryPageState();
@@ -88,13 +88,14 @@ class _AdsCategoryPageState extends State<AdsCategoryPage> {
                             return ListTile(
                               title: Text(category.name),
                               onTap: () {
-                                if (category.id == 1) {
-                                  context.router.navigate(
-                                    AdsSubCategoryRoute(
-                                      categoryId: category.id.toString(),
-                                    ),
-                                  );
-                                }
+                                // if (category.id == 1) {
+                                //   context.router.navigate(
+                                //     AdsSubCategoryRoute(
+                                //       categoryId: category.id.toString(),
+                                //     ),
+                                //   );
+                                // }
+                                Navigator.pop(context, category.id.toString());
                               },
                             );
                           },

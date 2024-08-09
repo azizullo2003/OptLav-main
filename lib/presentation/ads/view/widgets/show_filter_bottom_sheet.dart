@@ -45,7 +45,7 @@ Future<String?> showFilterBottomSheet(
                 const SizedBox(height: 12),
                 FilterOption(
                   title: 'Сначала новые',
-                  value: 'newest',
+                  value: 'new',
                   groupValue: selectedValue,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -56,7 +56,7 @@ Future<String?> showFilterBottomSheet(
                 ),
                 FilterOption(
                   title: 'Сначала старые',
-                  value: 'oldest',
+                  value: 'old',
                   groupValue: selectedValue,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -81,12 +81,12 @@ class FilterOption extends StatelessWidget {
   final ValueChanged<String?> onChanged;
 
   const FilterOption({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
     required this.groupValue,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

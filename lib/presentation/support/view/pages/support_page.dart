@@ -18,7 +18,7 @@ import '../../../registration/data/models/user_info.dart';
 import '../../../sendactivity/bloc/sendactivity_bloc.dart';
 
 class SupportPage extends StatefulWidget {
-  const SupportPage({Key? key}) : super(key: key);
+  const SupportPage({super.key});
 
   @override
   State<SupportPage> createState() => _SettingsPageState();
@@ -67,137 +67,138 @@ class _SettingsPageState extends State<SupportPage> {
   Widget build(BuildContext context) {
     final colorTheme = AppTheme.of(context).colorTheme;
     return BlocListener<SupportBloc, SupportState>(
-  listener: (context, state) {
-    state.maybeMap(
-      loading: (_) => {
-         Container(child: const Center(child: CircularProgressIndicator()))
+      listener: (context, state) {
+        state.maybeMap(
+            loading: (_) => {
+                  Container(
+                      child: const Center(child: CircularProgressIndicator()))
+                },
+            messageSent: (response) => {
+                  if (response.response.result)
+                    {context.router.push(const SupportRequestSent())}
+                },
+            orElse: () => {});
       },
-    messageSent: (response) => {
-        if(response.response.result){
-          context.router.push(const SupportRequestSent())
-        }
-    },
-        
-        orElse: () => {});
-  },
-  child: Scaffold(
-        body: SingleChildScrollView(
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) => state.maybeMap(orElse: () {
-          return const SizedBox();
-        }, loading: (_) {
-          return Container(child: const Center(child: CircularProgressIndicator()));
-        }, loaded: (response) {
-          fillFieldsFromResponse(response.response.user_info);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () => context.router.push(
-                        const MainRoute(),
+      child: Scaffold(
+          body: SingleChildScrollView(
+        child: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) => state.maybeMap(orElse: () {
+            return const SizedBox();
+          }, loading: (_) {
+            return Container(
+                child: const Center(child: CircularProgressIndicator()));
+          }, loaded: (response) {
+            fillFieldsFromResponse(response.response.user_info);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 16),
+                      GestureDetector(
+                        onTap: () => context.router.push(
+                          const MainRoute(),
+                        ),
+                        child: Box(
+                          child: Assets.images.back.svg(fit: BoxFit.cover),
+                        ),
                       ),
-                      child: Box(
-                        child: Assets.images.back.svg(fit: BoxFit.cover),
+                      const SizedBox(height: 12),
+                      Text(
+                        "Служба поддержки",
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                            color: colorTheme.blackText),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      "Служба поддержки",
-                      style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w700,
-                          color: colorTheme.blackText),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      "Ваши контактные данные",
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: colorTheme.blackText),
-                    ),
-                    const SizedBox(height: 20),
-                    ProfileTextField(
-                        labelText: "Электронная почта",
-                        keyboardType: TextInputType.emailAddress,
-                        inputFormatters: emailMask,
-                        controller: emailController,
-                        validator: (value) => EmailValidator.validate(value!)
-                            ? null
-                            : "Введите корректный email",
-                        function: () => emailController.clear()),
-                    const SizedBox(height: 30),
-                    ProfileTextField(
-                        labelText: "Текст обращения",
-                        keyboardType: TextInputType.text,
-                        inputFormatters: singleFormat,
-                        controller: textController,
-                        function: () => textController.clear()),
-                    const SizedBox(height: 30),
-                    Box(
-                      width: double.infinity,
-                      padding: const Pad(horizontal: 16, top: 40),
-                      child: ElevatedButton(
-                        onPressed:
-                          isCorrectFields
+                      const SizedBox(height: 12),
+                      Text(
+                        "Ваши контактные данные",
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: colorTheme.blackText),
+                      ),
+                      const SizedBox(height: 20),
+                      ProfileTextField(
+                          labelText: "Электронная почта",
+                          keyboardType: TextInputType.emailAddress,
+                          inputFormatters: emailMask,
+                          controller: emailController,
+                          validator: (value) => EmailValidator.validate(value!)
+                              ? null
+                              : "Введите корректный email",
+                          function: () => emailController.clear()),
+                      const SizedBox(height: 30),
+                      ProfileTextField(
+                          labelText: "Текст обращения",
+                          keyboardType: TextInputType.text,
+                          inputFormatters: singleFormat,
+                          controller: textController,
+                          function: () => textController.clear()),
+                      const SizedBox(height: 30),
+                      Box(
+                        width: double.infinity,
+                        padding: const Pad(horizontal: 16, top: 40),
+                        child: ElevatedButton(
+                          onPressed: isCorrectFields
                               ? () => _onSendMessage(context,
                                   emailController.text, textController.text)
                               : null,
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0, backgroundColor: isCorrectFields
-                                ? const Color(0xFF5DB248)
-                                : const Color(0xFFAAABAD),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            textStyle: const TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.bold)),
-                        child: const Text('Отправить'),
-                      ),
-                    ),
-                    Center(
-                      child: Box(
-                          padding: const Pad(horizontal: 16, top: 25),
-                          alignment: Alignment.center,
-                          width: 300,
-                          child: GestureDetector(
-                            onTap: _launchUrlConf,
-                            child: RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                text: "Отправляя свои данные, вы соглашаетесь ",
-                                style: TextStyle(
-                                    color: colorTheme.greyText, fontSize: 10),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: "\nс политикой конфедициальности",
-                                      style: TextStyle(
-                                          height: 1.5,
-                                          color: colorTheme.blueSochi,
-                                          decoration:
-                                              TextDecoration.underline)),
-                                ],
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor: isCorrectFields
+                                  ? const Color(0xFF5DB248)
+                                  : const Color(0xFFAAABAD),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                            ),
-                          )),
-                    ),
-                  ],
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              textStyle: const TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.bold)),
+                          child: const Text('Отправить'),
+                        ),
+                      ),
+                      Center(
+                        child: Box(
+                            padding: const Pad(horizontal: 16, top: 25),
+                            alignment: Alignment.center,
+                            width: 300,
+                            child: GestureDetector(
+                              onTap: _launchUrlConf,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text:
+                                      "Отправляя свои данные, вы соглашаетесь ",
+                                  style: TextStyle(
+                                      color: colorTheme.greyText, fontSize: 10),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: "\nс политикой конфедициальности",
+                                        style: TextStyle(
+                                            height: 1.5,
+                                            color: colorTheme.blueSochi,
+                                            decoration:
+                                                TextDecoration.underline)),
+                                  ],
+                                ),
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              //ButtonColourful(text: "Сохранить", color :colorTheme.primary),
-            ],
-          );
-        }),
-      ),
-    )),
-);
+                //ButtonColourful(text: "Сохранить", color :colorTheme.primary),
+              ],
+            );
+          }),
+        ),
+      )),
+    );
   }
 
   Future<void> _launchUrlConf() async {
@@ -227,6 +228,6 @@ class _SettingsPageState extends State<SupportPage> {
 
   void fillFieldsFromResponse(UserInfo user) {
     phoneController.text = StringUtils.maskForPhone(user.phone);
-    emailController.text = user.email?? "";
+    emailController.text = user.email ?? "";
   }
 }

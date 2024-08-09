@@ -6,26 +6,28 @@ import 'package:optlove/presentation/profile/domain/models/user_change_response.
 import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 
 abstract class UserRepository {
-  Future<Either<DioError, UserInfoResponse>> getUserInfo();
+  Future<Either<DioException, UserInfoResponse>> getUserInfo();
 
-  Future<Either<DioError, StandartResponse>> getUserExist();
+  Future<Either<DioException, StandartResponse>> getUserExist();
 
-  Future<Either<DioError, UserChangeResponse>> changeUserInfo(
+  Future<Either<DioException, UserChangeResponse>> changeUserInfo(
       List<String> fields, List<String> values, List<String> regions);
 
-  Future<Either<DioError, InnResponse>> innSearch(String inn);
+  Future<Either<DioException, InnResponse>> innSearch(String inn);
 
-  Future<Either<DioError, UserChangeResponse>> deleteUser();
+  Future<Either<DioException, UserChangeResponse>> deleteUser();
 
-  Future<Either<DioError, StandartResponse>> addToFavorite(String firmId);
+  Future<Either<DioException, StandartResponse>> addToFavorite(String firmId);
 
-  Future<Either<DioError, StandartResponse>> addProductToFavorite(
+  Future<Either<DioException, StandartResponse>> addProductToFavorite(
       String firmId, String productId);
 
-  Future<Either<DioError, StandartResponse>> removeProductFromFavorite(
+  Future<Either<DioException, StandartResponse>> removeProductFromFavorite(
       String firmId, String productId);
 
-  Future<Either<DioError, StandartResponse>> removeFromFavorite(String firmId);
+  Future<Either<DioException, StandartResponse>> removeFromFavorite(
+      String firmId);
 
-  Future<Either<DioError, StandartResponse>> sendMessage(String email, String message);
+  Future<Either<DioException, StandartResponse>> sendMessage(
+      String email, String message);
 }

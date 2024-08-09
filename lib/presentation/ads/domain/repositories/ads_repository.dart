@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_category_response.dart';
+import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_response.dart';
 
@@ -56,5 +57,15 @@ abstract class AdsRepository {
     bool? my,
     String? userId,
     String? poisk,
+  });
+
+  // New method to fetch ads with optional filters
+  Future<Either<DioException, AdsResponse>> getMyAds({
+    String? sort,
+    String? poisk,
+  });
+
+  Future<Either<DioException, AdsCityResponse>> getCityById({
+    required String id,
   });
 }

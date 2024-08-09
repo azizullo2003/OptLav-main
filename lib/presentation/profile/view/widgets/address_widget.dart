@@ -21,13 +21,12 @@ class AddressPage extends StatefulWidget {
   String comment = "";
 
   AddressPage(
-      {Key? key,
+      {super.key,
       required this.addressNumber,
       this.removeAddress,
       this.city,
       this.readonly,
-      this.citySelectListener})
-      : super(key: key);
+      this.citySelectListener});
 
   @override
   State<AddressPage> createState() => _AddressPageState();

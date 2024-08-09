@@ -10,8 +10,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/data/models/ads_category_model.dart';
+import 'package:optlove/presentation/ads/data/models/ads_city_model.dart';
+import 'package:optlove/presentation/ads/data/models/ads_model.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/add_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/edit_ad_bloc.dart';
 import 'package:optlove/presentation/ads/view/widgets/select_ads_type_sheet.dart';
 import 'package:optlove/presentation/ads/view/widgets/show_select_ads_category.dart';
 import 'package:optlove/presentation/ads/view/widgets/show_select_ads_subcategory.dart';
@@ -23,23 +25,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../app/utils/functionNetwork.dart';
 
-class AddNewAdsPage extends StatefulWidget {
-  const AddNewAdsPage({super.key});
+class EditAdsPage extends StatefulWidget {
+  final AdsModel ads;
+  const EditAdsPage({super.key, required this.ads});
 
   @override
-  State<AddNewAdsPage> createState() => _AddNewAdsPageState();
+  State<EditAdsPage> createState() => _EditAdsPageState();
 }
 
-class _AddNewAdsPageState extends State<AddNewAdsPage> {
+class _EditAdsPageState extends State<EditAdsPage> {
   late ScrollController _controller;
-  String _selectedOption = "Спрос";
+  String? _selectedOption;
   AdsCategory? _selectedCategory;
   AdsCategory? _selectedSubCategory;
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController descriptionTextController =
-      TextEditingController();
-  final TextEditingController sellerOrOrganizationNameTextController =
       TextEditingController();
   final TextEditingController priceTextController = TextEditingController();
   final TextEditingController phoneTextController = TextEditingController();
@@ -61,51 +62,91 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
   var focus = false;
 
   static final List<Cities> _cities = <Cities>[];
-  Cities? _selectedCity;
+  AdsCity? _selectedCity;
   var isCorrectFields = false;
   var citySelected = false;
   var os = 0;
   var showSuggestion = false;
 
   void checkFields() {
+    // Check if Ads Name is valid
     final isValidAdsName = nameTextController.text.isNotEmpty;
+    if (!isValidAdsName) {
+      print("Ads Name is not valid");
+    } else {
+      print("Ads Name is valid");
+    }
+
+    // Check if a category is selected and, if necessary, a subcategory is also selected
     final isSelectedCategory = _selectedCategory != null
         ? _selectedCategory!.id == 1
             ? _selectedSubCategory != null
             : _selectedCategory != null
         : false;
+    if (!isSelectedCategory) {
+      print("Category/Subcategory is not valid");
+    } else {
+      print("Category/Subcategory is valid");
+    }
+
+    // Check if Ads Description is valid
     final isValidAdsDescription = descriptionTextController.text.isNotEmpty;
-    final isValidOrganizationName =
-        sellerOrOrganizationNameTextController.text.isNotEmpty;
+    if (!isValidAdsDescription) {
+      print("Ads Description is not valid");
+    } else {
+      print("Ads Description is valid");
+    }
+
+    // Check if Phone number is valid
     final isValidPhone = phoneTextController.text.length == 18;
+    if (!isValidPhone) {
+      print("Phone number is not valid");
+    } else {
+      print("Phone number is valid");
+    }
+
+    // Check if Email is valid
     final isValidEmail = EmailValidator.validate(emailTextController.text);
-    final isValidImages = images.isNotEmpty;
+    if (!isValidEmail) {
+      print("Email is not valid");
+    } else {
+      print("Email is valid");
+    }
+
+    // Check if Price is valid
     final isValidPrice = priceTextController.text.isNotEmpty &&
         isNumeric(priceTextController.text);
+    if (!isValidPrice) {
+      print("Price is not valid");
+    } else {
+      print("Price is valid");
+    }
 
-    print("Phone valid: $isValidPhone");
-    print("Email valid: $isValidEmail");
-    print("City selected: $citySelected");
+    // Check if city is selected
+    if (!citySelected) {
+      print("City is not selected");
+    } else {
+      print("City is selected");
+    }
 
+    // Final validation
     if (isValidPhone &&
         isValidEmail &&
         citySelected &&
         isValidAdsName &&
         isSelectedCategory &&
         isValidAdsDescription &&
-        isValidOrganizationName &&
-        isValidImages &&
         isValidPrice) {
       setState(() {
         isCorrectFields = true;
       });
+      print("All fields are valid");
     } else {
       setState(() {
         isCorrectFields = false;
       });
+      print("Some fields are not valid");
     }
-
-    print("isCorrectFields: $isCorrectFields");
   }
 
   bool isValidPhoneNumber(String value) =>
@@ -118,6 +159,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
   @override
   void initState() {
     super.initState();
+
     _controller = ScrollController();
     cityController.addListener(cityListener);
     phoneTextController.addListener(phoneListener);
@@ -125,10 +167,49 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     priceTextController.addListener(priceListener);
     nameTextController.addListener(nameListener);
     descriptionTextController.addListener(descriptionListener);
-    sellerOrOrganizationNameTextController
-        .addListener(sellerOrOrganizationListener);
 
-    initUserId();
+    setState(() {
+      _selectedOption = widget.ads.type;
+      nameTextController.text = widget.ads.name!;
+      descriptionTextController.text = widget.ads.description!;
+      // sellerOrOrganizationNameTextController.text = widget.ads.
+      priceTextController.text = widget.ads.price!;
+      emailTextController.text = widget.ads.email!;
+      phoneTextController.text = phoneMask.maskText(widget.ads.phone!);
+    });
+    initFields();
+  }
+
+  Future<void> initFields() async {
+    await initCategoryAndSubcategory();
+    await initCity();
+    await initUserId();
+    checkFields();
+  }
+
+  Future<void> initCity() async {
+    final city = await getCityById(widget.ads.city_id!);
+    setState(() {
+      _selectedCity = city.city.first;
+      cityController.text = _selectedCity!.name!;
+      citySelected = true;
+    });
+  }
+
+  Future<void> initCategoryAndSubcategory() async {
+    final category = await getCategoryById(widget.ads.category_id.toString());
+
+    if (widget.ads.subcategory_id != "0") {
+      final subcategory = await getSubcategoryByCategoryId(
+          widget.ads.category_id!, widget.ads.subcategory_id!);
+      setState(() {
+        _selectedSubCategory = subcategory;
+      });
+    }
+
+    setState(() {
+      _selectedCategory = category;
+    });
   }
 
   void cityListener() {
@@ -178,12 +259,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     checkFields();
   }
 
-  void sellerOrOrganizationListener() {
-    print(
-        "SellerOrOrganization controller text: ${sellerOrOrganizationNameTextController.text}");
-    checkFields();
-  }
-
   Future<void> initUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? userIdPrefs = prefs.getString('userId');
@@ -198,8 +273,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
   void dispose() {
     nameTextController.removeListener(nameListener);
     descriptionTextController.removeListener(descriptionListener);
-    sellerOrOrganizationNameTextController
-        .removeListener(sellerOrOrganizationListener);
+
     cityController.removeListener(cityListener);
     phoneTextController.removeListener(phoneListener);
     emailTextController.removeListener(emailListener);
@@ -208,7 +282,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     _controller.dispose();
     nameTextController.dispose();
     descriptionTextController.dispose();
-    sellerOrOrganizationNameTextController.dispose();
     priceTextController.dispose();
     phoneTextController.dispose();
     emailTextController.dispose();
@@ -223,7 +296,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: BlocListener<AddAdBloc, AddAdState>(
+      body: BlocListener<EditAdBloc, EditAdState>(
         listener: (context, state) {
           state.when(
             initial: () {},
@@ -276,7 +349,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Создать объявление",
+                    "Изменить объявление",
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
@@ -312,7 +385,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                         setState(() {
                           _selectedOption = value;
                         });
-                        print(_selectedOption);
                       }
                     },
                     child: Container(
@@ -329,7 +401,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            _selectedOption,
+                            _selectedOption!,
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -566,73 +638,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                   ),
                   const SizedBox(height: 24),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 60,
-                        width: MediaQuery.of(context).size.width - 50,
-                        child: Text(
-                          "Выберите название продавца или организации",
-                          maxLines: 3,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: colorTheme.blackText),
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      const Text(
-                        '*',
-                        style: TextStyle(color: Colors.red, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: sellerOrOrganizationNameTextController,
-                    onChanged: (value) => checkFields,
-                    decoration: InputDecoration(
-                      hintText: "Название продавца или организации",
-                      hintStyle: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.normal,
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade200,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Добавьте изображение",
-                        maxLines: 3,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: colorTheme.blackText),
-                      ),
-                      const SizedBox(width: 5),
-                      const Text(
-                        '*',
-                        style: TextStyle(color: Colors.red, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
                     children: [
                       GestureDetector(
                         onTap: () async {
@@ -667,7 +672,9 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                       AutoSizeText(
                         images.isNotEmpty
                             ? "(выбрано ${images.length} файлов)"
-                            : "(до 10 файлов)",
+                            : widget.ads.images.isNotEmpty
+                                ? "(выбрано ${widget.ads.images.length} файлов)"
+                                : "(до 10 файлов)",
                         style: const TextStyle(fontSize: 14),
                         maxFontSize: 16,
                       ),
@@ -753,10 +760,12 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                                 fontWeight: FontWeight.normal)),
                         maxSuggestionsInViewPort: 5,
                         itemHeight: 40,
-                        onSuggestionTap: (SearchFieldListItem<Cities> city) {
+                        onSuggestionTap:
+                            (SearchFieldListItem<Cities> city) async {
+                          final cityObj = await getCityById(city.item!.id);
                           setState(() {
                             citySelected = true;
-                            _selectedCity = city.item!;
+                            _selectedCity = cityObj.city[0];
                           });
                         },
                       ));
@@ -864,8 +873,9 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                                 await convertToMultipartFiles(images);
 
                             if (context.mounted) {
-                              context.read<AddAdBloc>().add(
-                                    AddAdEvent.addAd(
+                              context.read<EditAdBloc>().add(
+                                    EditAdEvent.editAd(
+                                      adId: widget.ads.id!,
                                       userId: userId,
                                       type1: _selectedOption == "Предложение"
                                           ? "on"

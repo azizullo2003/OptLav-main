@@ -2,12 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:optlove/presentation/about/view/bloc/about_bloc.dart';
 import 'package:optlove/presentation/ads/data/datasources/ads_remote_datasource.dart';
-import 'package:optlove/presentation/ads/data/repositories/ads_category_repository_impl.dart';
-import 'package:optlove/presentation/ads/domain/repositories/ads_category_repository.dart';
-import 'package:optlove/presentation/ads/view/bloc/add_ad_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_category_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
+import 'package:optlove/presentation/ads/data/repositories/ads_repository_impl.dart';
+import 'package:optlove/presentation/ads/domain/repositories/ads_repository.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/add_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/delete_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/edit_ad_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/category/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/city/ads_city_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_fetch_my_ads_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/cart/view/bloc/cart_bloc.dart';
 import 'package:optlove/presentation/favorite/view/bloc/favorite_bloc.dart';
 import 'package:optlove/presentation/main/%20data/datasources/search_remote_datasource.dart';
@@ -159,4 +163,13 @@ Future<void> initializeDependencies() async {
   injector.registerFactory<AddAdBloc>(() => AddAdBloc(injector()));
 
   injector.registerFactory<AdsBloc>(() => AdsBloc(injector()));
+
+  injector
+      .registerFactory<AdsFetchMyAdsBloc>(() => AdsFetchMyAdsBloc(injector()));
+
+  injector.registerFactory<AdsCityBloc>(() => AdsCityBloc(injector()));
+
+  injector.registerFactory<DeleteAdBloc>(() => DeleteAdBloc(injector()));
+
+  injector.registerFactory<EditAdBloc>(() => EditAdBloc(injector()));
 }

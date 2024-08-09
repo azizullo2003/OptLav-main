@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
 import 'package:optlove/generated/assets.gen.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads_subcategory_bloc.dart';
+import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/ads/view/widgets/ads_catalog_card.dart';
 import 'package:optlove/presentation/main/%20data/models/category.dart';
 

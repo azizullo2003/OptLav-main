@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_category_response.dart';
+import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_response.dart';
 import 'package:retrofit/dio.dart';
@@ -85,6 +86,14 @@ class AdsRemoteDatasource {
       poisk: poisk,
     );
   }
+
+  Future<HttpResponse<AdsCityResponse>> getCityById({
+    required String id,
+  }) {
+    return api.getCityById(
+      id: id,
+    );
+  }
 }
 
 @RestApi(baseUrl: apiBaseUrl)
@@ -108,7 +117,7 @@ abstract class AdsRemoteApi {
       @Part(name: "price") String price,
       @Part(name: "phone") String phone,
       @Part(name: "email") String email,
-      @Part(name: "images") List<MultipartFile> images);
+      @Part(name: "images[]") List<MultipartFile> images);
 
   @POST('api4.php?action=ads_update')
   @MultiPart()
@@ -125,7 +134,7 @@ abstract class AdsRemoteApi {
       @Part(name: "price") String price,
       @Part(name: "phone") String phone,
       @Part(name: "email") String email,
-      @Part(name: "images") List<MultipartFile> images);
+      @Part(name: "images[]") List<MultipartFile> images);
 
   @POST('api4.php?action=ads_remove')
   @FormUrlEncoded()
@@ -159,5 +168,10 @@ abstract class AdsRemoteApi {
     @Query("my") bool? my,
     @Query("user_id") String? userId,
     @Query("poisk") String? poisk,
+  });
+
+  @GET('api4.php?action=сity_get')
+  Future<HttpResponse<AdsCityResponse>> getCityById({
+    @Query("id") String? id,
   });
 }

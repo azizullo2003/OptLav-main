@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_category_response.dart';
-import 'package:optlove/presentation/ads/domain/repositories/ads_category_repository.dart';
+import 'package:optlove/presentation/ads/domain/repositories/ads_repository.dart';
 
 part 'ads_subcategory_bloc.freezed.dart';
 part 'ads_subcategory_event.dart';

@@ -3,6 +3,7 @@ import 'package:auto_route/empty_router_widgets.dart';
 import 'package:optlove/presentation/about/view/pages/about_info_page.dart';
 import 'package:optlove/presentation/about/view/pages/about_page.dart';
 import 'package:optlove/presentation/ads/view/pages/ads_category_page.dart';
+import 'package:optlove/presentation/ads/view/pages/ads_detail_page.dart';
 import 'package:optlove/presentation/ads/view/pages/ads_main_page.dart';
 import 'package:optlove/presentation/ads/view/pages/ads_subcategory_page.dart';
 import 'package:optlove/presentation/ads/view/pages/my_ads/add_ads_page.dart';
@@ -94,6 +95,7 @@ import '../../presentation/support/view/pages/support_request_sent.dart';
           name: "AdsMainPageRoute",
           children: [
             AutoRoute(page: AdsMainPage, path: ''),
+            AutoRoute(page: AdsDetailPage, path: 'ads_detail'),
             AutoRoute(page: AdsCategoryPage, path: 'ads_category'),
             AutoRoute(page: AdsSubCategoryPage, path: 'ads_subcategory'),
             AutoRoute(page: SubcatalogPage, path: 'subcatalog'),
