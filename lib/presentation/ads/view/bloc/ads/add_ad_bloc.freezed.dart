@@ -28,6 +28,7 @@ mixin _$AddAdEvent {
   String get phone => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   List<MultipartFile> get images => throw _privateConstructorUsedError;
+  String get name_firm => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -42,7 +43,8 @@ mixin _$AddAdEvent {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)
+            List<MultipartFile> images,
+            String name_firm)
         addAd,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +62,8 @@ mixin _$AddAdEvent {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)?
+            List<MultipartFile> images,
+            String name_firm)?
         addAd,
   }) =>
       throw _privateConstructorUsedError;
@@ -78,7 +81,8 @@ mixin _$AddAdEvent {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)?
+            List<MultipartFile> images,
+            String name_firm)?
         addAd,
     required TResult orElse(),
   }) =>
@@ -123,7 +127,8 @@ abstract class $AddAdEventCopyWith<$Res> {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images});
+      List<MultipartFile> images,
+      String name_firm});
 }
 
 /// @nodoc
@@ -151,6 +156,7 @@ class _$AddAdEventCopyWithImpl<$Res, $Val extends AddAdEvent>
     Object? phone = null,
     Object? email = null,
     Object? images = null,
+    Object? name_firm = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -201,6 +207,10 @@ class _$AddAdEventCopyWithImpl<$Res, $Val extends AddAdEvent>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<MultipartFile>,
+      name_firm: null == name_firm
+          ? _value.name_firm
+          : name_firm // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -224,7 +234,8 @@ abstract class _$$AddAdImplCopyWith<$Res> implements $AddAdEventCopyWith<$Res> {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images});
+      List<MultipartFile> images,
+      String name_firm});
 }
 
 /// @nodoc
@@ -250,6 +261,7 @@ class __$$AddAdImplCopyWithImpl<$Res>
     Object? phone = null,
     Object? email = null,
     Object? images = null,
+    Object? name_firm = null,
   }) {
     return _then(_$AddAdImpl(
       userId: null == userId
@@ -300,6 +312,10 @@ class __$$AddAdImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<MultipartFile>,
+      name_firm: null == name_firm
+          ? _value.name_firm
+          : name_firm // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -319,7 +335,8 @@ class _$AddAdImpl implements AddAd {
       required this.price,
       required this.phone,
       required this.email,
-      required final List<MultipartFile> images})
+      required final List<MultipartFile> images,
+      required this.name_firm})
       : _images = images;
 
   @override
@@ -353,8 +370,11 @@ class _$AddAdImpl implements AddAd {
   }
 
   @override
+  final String name_firm;
+
+  @override
   String toString() {
-    return 'AddAdEvent.addAd(userId: $userId, type1: $type1, type2: $type2, categoryId: $categoryId, subcategoryId: $subcategoryId, name: $name, description: $description, cityId: $cityId, price: $price, phone: $phone, email: $email, images: $images)';
+    return 'AddAdEvent.addAd(userId: $userId, type1: $type1, type2: $type2, categoryId: $categoryId, subcategoryId: $subcategoryId, name: $name, description: $description, cityId: $cityId, price: $price, phone: $phone, email: $email, images: $images, name_firm: $name_firm)';
   }
 
   @override
@@ -376,7 +396,9 @@ class _$AddAdImpl implements AddAd {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.email, email) || other.email == email) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            (identical(other.name_firm, name_firm) ||
+                other.name_firm == name_firm));
   }
 
   @override
@@ -393,7 +415,8 @@ class _$AddAdImpl implements AddAd {
       price,
       phone,
       email,
-      const DeepCollectionEquality().hash(_images));
+      const DeepCollectionEquality().hash(_images),
+      name_firm);
 
   @JsonKey(ignore: true)
   @override
@@ -416,11 +439,12 @@ class _$AddAdImpl implements AddAd {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)
+            List<MultipartFile> images,
+            String name_firm)
         addAd,
   }) {
     return addAd(userId, type1, type2, categoryId, subcategoryId, name,
-        description, cityId, price, phone, email, images);
+        description, cityId, price, phone, email, images, name_firm);
   }
 
   @override
@@ -438,11 +462,12 @@ class _$AddAdImpl implements AddAd {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)?
+            List<MultipartFile> images,
+            String name_firm)?
         addAd,
   }) {
     return addAd?.call(userId, type1, type2, categoryId, subcategoryId, name,
-        description, cityId, price, phone, email, images);
+        description, cityId, price, phone, email, images, name_firm);
   }
 
   @override
@@ -460,13 +485,14 @@ class _$AddAdImpl implements AddAd {
             String price,
             String phone,
             String email,
-            List<MultipartFile> images)?
+            List<MultipartFile> images,
+            String name_firm)?
         addAd,
     required TResult orElse(),
   }) {
     if (addAd != null) {
       return addAd(userId, type1, type2, categoryId, subcategoryId, name,
-          description, cityId, price, phone, email, images);
+          description, cityId, price, phone, email, images, name_firm);
     }
     return orElse();
   }
@@ -513,7 +539,8 @@ abstract class AddAd implements AddAdEvent {
       required final String price,
       required final String phone,
       required final String email,
-      required final List<MultipartFile> images}) = _$AddAdImpl;
+      required final List<MultipartFile> images,
+      required final String name_firm}) = _$AddAdImpl;
 
   @override
   String get userId;
@@ -539,6 +566,8 @@ abstract class AddAd implements AddAdEvent {
   String get email;
   @override
   List<MultipartFile> get images;
+  @override
+  String get name_firm;
   @override
   @JsonKey(ignore: true)
   _$$AddAdImplCopyWith<_$AddAdImpl> get copyWith =>

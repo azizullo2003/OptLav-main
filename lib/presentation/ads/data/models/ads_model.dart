@@ -21,6 +21,7 @@ class AdsModel with _$AdsModel {
     required String? approved_at,
     required String? end_at,
     required List<dynamic> images,
+    required String? name_firm,
   }) = _AdsModel;
 
   factory AdsModel.fromJson(Map<String, dynamic> json) {
@@ -41,6 +42,7 @@ class AdsModel with _$AdsModel {
       approved_at: json['approved_at'] as String?,
       end_at: json['end_at'] as String?,
       images: json['images'] as List<dynamic>,
+      name_firm: json['name_firm'] as String?,
     );
   }
 }

@@ -19,27 +19,28 @@ mixin _$AdsEvent {
   String? get type => throw _privateConstructorUsedError;
   String? get sort => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
+  String? get subCategory => throw _privateConstructorUsedError;
   bool? get my => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   String? get poisk => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? type, String? sort, String? category,
-            bool? my, String? userId, String? poisk)
+            String? subCategory, bool? my, String? userId, String? poisk)
         fetchAds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? type, String? sort, String? category, bool? my,
-            String? userId, String? poisk)?
+    TResult? Function(String? type, String? sort, String? category,
+            String? subCategory, bool? my, String? userId, String? poisk)?
         fetchAds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? type, String? sort, String? category, bool? my,
-            String? userId, String? poisk)?
+    TResult Function(String? type, String? sort, String? category,
+            String? subCategory, bool? my, String? userId, String? poisk)?
         fetchAds,
     required TResult orElse(),
   }) =>
@@ -75,6 +76,7 @@ abstract class $AdsEventCopyWith<$Res> {
       {String? type,
       String? sort,
       String? category,
+      String? subCategory,
       bool? my,
       String? userId,
       String? poisk});
@@ -96,6 +98,7 @@ class _$AdsEventCopyWithImpl<$Res, $Val extends AdsEvent>
     Object? type = freezed,
     Object? sort = freezed,
     Object? category = freezed,
+    Object? subCategory = freezed,
     Object? my = freezed,
     Object? userId = freezed,
     Object? poisk = freezed,
@@ -112,6 +115,10 @@ class _$AdsEventCopyWithImpl<$Res, $Val extends AdsEvent>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subCategory: freezed == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
               as String?,
       my: freezed == my
           ? _value.my
@@ -141,6 +148,7 @@ abstract class _$$FetchAdsImplCopyWith<$Res>
       {String? type,
       String? sort,
       String? category,
+      String? subCategory,
       bool? my,
       String? userId,
       String? poisk});
@@ -160,6 +168,7 @@ class __$$FetchAdsImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? sort = freezed,
     Object? category = freezed,
+    Object? subCategory = freezed,
     Object? my = freezed,
     Object? userId = freezed,
     Object? poisk = freezed,
@@ -176,6 +185,10 @@ class __$$FetchAdsImplCopyWithImpl<$Res>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subCategory: freezed == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
               as String?,
       my: freezed == my
           ? _value.my
@@ -197,7 +210,13 @@ class __$$FetchAdsImplCopyWithImpl<$Res>
 
 class _$FetchAdsImpl implements FetchAds {
   const _$FetchAdsImpl(
-      {this.type, this.sort, this.category, this.my, this.userId, this.poisk});
+      {this.type,
+      this.sort,
+      this.category,
+      this.subCategory,
+      this.my,
+      this.userId,
+      this.poisk});
 
   @override
   final String? type;
@@ -205,6 +224,8 @@ class _$FetchAdsImpl implements FetchAds {
   final String? sort;
   @override
   final String? category;
+  @override
+  final String? subCategory;
   @override
   final bool? my;
   @override
@@ -214,7 +235,7 @@ class _$FetchAdsImpl implements FetchAds {
 
   @override
   String toString() {
-    return 'AdsEvent.fetchAds(type: $type, sort: $sort, category: $category, my: $my, userId: $userId, poisk: $poisk)';
+    return 'AdsEvent.fetchAds(type: $type, sort: $sort, category: $category, subCategory: $subCategory, my: $my, userId: $userId, poisk: $poisk)';
   }
 
   @override
@@ -226,14 +247,16 @@ class _$FetchAdsImpl implements FetchAds {
             (identical(other.sort, sort) || other.sort == sort) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.subCategory, subCategory) ||
+                other.subCategory == subCategory) &&
             (identical(other.my, my) || other.my == my) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.poisk, poisk) || other.poisk == poisk));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, sort, category, my, userId, poisk);
+  int get hashCode => Object.hash(
+      runtimeType, type, sort, category, subCategory, my, userId, poisk);
 
   @JsonKey(ignore: true)
   @override
@@ -245,32 +268,32 @@ class _$FetchAdsImpl implements FetchAds {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? type, String? sort, String? category,
-            bool? my, String? userId, String? poisk)
+            String? subCategory, bool? my, String? userId, String? poisk)
         fetchAds,
   }) {
-    return fetchAds(type, sort, category, my, userId, poisk);
+    return fetchAds(type, sort, category, subCategory, my, userId, poisk);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? type, String? sort, String? category, bool? my,
-            String? userId, String? poisk)?
+    TResult? Function(String? type, String? sort, String? category,
+            String? subCategory, bool? my, String? userId, String? poisk)?
         fetchAds,
   }) {
-    return fetchAds?.call(type, sort, category, my, userId, poisk);
+    return fetchAds?.call(type, sort, category, subCategory, my, userId, poisk);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? type, String? sort, String? category, bool? my,
-            String? userId, String? poisk)?
+    TResult Function(String? type, String? sort, String? category,
+            String? subCategory, bool? my, String? userId, String? poisk)?
         fetchAds,
     required TResult orElse(),
   }) {
     if (fetchAds != null) {
-      return fetchAds(type, sort, category, my, userId, poisk);
+      return fetchAds(type, sort, category, subCategory, my, userId, poisk);
     }
     return orElse();
   }
@@ -309,6 +332,7 @@ abstract class FetchAds implements AdsEvent {
       {final String? type,
       final String? sort,
       final String? category,
+      final String? subCategory,
       final bool? my,
       final String? userId,
       final String? poisk}) = _$FetchAdsImpl;
@@ -319,6 +343,8 @@ abstract class FetchAds implements AdsEvent {
   String? get sort;
   @override
   String? get category;
+  @override
+  String? get subCategory;
   @override
   bool? get my;
   @override

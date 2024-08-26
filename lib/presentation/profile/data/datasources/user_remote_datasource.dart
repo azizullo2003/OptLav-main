@@ -6,6 +6,7 @@ import 'package:optlove/presentation/profile/domain/models/user_change_response.
 import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:optlove/core/errorLogger.dart';
 
 import '../../../../core/constants.dart';
 part 'user_remote_datasource.g.dart';
@@ -16,7 +17,8 @@ class UserRemoteDatasource {
 
   UserRemoteDatasource(this.api);
 
-  Future<HttpResponse<UserInfoResponse>> getUserInfo(String? phone, String userId) =>
+  Future<HttpResponse<UserInfoResponse>> getUserInfo(
+          String phone, String userId) =>
       api.getUserInfo(phone, userId);
 
   Future<HttpResponse<StandartResponse>> getUserExist(String userId) =>
@@ -37,7 +39,7 @@ class UserRemoteDatasource {
       api.addProductToFavorite(userId, productId, firmId, put);
 
   Future<HttpResponse<StandartResponse>> removeProductFromFavorite(
-      String userId, String productId, String firmId, int del) =>
+          String userId, String productId, String firmId, int del) =>
       api.removeProductFromFavorite(userId, productId, firmId, del);
 
   Future<HttpResponse<StandartResponse>> addToFavorite(
@@ -49,7 +51,7 @@ class UserRemoteDatasource {
       api.removeFromFavorite(userId, firmId, del);
 
   Future<HttpResponse<StandartResponse>> sendMessage(
-      String phone, String userId, String email, String message) =>
+          String phone, String userId, String email, String message) =>
       api.sendMessage(phone, userId, email, message);
 }
 
@@ -62,7 +64,7 @@ abstract class UserApi {
   @POST('api4.php?action=user_info')
   @FormUrlEncoded()
   Future<HttpResponse<UserInfoResponse>> getUserInfo(
-      @Query("phone") String? phone, @Query("user_id") String userId);
+      @Query("phone") String phone, @Query("user_id") String userId);
 
   @GET('api4.php?action=user_error')
   Future<HttpResponse<StandartResponse>> getUserExist(
@@ -121,11 +123,11 @@ abstract class UserApi {
   @POST('api4.php?action=message')
   @FormUrlEncoded()
   Future<HttpResponse<StandartResponse>> sendMessage(
-      @Field("phone") String phone,
-      @Field("user_id") String userId,
-      @Field("email") String email,
-      @Field("message") String message,
-      );
+    @Field("phone") String phone,
+    @Field("user_id") String userId,
+    @Field("email") String email,
+    @Field("message") String message,
+  );
 
   @GET('api4.php?action=inn')
   Future<HttpResponse<InnResponse>> innSearch(

@@ -16,5 +16,6 @@ class EditAdEvent with _$EditAdEvent {
     required String phone,
     required String email,
     required List<MultipartFile> images,
+    required String name_firm,
   }) = EditAd;
 }

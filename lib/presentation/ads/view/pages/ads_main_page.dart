@@ -12,7 +12,6 @@ import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart'
 import 'package:optlove/presentation/ads/view/bloc/ads/ads_bloc.dart';
 import 'package:optlove/presentation/ads/view/pages/ads_category_page.dart';
 import 'package:optlove/presentation/ads/view/widgets/show_filter_bottom_sheet.dart';
-import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 
 class AdsMainPage extends StatefulWidget {
   const AdsMainPage({super.key});
@@ -31,7 +30,8 @@ class _AdsMainPageState extends State<AdsMainPage> {
   var type = "offer";
   final offer = "offer";
   final demand = "demand";
-  var _category;
+  String? _category;
+  String? _subcategory;
 
   @override
   void initState() {
@@ -56,13 +56,14 @@ class _AdsMainPageState extends State<AdsMainPage> {
       body: RefreshIndicator(
         color: const Color.fromRGBO(114, 175, 86, 1),
         onRefresh: () async {
-          print(type);
           context.read<AdsBloc>().add(FetchAds(sort: sort, type: type));
           setState(() {
             _category = null;
+            _subcategory = null;
           });
         },
         child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -78,36 +79,44 @@ class _AdsMainPageState extends State<AdsMainPage> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          // context.router
-                          //     .navigate(AdsCategoryRoute(sort: sort, type: type));
-
-                          final selectedCategoryId = await Navigator.push(
+                          final ResponseSelectionCategory?
+                              responseSelectionCategory = await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
                                   AdsCategoryPage(sort: sort, type: type),
                             ),
                           );
+
                           setState(() {
-                            _category = selectedCategoryId;
+                            if (responseSelectionCategory != null) {
+                              final selectedCategoryId =
+                                  responseSelectionCategory.category.id
+                                      .toString();
+
+                              if (responseSelectionCategory.isCatagory) {
+                                _category = selectedCategoryId;
+                                _subcategory = null;
+                              } else {
+                                _subcategory = selectedCategoryId;
+                                _category = null;
+                              }
+                            } else {
+                              type = offer;
+                              _category = null;
+                              _subcategory = null;
+                            }
                           });
 
-                          if (_category != null) {
-                            if (context.mounted) {
-                              context.read<AdsBloc>().add(
-                                    FetchAds(
-                                      sort: sort,
-                                      type: type,
-                                      category: _category,
-                                    ),
-                                  );
-                            }
-                          } else {
-                            if (context.mounted) {
-                              context
-                                  .read<AdsBloc>()
-                                  .add(FetchAds(sort: sort, type: offer));
-                            }
+                          if (context.mounted) {
+                            context.read<AdsBloc>().add(
+                                  FetchAds(
+                                    sort: sort,
+                                    type: type,
+                                    category: _category,
+                                    subCategory: _subcategory,
+                                  ),
+                                );
                           }
                         },
                         child: Stack(
@@ -124,7 +133,7 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                 ),
                               ),
                             ),
-                            _category != null
+                            _category != null || _subcategory != null
                                 ? Positioned(
                                     right: 0,
                                     top: 0,
@@ -167,6 +176,7 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                       sort: sort,
                                       type: type,
                                       category: _category,
+                                      subCategory: _subcategory,
                                     ),
                                   ),
                             }
@@ -199,6 +209,7 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                       sort: sort,
                                       type: type,
                                       category: _category,
+                                      subCategory: _subcategory,
                                     ),
                                   ),
                             }
@@ -281,6 +292,7 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                       sort: sort,
                                       type: type,
                                       category: _category,
+                                      subCategory: _subcategory,
                                     ),
                                   );
                             }
@@ -376,55 +388,19 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            FutureBuilder<UserInfoResponse>(
-                                              future: getNameUser(ad.phone!,
-                                                  ad.user_id!), // async work
-                                              builder: (BuildContext context,
-                                                  AsyncSnapshot<
-                                                          UserInfoResponse>
-                                                      snapshot) {
-                                                switch (
-                                                    snapshot.connectionState) {
-                                                  case ConnectionState.waiting:
-                                                    return const Text('');
-                                                  default:
-                                                    if (snapshot.hasError) {
-                                                      return const Text("");
-                                                    } else {
-                                                      return Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            "Продавец",
-                                                            style: TextStyle(
-                                                              color: Colors.grey
-                                                                  .shade500,
-                                                              fontSize: 10,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            snapshot
-                                                                    .data!
-                                                                    .user_info
-                                                                    .name ??
-                                                                "",
-                                                            style:
-                                                                const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 10,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }
-                                                }
-                                              },
+                                            Text(
+                                              "Продавец",
+                                              style: TextStyle(
+                                                color: Colors.grey.shade500,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                            Text(
+                                              ad.name_firm ?? "",
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10,
+                                              ),
                                             ),
                                             const SizedBox(height: 10),
                                             FutureBuilder<AdsCityResponse>(
@@ -482,13 +458,16 @@ class _AdsMainPageState extends State<AdsMainPage> {
                                           ],
                                         ),
                                         const SizedBox(width: 10),
-                                        AutoSizeText(
-                                          "${ad.price!} ₽",
-                                          style: const TextStyle(
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.bold,
+                                        Flexible(
+                                          child: AutoSizeText(
+                                            "${ad.price!} ₽",
+                                            style: const TextStyle(
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            minFontSize: 26,
+                                            maxLines: 1,
                                           ),
-                                          minFontSize: 28,
                                         ),
                                       ],
                                     ),

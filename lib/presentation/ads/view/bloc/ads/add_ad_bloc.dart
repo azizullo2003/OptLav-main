@@ -29,6 +29,7 @@ class AddAdBloc extends Bloc<AddAdEvent, AddAdState> {
         event.phone,
         event.email,
         event.images,
+        event.name_firm,
       );
       result.fold(
         (l) => emit(AddAdState.failure(l)),

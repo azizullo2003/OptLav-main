@@ -5,6 +5,7 @@ import 'package:optlove/presentation/registration/domain/entities/AboutResp.dart
 import 'package:optlove/presentation/registration/domain/entities/cities_response.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
+import 'package:optlove/core/errorLogger.dart';
 
 import '../../../../core/constants.dart';
 import '../../domain/entities/auth_response.dart';

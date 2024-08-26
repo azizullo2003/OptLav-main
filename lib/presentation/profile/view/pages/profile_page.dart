@@ -551,6 +551,10 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     organizationController.text = user.name ?? "";
+    print("________________");
+    print(organizationController.text);
+    print(ogrnController.text);
+    print("________________");
     if (user.ogrn != null) {
       ogrnController.text = user.ogrn!;
     }

@@ -1,69 +1,65 @@
 PODS:
-  - AppMetricaCore (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaEncodingUtils (= 5.6.0)
-    - AppMetricaFMDB (= 5.6.0)
-    - AppMetricaHostState (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-    - AppMetricaNetwork (= 5.6.0)
-    - AppMetricaPlatform (= 5.6.0)
-    - AppMetricaProtobuf (= 5.6.0)
-    - AppMetricaProtobufUtils (= 5.6.0)
-    - AppMetricaStorageUtils (= 5.6.0)
-  - AppMetricaCoreExtension (5.6.0):
-    - AppMetricaCore (= 5.6.0)
-    - AppMetricaStorageUtils (= 5.6.0)
-  - AppMetricaCoreUtils (5.6.0):
-    - AppMetricaLog (= 5.6.0)
-  - AppMetricaCrashes (5.6.0):
-    - AppMetricaCore (= 5.6.0)
-    - AppMetricaCoreExtension (= 5.6.0)
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaEncodingUtils (= 5.6.0)
-    - AppMetricaHostState (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-    - AppMetricaPlatform (= 5.6.0)
-    - AppMetricaProtobufUtils (= 5.6.0)
-    - AppMetricaStorageUtils (= 5.6.0)
+  - AppMetricaCore (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaEncodingUtils (= 5.7.0)
+    - AppMetricaFMDB (= 5.7.0)
+    - AppMetricaHostState (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+    - AppMetricaNetwork (= 5.7.0)
+    - AppMetricaPlatform (= 5.7.0)
+    - AppMetricaProtobuf (= 5.7.0)
+    - AppMetricaProtobufUtils (= 5.7.0)
+    - AppMetricaStorageUtils (= 5.7.0)
+  - AppMetricaCoreExtension (5.7.0):
+    - AppMetricaCore (= 5.7.0)
+    - AppMetricaStorageUtils (= 5.7.0)
+  - AppMetricaCoreUtils (5.7.0):
+    - AppMetricaLog (= 5.7.0)
+  - AppMetricaCrashes (5.7.0):
+    - AppMetricaCore (= 5.7.0)
+    - AppMetricaCoreExtension (= 5.7.0)
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaEncodingUtils (= 5.7.0)
+    - AppMetricaHostState (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+    - AppMetricaPlatform (= 5.7.0)
+    - AppMetricaProtobufUtils (= 5.7.0)
+    - AppMetricaStorageUtils (= 5.7.0)
     - KSCrash/Recording (~> 1.17.0)
     - KSCrash/Recording/Tools
-  - AppMetricaEncodingUtils (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-    - AppMetricaPlatform (= 5.6.0)
-  - AppMetricaFMDB (5.6.0)
-  - AppMetricaHostState (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-  - AppMetricaLog (5.6.0)
-  - AppMetricaNetwork (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-    - AppMetricaPlatform (= 5.6.0)
-  - AppMetricaPlatform (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-  - AppMetricaProtobuf (5.6.0)
-  - AppMetricaProtobufUtils (5.6.0):
-    - AppMetricaProtobuf (= 5.6.0)
-  - AppMetricaStorageUtils (5.6.0):
-    - AppMetricaCoreUtils (= 5.6.0)
-    - AppMetricaLog (= 5.6.0)
-  - DivKit (30.2.0):
-    - DivKit_LayoutKit (= 30.2.0)
-    - DivKit_Serialization (= 30.2.0)
-    - VGSLCommonCore (~> 5.0)
-    - VGSLNetworking (~> 5.0)
-  - DivKit_LayoutKit (30.2.0):
-    - DivKit_LayoutKitInterface (= 30.2.0)
-    - VGSLCommonCore (~> 5.0)
-    - VGSLNetworking (~> 5.0)
-  - DivKit_LayoutKitInterface (30.2.0):
-    - VGSLBase (~> 5.0)
-    - VGSLBaseTiny (~> 5.0)
-    - VGSLBaseUI (~> 5.0)
-  - DivKit_Serialization (30.2.0):
-    - VGSLCommonCore (~> 5.0)
+  - AppMetricaEncodingUtils (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+    - AppMetricaPlatform (= 5.7.0)
+  - AppMetricaFMDB (5.7.0)
+  - AppMetricaHostState (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+  - AppMetricaLog (5.7.0)
+  - AppMetricaNetwork (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+    - AppMetricaPlatform (= 5.7.0)
+  - AppMetricaPlatform (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+  - AppMetricaProtobuf (5.7.0)
+  - AppMetricaProtobufUtils (5.7.0):
+    - AppMetricaProtobuf (= 5.7.0)
+  - AppMetricaStorageUtils (5.7.0):
+    - AppMetricaCoreUtils (= 5.7.0)
+    - AppMetricaLog (= 5.7.0)
+  - DivKit (30.11.0):
+    - DivKit_LayoutKit (= 30.11.0)
+    - DivKit_Serialization (= 30.11.0)
+    - VGSL (~> 6.0)
+  - DivKit_LayoutKit (30.11.0):
+    - DivKit_LayoutKitInterface (= 30.11.0)
+    - VGSL (~> 6.0)
+  - DivKit_LayoutKitInterface (30.11.0):
+    - VGSL (~> 6.0)
+  - DivKit_Serialization (30.11.0):
+    - VGSL (~> 6.0)
   - Firebase/CoreOnly (10.29.0):
     - FirebaseCore (= 10.29.0)
   - Firebase/Crashlytics (10.29.0):
@@ -131,14 +127,14 @@ PODS:
   - GoogleUtilities/UserDefaults (7.13.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleYandexMobileAdsAdapters (11.3.0.1):
+  - GoogleYandexMobileAdsAdapters (11.3.0.5):
     - Google-Mobile-Ads-SDK (~> 11.3.0)
-    - YandexMobileAds (~> 7.1.1)
+    - YandexMobileAds (= 7.3.2)
   - image_picker_ios (0.0.1):
     - Flutter
-  - KSCrash/Recording (1.17.4):
-    - KSCrash/Recording/Tools (= 1.17.4)
-  - KSCrash/Recording/Tools (1.17.4)
+  - KSCrash/Recording (1.17.5):
+    - KSCrash/Recording/Tools (= 1.17.5)
+  - KSCrash/Recording/Tools (1.17.5)
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -161,28 +157,23 @@ PODS:
   - Toast (4.1.1)
   - url_launcher_ios (0.0.1):
     - Flutter
-  - VGSL_Fundamentals (5.1.1):
-    - VGSL_Fundamentals_Tiny (= 5.1.1)
-  - VGSL_Fundamentals_Tiny (5.1.1)
-  - VGSLBase (5.1.1):
-    - VGSL_Fundamentals (= 5.1.1)
-    - VGSLBaseTiny (= 5.1.1)
-    - VGSLBaseUI (= 5.1.1)
-  - VGSLBaseTiny (5.1.1):
-    - VGSL_Fundamentals_Tiny (= 5.1.1)
-  - VGSLBaseUI (5.1.1):
-    - VGSLBaseTiny (= 5.1.1)
-  - VGSLCommonCore (5.1.1):
-    - VGSLBase (= 5.1.1)
-  - VGSLNetworking (5.1.1):
-    - VGSLBase (= 5.1.1)
-  - yandex_mobileads (7.1.0):
+  - VGSL (6.4.0):
+    - VGSLFundamentals (= 6.4.0)
+    - VGSLNetworking (= 6.4.0)
+    - VGSLUI (= 6.4.0)
+  - VGSLFundamentals (6.4.0)
+  - VGSLNetworking (6.4.0):
+    - VGSLFundamentals (= 6.4.0)
+    - VGSLUI (= 6.4.0)
+  - VGSLUI (6.4.0):
+    - VGSLFundamentals (= 6.4.0)
+  - yandex_mobileads (7.2.0):
     - Flutter
-    - YandexMobileAds (~> 7.1.0)
-  - YandexMobileAds (7.1.1):
+    - YandexMobileAds (~> 7.3.2)
+  - YandexMobileAds (7.3.2):
     - AppMetricaCore (< 6.0.0, >= 5.0.0)
     - AppMetricaCrashes (< 6.0.0, >= 5.0.0)
-    - DivKit (= 30.2.0)
+    - DivKit (= 30.11.0)
 
 DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -235,13 +226,10 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - Toast
-    - VGSL_Fundamentals
-    - VGSL_Fundamentals_Tiny
-    - VGSLBase
-    - VGSLBaseTiny
-    - VGSLBaseUI
-    - VGSLCommonCore
+    - VGSL
+    - VGSLFundamentals
     - VGSLNetworking
+    - VGSLUI
     - YandexMobileAds
 
 EXTERNAL SOURCES:
@@ -269,23 +257,23 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/yandex_mobileads/ios"
 
 SPEC CHECKSUMS:
-  AppMetricaCore: ab504a62db40fb388080a8eff69f1dc91d8d84d1
-  AppMetricaCoreExtension: 07f8436f4a2a9abd64f8ac09dd3304d810886ebd
-  AppMetricaCoreUtils: 85df2c9a765d68ec7655a80feb84c8cf21ed3674
-  AppMetricaCrashes: 4637f2f85adc71e0a096b753b7f9d1d1761b3ad2
-  AppMetricaEncodingUtils: d769d76639960c4f495067b1f68c8874186ed96d
-  AppMetricaFMDB: cafb143a494738be6cbd767d703b376ffbeb5c92
-  AppMetricaHostState: 68d333f2ae460a117e498b09120fdcee708ac240
-  AppMetricaLog: 319461a3fcd77332024311e109c82ce32fac4e38
-  AppMetricaNetwork: 7a592d9b5ba4a2973d7219b8c933ba744847172a
-  AppMetricaPlatform: c1fa9e83be342d2f173d878da99996d9e06f34b3
-  AppMetricaProtobuf: 2ec9b9fb300c7b06406858f1d4d53301ed65a3ea
-  AppMetricaProtobufUtils: c87c770b2f42b24d88f6cbeeca85d5431190d233
-  AppMetricaStorageUtils: 3ae99b72caa97624177bc7b223b593bc6e6d3956
-  DivKit: 5c03c0c81e854c65306dd695909aa90dbc572b6d
-  DivKit_LayoutKit: de875092a505ff1b3b5d4301b0151adf8479a3a7
-  DivKit_LayoutKitInterface: 292edf7193f77ab40672f608b1ed0ca87f5c9d50
-  DivKit_Serialization: 442db283fdb39402e207c5bed0758a09feaa75d5
+  AppMetricaCore: 2b88e6d5a5aafd9663bbc6056388ac0e95b6e2f1
+  AppMetricaCoreExtension: 1d7924bb168f7238fffeecaeea0a04a0b29037c5
+  AppMetricaCoreUtils: 9ed2396aa229554bd6b7532b5f52c638275bba67
+  AppMetricaCrashes: 1a9d2e68cfa92425d6ce3a997287db051219263d
+  AppMetricaEncodingUtils: b789fa4c1e65291751d2f2ddf71f63e097abfcc8
+  AppMetricaFMDB: adc2ca20358239db4c246113e2d4f0663779839c
+  AppMetricaHostState: 70a575d9226ae3fcf9adc3f948403e45a8199a60
+  AppMetricaLog: 8903049a47249067f01839f392552e91feb72171
+  AppMetricaNetwork: a738841c6987ca81da92ba721edcda3ebced351a
+  AppMetricaPlatform: 456d620ca7816ae57d9b94c19bddc10f36fab7b3
+  AppMetricaProtobuf: 4d9c8e28bc7ee7f2df7bc0b5882b5b8734add7a5
+  AppMetricaProtobufUtils: 69272f30e19e30d814b7f05cbd1130e888764c8d
+  AppMetricaStorageUtils: d72c866868dce22626441349bcd45eeec43b9e86
+  DivKit: a7da636a2e9a946705e940b57d719a43613cc2e9
+  DivKit_LayoutKit: 0ccdccd1da72fa8d57fb592a4e2ef0a0080cf421
+  DivKit_LayoutKitInterface: a0e6c37e139131a30255ad8d1457528472d346d8
+  DivKit_Serialization: 122aa27c87f7ba9ec212e6dae1f1c76284e755df
   Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
   firebase_core: 57aeb91680e5d5e6df6b888064be7c785f146efb
   firebase_crashlytics: e3d3e0c99bad5aaab5908385133dea8ec344693f
@@ -302,9 +290,9 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUserMessagingPlatform: 6b4f48a370e77ce121d034c908cc6ee4fdafaf13
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
-  GoogleYandexMobileAdsAdapters: 3fb3b76cb9e697156918d718e1cfb69d2e3e348d
+  GoogleYandexMobileAdsAdapters: 2da333a07c8e6f956e8312c9dc3fb0ad0d993996
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
-  KSCrash: 158a0998f08ae7d4e54ef8a2da62d6e08b46d03a
+  KSCrash: b104a00c75f4c454590ae8d23cc8d8b003dae900
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
@@ -314,15 +302,12 @@ SPEC CHECKSUMS:
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
-  VGSL_Fundamentals: 4d880dbd63c6da3b04e5d9a882969d4f4d2648eb
-  VGSL_Fundamentals_Tiny: 0e181e4c84b74190cb1e1f85b98dea6cb78eb994
-  VGSLBase: 1f1a9d7180485ffedf8ee53074c321afbad002be
-  VGSLBaseTiny: bf9f20a026fb1144e93aa78bf3fbaec35daed5a6
-  VGSLBaseUI: 800b696bf41762a385a2849df93a94d71bf16b2d
-  VGSLCommonCore: ea4898715094fae93591278c6c72a8c0269d1a6d
-  VGSLNetworking: ef40c15438abfffe96680deac20cdd66327ffdd6
-  yandex_mobileads: 815c6811dacb5001a0d5f619a8515bb12343a736
-  YandexMobileAds: 62025e5c6e1be4611d14db2cc4f94034d218def3
+  VGSL: 14a67feafe2e6203546d4557f9259d8c705fcb83
+  VGSLFundamentals: 9cb06c36cb92a72c77b689a6f5c4802dd18eeb7e
+  VGSLNetworking: 0146afd59633755bb3fab997b3a8450f8dcd5f27
+  VGSLUI: a963363d2aa3421658245d7b8951029f674e5427
+  yandex_mobileads: 12e937727e820e10c35cf45cf989fb6ac8022134
+  YandexMobileAds: 35248b07e9078f62fe5d7d3dd08086dca6418f3b
 
 PODFILE CHECKSUM: 933968348992d95c3b6ae0d64a149c9e0f733b5c
 

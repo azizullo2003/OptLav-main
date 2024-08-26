@@ -3,8 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:optlove/presentation/ads/data/datasources/ads_remote_datasource.dart';
 import 'package:optlove/presentation/ads/data/models/ads_category_model.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
-import 'package:optlove/presentation/profile/data/datasources/user_remote_datasource.dart';
-import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<List<MultipartFile>> convertToMultipartFiles(List<XFile> files) async {
@@ -49,12 +47,6 @@ void sendEmail(String email) async {
   }
 }
 
-Future<UserInfoResponse> getNameUser(String phone, String user) async {
-  final userInfo =
-      await UserRemoteDatasource(UserApi(Dio())).getUserInfo(phone, user);
-  return userInfo.data;
-}
-
 Future<AdsCityResponse> getCityById(String id) async {
   final cityInfo =
       await AdsRemoteDatasource(AdsRemoteApi(Dio())).getCityById(id: id);
@@ -77,4 +69,10 @@ Future<AdsCategory?> getSubcategoryByCategoryId(
   final subcategory = subcategories.data.categories
       .firstWhere((subcategory) => subcategory.id.toString() == id);
   return subcategory;
+}
+
+class ResponseSelectionCategory {
+  final bool isCatagory;
+  final AdsCategory category;
+  ResponseSelectionCategory(this.isCatagory, this.category);
 }

@@ -6,7 +6,6 @@ import 'package:optlove/app/utils/functionNetwork.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/data/models/ads_model.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
-import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 
 class AdsDetailPage extends StatefulWidget {
   final AdsModel ad;
@@ -139,41 +138,19 @@ class _AdsDetailPageState extends State<AdsDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FutureBuilder<UserInfoResponse>(
-                        future: getNameUser(
-                            widget.ad.phone!, widget.ad.user_id!), // async work
-                        builder: (BuildContext context,
-                            AsyncSnapshot<UserInfoResponse> snapshot) {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.waiting:
-                              return const Text('');
-                            default:
-                              if (snapshot.hasError) {
-                                return const Text("");
-                              } else {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Продавец",
-                                      style: TextStyle(
-                                        color: Colors.grey.shade500,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.user_info.name ?? "",
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
-                          }
-                        },
+                      Text(
+                        "Продавец",
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 10,
+                        ),
+                      ),
+                      Text(
+                        widget.ad.name_firm ?? "",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                        ),
                       ),
                       const SizedBox(height: 10),
                       FutureBuilder<AdsCityResponse>(
@@ -223,10 +200,10 @@ class _AdsDetailPageState extends State<AdsDetailPage> {
                       "${widget.ad.price!} ₽",
                       maxLines: 1,
                       style: const TextStyle(
-                        fontSize: 36,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
-                      minFontSize: 22,
+                      minFontSize: 26,
                     ),
                   ),
                 ],

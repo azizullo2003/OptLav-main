@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:optlove/core/errorLogger.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_category_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_city_response.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
@@ -29,9 +30,10 @@ class AdsRemoteDatasource {
           String price,
           String phone,
           String email,
-          List<MultipartFile> images) =>
+          List<MultipartFile> images,
+          String name_firm) =>
       api.createAd(userId, type1, type2, categoryId, subcategoryId, name,
-          description, cityId, price, phone, email, images);
+          description, cityId, price, phone, email, images, name_firm);
 
   Future<HttpResponse<AdsFunctionResponse>> updateAd(
           String adId,
@@ -46,9 +48,10 @@ class AdsRemoteDatasource {
           String price,
           String phone,
           String email,
-          List<MultipartFile> images) =>
+          List<MultipartFile> images,
+          String name_firm) =>
       api.updateAd(adId, userId, type1, type2, categoryId, subcategoryId, name,
-          description, cityId, price, phone, email, images);
+          description, cityId, price, phone, email, images, name_firm);
 
   Future<HttpResponse<AdsFunctionResponse>> deleteAd(String adId) =>
       api.deleteAd(adId);
@@ -73,6 +76,7 @@ class AdsRemoteDatasource {
     String? type,
     String? sort,
     String? category,
+    String? subCategory,
     bool? my,
     String? userId,
     String? poisk,
@@ -81,6 +85,7 @@ class AdsRemoteDatasource {
       type: type,
       sort: sort,
       category: category,
+      subCategory: subCategory,
       my: my,
       userId: userId,
       poisk: poisk,
@@ -117,7 +122,8 @@ abstract class AdsRemoteApi {
       @Part(name: "price") String price,
       @Part(name: "phone") String phone,
       @Part(name: "email") String email,
-      @Part(name: "images[]") List<MultipartFile> images);
+      @Part(name: "images[]") List<MultipartFile> images,
+      @Part(name: "name_firm") String name_firm);
 
   @POST('api4.php?action=ads_update')
   @MultiPart()
@@ -134,7 +140,8 @@ abstract class AdsRemoteApi {
       @Part(name: "price") String price,
       @Part(name: "phone") String phone,
       @Part(name: "email") String email,
-      @Part(name: "images[]") List<MultipartFile> images);
+      @Part(name: "images[]") List<MultipartFile> images,
+      @Part(name: "name_firm") String name_firm);
 
   @POST('api4.php?action=ads_remove')
   @FormUrlEncoded()
@@ -165,6 +172,7 @@ abstract class AdsRemoteApi {
     @Query("type") String? type,
     @Query("sort") String? sort,
     @Query("category") String? category,
+    @Query("sub_category") String? subCategory,
     @Query("my") bool? my,
     @Query("user_id") String? userId,
     @Query("poisk") String? poisk,

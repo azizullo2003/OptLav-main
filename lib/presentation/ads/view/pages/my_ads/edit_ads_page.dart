@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
+import 'package:optlove/app/utils/shared_preferences_helper.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/data/models/ads_category_model.dart';
 import 'package:optlove/presentation/ads/data/models/ads_city_model.dart';
@@ -41,6 +42,8 @@ class _EditAdsPageState extends State<EditAdsPage> {
 
   final TextEditingController nameTextController = TextEditingController();
   final TextEditingController descriptionTextController =
+      TextEditingController();
+  final TextEditingController sellerOrOrganizationNameTextController =
       TextEditingController();
   final TextEditingController priceTextController = TextEditingController();
   final TextEditingController phoneTextController = TextEditingController();
@@ -90,6 +93,15 @@ class _EditAdsPageState extends State<EditAdsPage> {
     }
 
     // Check if Ads Description is valid
+    final isValidOrganizationName =
+        sellerOrOrganizationNameTextController.text.isNotEmpty;
+    if (!isValidOrganizationName) {
+      print("Ads SellerOrOrganization is not valid");
+    } else {
+      print("Ads SellerOrOrganization is valid");
+    }
+
+    // Check if Ads Description is valid
     final isValidAdsDescription = descriptionTextController.text.isNotEmpty;
     if (!isValidAdsDescription) {
       print("Ads Description is not valid");
@@ -135,6 +147,7 @@ class _EditAdsPageState extends State<EditAdsPage> {
         citySelected &&
         isValidAdsName &&
         isSelectedCategory &&
+        isValidOrganizationName &&
         isValidAdsDescription &&
         isValidPrice) {
       setState(() {
@@ -167,12 +180,11 @@ class _EditAdsPageState extends State<EditAdsPage> {
     priceTextController.addListener(priceListener);
     nameTextController.addListener(nameListener);
     descriptionTextController.addListener(descriptionListener);
-
     setState(() {
       _selectedOption = widget.ads.type;
       nameTextController.text = widget.ads.name!;
       descriptionTextController.text = widget.ads.description!;
-      // sellerOrOrganizationNameTextController.text = widget.ads.
+      sellerOrOrganizationNameTextController.text = widget.ads.name_firm!;
       priceTextController.text = widget.ads.price!;
       emailTextController.text = widget.ads.email!;
       phoneTextController.text = phoneMask.maskText(widget.ads.phone!);
@@ -261,19 +273,20 @@ class _EditAdsPageState extends State<EditAdsPage> {
 
   Future<void> initUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? orgName = await SharedPrefsHelper.getName();
     final String? userIdPrefs = prefs.getString('userId');
-    if (userIdPrefs != null) {
-      setState(() {
-        userId = userIdPrefs;
-      });
-    }
+    print(orgName);
+    print(userIdPrefs);
+    setState(() {
+      userId = userIdPrefs ?? "";
+      sellerOrOrganizationNameTextController.text = orgName ?? "";
+    });
   }
 
   @override
   void dispose() {
     nameTextController.removeListener(nameListener);
     descriptionTextController.removeListener(descriptionListener);
-
     cityController.removeListener(cityListener);
     phoneTextController.removeListener(phoneListener);
     emailTextController.removeListener(emailListener);
@@ -282,6 +295,7 @@ class _EditAdsPageState extends State<EditAdsPage> {
     _controller.dispose();
     nameTextController.dispose();
     descriptionTextController.dispose();
+    sellerOrOrganizationNameTextController.dispose();
     priceTextController.dispose();
     phoneTextController.dispose();
     emailTextController.dispose();
@@ -577,6 +591,53 @@ class _EditAdsPageState extends State<EditAdsPage> {
                     onChanged: (value) => checkFields(),
                     decoration: InputDecoration(
                       hintText: "Название объявления",
+                      hintStyle: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: Text(
+                          "Выберите название продавца или организации",
+                          maxLines: 3,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: colorTheme.blackText),
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      const Text(
+                        '*',
+                        style: TextStyle(color: Colors.red, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: sellerOrOrganizationNameTextController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: "Название продавца или организации",
                       hintStyle: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -900,6 +961,9 @@ class _EditAdsPageState extends State<EditAdsPage> {
                                       phone: phone,
                                       email: emailTextController.text,
                                       images: multipartFiles,
+                                      name_firm:
+                                          sellerOrOrganizationNameTextController
+                                              .text,
                                     ),
                                   );
                             }

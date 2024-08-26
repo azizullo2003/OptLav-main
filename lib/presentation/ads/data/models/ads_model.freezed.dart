@@ -32,6 +32,7 @@ mixin _$AdsModel {
   String? get approved_at => throw _privateConstructorUsedError;
   String? get end_at => throw _privateConstructorUsedError;
   List<dynamic> get images => throw _privateConstructorUsedError;
+  String? get name_firm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdsModelCopyWith<AdsModel> get copyWith =>
@@ -59,7 +60,8 @@ abstract class $AdsModelCopyWith<$Res> {
       String? created_at,
       String? approved_at,
       String? end_at,
-      List<dynamic> images});
+      List<dynamic> images,
+      String? name_firm});
 }
 
 /// @nodoc
@@ -91,6 +93,7 @@ class _$AdsModelCopyWithImpl<$Res, $Val extends AdsModel>
     Object? approved_at = freezed,
     Object? end_at = freezed,
     Object? images = null,
+    Object? name_firm = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -157,6 +160,10 @@ class _$AdsModelCopyWithImpl<$Res, $Val extends AdsModel>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      name_firm: freezed == name_firm
+          ? _value.name_firm
+          : name_firm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -185,7 +192,8 @@ abstract class _$$AdsModelImplCopyWith<$Res>
       String? created_at,
       String? approved_at,
       String? end_at,
-      List<dynamic> images});
+      List<dynamic> images,
+      String? name_firm});
 }
 
 /// @nodoc
@@ -215,6 +223,7 @@ class __$$AdsModelImplCopyWithImpl<$Res>
     Object? approved_at = freezed,
     Object? end_at = freezed,
     Object? images = null,
+    Object? name_firm = freezed,
   }) {
     return _then(_$AdsModelImpl(
       id: freezed == id
@@ -281,6 +290,10 @@ class __$$AdsModelImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      name_firm: freezed == name_firm
+          ? _value.name_firm
+          : name_firm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -304,7 +317,8 @@ class _$AdsModelImpl implements _AdsModel {
       required this.created_at,
       required this.approved_at,
       required this.end_at,
-      required final List<dynamic> images})
+      required final List<dynamic> images,
+      required this.name_firm})
       : _images = images;
 
   @override
@@ -346,8 +360,11 @@ class _$AdsModelImpl implements _AdsModel {
   }
 
   @override
+  final String? name_firm;
+
+  @override
   String toString() {
-    return 'AdsModel(id: $id, type: $type, name: $name, description: $description, city_id: $city_id, price: $price, phone: $phone, email: $email, user_id: $user_id, status: $status, category_id: $category_id, subcategory_id: $subcategory_id, created_at: $created_at, approved_at: $approved_at, end_at: $end_at, images: $images)';
+    return 'AdsModel(id: $id, type: $type, name: $name, description: $description, city_id: $city_id, price: $price, phone: $phone, email: $email, user_id: $user_id, status: $status, category_id: $category_id, subcategory_id: $subcategory_id, created_at: $created_at, approved_at: $approved_at, end_at: $end_at, images: $images, name_firm: $name_firm)';
   }
 
   @override
@@ -375,7 +392,9 @@ class _$AdsModelImpl implements _AdsModel {
             (identical(other.approved_at, approved_at) ||
                 other.approved_at == approved_at) &&
             (identical(other.end_at, end_at) || other.end_at == end_at) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            (identical(other.name_firm, name_firm) ||
+                other.name_firm == name_firm));
   }
 
   @override
@@ -396,7 +415,8 @@ class _$AdsModelImpl implements _AdsModel {
       created_at,
       approved_at,
       end_at,
-      const DeepCollectionEquality().hash(_images));
+      const DeepCollectionEquality().hash(_images),
+      name_firm);
 
   @JsonKey(ignore: true)
   @override
@@ -422,7 +442,8 @@ abstract class _AdsModel implements AdsModel {
       required final String? created_at,
       required final String? approved_at,
       required final String? end_at,
-      required final List<dynamic> images}) = _$AdsModelImpl;
+      required final List<dynamic> images,
+      required final String? name_firm}) = _$AdsModelImpl;
 
   @override
   String? get id;
@@ -456,6 +477,8 @@ abstract class _AdsModel implements AdsModel {
   String? get end_at;
   @override
   List<dynamic> get images;
+  @override
+  String? get name_firm;
   @override
   @JsonKey(ignore: true)
   _$$AdsModelImplCopyWith<_$AdsModelImpl> get copyWith =>

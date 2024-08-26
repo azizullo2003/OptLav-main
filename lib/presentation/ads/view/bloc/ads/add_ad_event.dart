@@ -15,5 +15,6 @@ class AddAdEvent with _$AddAdEvent {
     required String phone,
     required String email,
     required List<MultipartFile> images,
+    required String name_firm,
   }) = AddAd;
 }

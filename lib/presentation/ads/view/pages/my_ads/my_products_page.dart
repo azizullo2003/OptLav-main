@@ -14,7 +14,6 @@ import 'package:optlove/presentation/ads/view/bloc/ads/delete_ad_bloc.dart';
 import 'package:optlove/presentation/ads/view/pages/my_ads/edit_ads_page.dart';
 import 'package:optlove/presentation/ads/view/widgets/delete_ads_alert_dialog.dart';
 import 'package:optlove/presentation/ads/view/widgets/show_filter_bottom_sheet.dart';
-import 'package:optlove/presentation/registration/domain/entities/user_info_response.dart';
 
 class MyProductsPage extends StatefulWidget {
   const MyProductsPage({super.key});
@@ -253,59 +252,19 @@ class _MyProductsPageState extends State<MyProductsPage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                FutureBuilder<UserInfoResponse>(
-                                                  future: getNameUser(ad.phone!,
-                                                      ad.user_id!), // async work
-                                                  builder: (BuildContext
-                                                          context,
-                                                      AsyncSnapshot<
-                                                              UserInfoResponse>
-                                                          snapshot) {
-                                                    switch (snapshot
-                                                        .connectionState) {
-                                                      case ConnectionState
-                                                            .waiting:
-                                                        return const Text('');
-                                                      default:
-                                                        if (snapshot.hasError) {
-                                                          return const Text("");
-                                                        } else {
-                                                          return Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                "Продавец",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .shade500,
-                                                                  fontSize: 10,
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                snapshot
-                                                                        .data!
-                                                                        .user_info
-                                                                        .name ??
-                                                                    "",
-                                                                style:
-                                                                    const TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 10,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }
-                                                    }
-                                                  },
+                                                Text(
+                                                  "Продавец",
+                                                  style: TextStyle(
+                                                    color: Colors.grey.shade500,
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  ad.name_firm ?? "",
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                  ),
                                                 ),
                                                 const SizedBox(height: 10),
                                                 FutureBuilder<AdsCityResponse>(
@@ -370,13 +329,16 @@ class _MyProductsPageState extends State<MyProductsPage> {
                                               ],
                                             ),
                                             const SizedBox(width: 10),
-                                            AutoSizeText(
-                                              "${ad.price!} ₽",
-                                              style: const TextStyle(
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.bold,
+                                            Flexible(
+                                              child: AutoSizeText(
+                                                "${ad.price!} ₽",
+                                                style: const TextStyle(
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                minFontSize: 26,
+                                                maxLines: 1,
                                               ),
-                                              minFontSize: 28,
                                             ),
                                           ],
                                         ),

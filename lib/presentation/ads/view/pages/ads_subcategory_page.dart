@@ -1,13 +1,11 @@
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:optlove/app/routes/router.gr.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
+import 'package:optlove/app/utils/functionNetwork.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
 import 'package:optlove/presentation/ads/view/widgets/ads_catalog_card.dart';
-import 'package:optlove/presentation/main/%20data/models/category.dart';
 
 class AdsSubCategoryPage extends StatefulWidget {
   final String categoryId;
@@ -89,14 +87,10 @@ class _AdsSubCategoryPageState extends State<AdsSubCategoryPage> {
                           itemCount: categories.length,
                           itemBuilder: (context, index) => InkWell(
                             onTap: () => {
-                              onCategory(
-                                Category(
-                                  id: categories[index].id.toString(),
-                                  name: categories[index].name.toString(),
-                                  count: categories[index].count.toString(),
-                                  imagesUrl:
-                                      categories[index].images_url.toString(),
-                                ),
+                              Navigator.pop(
+                                context,
+                                ResponseSelectionCategory(
+                                    false, categories[index]),
                               ),
                             },
                             child: AdsCategoryCard(
@@ -122,12 +116,6 @@ class _AdsSubCategoryPageState extends State<AdsSubCategoryPage> {
           ),
         ),
       ),
-    );
-  }
-
-  void onCategory(Category category) {
-    context.router.push(
-      SubcatalogRoute(category: category),
     );
   }
 }

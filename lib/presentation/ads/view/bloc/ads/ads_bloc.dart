@@ -20,6 +20,7 @@ class AdsBloc extends Bloc<AdsEvent, AdsState> {
         type: event.type,
         sort: event.sort,
         category: event.category,
+        subCategory: event.subCategory,
         my: event.my,
         userId: event.userId,
         poisk: event.poisk,

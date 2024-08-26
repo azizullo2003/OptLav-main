@@ -48,7 +48,8 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images) async {
+      List<MultipartFile> images,
+      String name_firm) async {
     try {
       final httpResponse = await remoteDatasource.createAd(
           userId,
@@ -62,7 +63,8 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
           price,
           phone,
           email,
-          images);
+          images,
+          name_firm);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
       }
@@ -93,7 +95,8 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images) async {
+      List<MultipartFile> images,
+      String name_firm) async {
     try {
       final httpResponse = await remoteDatasource.updateAd(
         adId,
@@ -109,6 +112,7 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
         phone,
         email,
         images,
+        name_firm,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return Right(httpResponse.data);
@@ -266,6 +270,7 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
     String? type,
     String? sort,
     String? category,
+    String? subCategory,
     bool? my,
     String? userId,
     String? poisk,
@@ -275,6 +280,7 @@ class AdsCategoryRepositoryImpl implements AdsRepository {
         type: type,
         sort: sort,
         category: category,
+        subCategory: subCategory,
         my: my,
         userId: userId,
         poisk: poisk,

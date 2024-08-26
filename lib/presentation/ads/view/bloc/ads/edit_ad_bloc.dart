@@ -30,6 +30,7 @@ class EditAdBloc extends Bloc<EditAdEvent, EditAdState> {
         event.phone,
         event.email,
         event.images,
+        event.name_firm,
       );
       result.fold(
         (l) => emit(EditAdState.failure(l)),

@@ -6,6 +6,7 @@ class AdsEvent with _$AdsEvent {
     String? type,
     String? sort,
     String? category,
+    String? subCategory,
     bool? my,
     String? userId,
     String? poisk,

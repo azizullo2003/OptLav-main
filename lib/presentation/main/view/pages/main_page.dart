@@ -18,7 +18,7 @@ import '../../../profile/view/bloc/user_bloc.dart';
 import '../../../../core/constants.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -70,11 +70,6 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
         );
       }
       if (refreshNotifier.value == 4) {
-        context.router.replace(
-          const FavoriteRoute(),
-        );
-      }
-      if (refreshNotifier.value == 5) {
         context.router.replace(
           CatalogRoute(),
         );
@@ -246,7 +241,6 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
                         OrdersPageRoute(),
                         HomePageRoute(),
                         AdsMainPageRoute(),
-                        FavoriteRoute(),
                         CatalogsRoute(),
                       ],
                       bottomNavigationBuilder: (_, tabsRouter) {
@@ -295,12 +289,6 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
                                 icon: Assets.images.bottomNav.megaphone
                                     .svg(fit: BoxFit.cover),
                                 label: "Объявления"),
-                            BottomNavigationBarItem(
-                                activeIcon: Assets.images.bottomNav.favoriteact
-                                    .svg(fit: BoxFit.cover),
-                                icon: Assets.images.bottomNav.favorite
-                                    .svg(fit: BoxFit.cover),
-                                label: "Избранное"),
                             BottomNavigationBarItem(
                                 activeIcon: Assets.images.bottomNav.catalogact
                                     .svg(fit: BoxFit.cover),

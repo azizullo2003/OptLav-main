@@ -12,6 +12,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
   _AdsRemoteApi(
     this._dio, {
     this.baseUrl,
+    this.errorLogger,
   }) {
     baseUrl ??= 'https://panel.optlav.ru/';
   }
@@ -19,6 +20,8 @@ class _AdsRemoteApi implements AdsRemoteApi {
   final Dio _dio;
 
   String? baseUrl;
+
+  final ParseErrorLogger? errorLogger;
 
   @override
   Future<HttpResponse<AdsFunctionResponse>> createAd(
@@ -34,6 +37,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
     String phone,
     String email,
     List<MultipartFile> images,
+    String name_firm,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -84,25 +88,35 @@ class _AdsRemoteApi implements AdsRemoteApi {
       email,
     ));
     _data.files.addAll(images.map((i) => MapEntry('images[]', i)));
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
+    _data.fields.add(MapEntry(
+      'name_firm',
+      name_firm,
+    ));
+    final _options = _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_create',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsFunctionResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_create',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsFunctionResponse _value;
+    try {
+      _value = AdsFunctionResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -122,6 +136,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
     String phone,
     String email,
     List<MultipartFile> images,
+    String name_firm,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -176,25 +191,35 @@ class _AdsRemoteApi implements AdsRemoteApi {
       email,
     ));
     _data.files.addAll(images.map((i) => MapEntry('images[]', i)));
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
+    _data.fields.add(MapEntry(
+      'name_firm',
+      name_firm,
+    ));
+    final _options = _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_update',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsFunctionResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_update',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsFunctionResponse _value;
+    try {
+      _value = AdsFunctionResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -205,25 +230,31 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{r'ads_id': adId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
+    final _options = _setStreamType<HttpResponse<AdsFunctionResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'application/x-www-form-urlencoded',
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_remove',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsFunctionResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_remove',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsFunctionResponse _value;
+    try {
+      _value = AdsFunctionResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -234,24 +265,30 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsCategoryResponse>>(Options(
+    final _options = _setStreamType<HttpResponse<AdsCategoryResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_category_get_collection',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsCategoryResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_category_get_collection',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsCategoryResponse _value;
+    try {
+      _value = AdsCategoryResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -263,24 +300,30 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{r'id': categoryId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsCategoryResponse>>(Options(
+    final _options = _setStreamType<HttpResponse<AdsCategoryResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_sub_category_get_collection',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsCategoryResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_sub_category_get_collection',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsCategoryResponse _value;
+    try {
+      _value = AdsCategoryResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -291,23 +334,23 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(Options(
+    final _options = _setStreamType<HttpResponse<void>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_get_collection',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_get_collection',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<void>(_options);
     final httpResponse = HttpResponse(null, _result);
     return httpResponse;
   }
@@ -318,23 +361,23 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{r'sub_category': subCategory};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(Options(
+    final _options = _setStreamType<HttpResponse<void>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_get_collection',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_get_collection',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<void>(_options);
     final httpResponse = HttpResponse(null, _result);
     return httpResponse;
   }
@@ -345,23 +388,23 @@ class _AdsRemoteApi implements AdsRemoteApi {
     final queryParameters = <String, dynamic>{r'ads_id': adId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(Options(
+    final _options = _setStreamType<HttpResponse<void>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_get',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_get',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<void>(_options);
     final httpResponse = HttpResponse(null, _result);
     return httpResponse;
   }
@@ -371,6 +414,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
     String? type,
     String? sort,
     String? category,
+    String? subCategory,
     bool? my,
     String? userId,
     String? poisk,
@@ -380,6 +424,7 @@ class _AdsRemoteApi implements AdsRemoteApi {
       r'type': type,
       r'sort': sort,
       r'category': category,
+      r'sub_category': subCategory,
       r'my': my,
       r'user_id': userId,
       r'poisk': poisk,
@@ -387,24 +432,30 @@ class _AdsRemoteApi implements AdsRemoteApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsResponse>>(Options(
+    final _options = _setStreamType<HttpResponse<AdsResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=ads_get_collection',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=ads_get_collection',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsResponse _value;
+    try {
+      _value = AdsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
@@ -416,24 +467,30 @@ class _AdsRemoteApi implements AdsRemoteApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<AdsCityResponse>>(Options(
+    final _options = _setStreamType<HttpResponse<AdsCityResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'api4.php?action=сity_get',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = AdsCityResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          'api4.php?action=сity_get',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AdsCityResponse _value;
+    try {
+      _value = AdsCityResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }

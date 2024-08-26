@@ -2,8 +2,10 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
+import 'package:optlove/app/utils/functionNetwork.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/view/bloc/category/ads_category_bloc.dart';
+import 'package:optlove/presentation/ads/view/pages/ads_subcategory_page.dart';
 
 class AdsCategoryPage extends StatefulWidget {
   final String sort;
@@ -87,15 +89,32 @@ class _AdsCategoryPageState extends State<AdsCategoryPage> {
                             final category = categories[index];
                             return ListTile(
                               title: Text(category.name),
-                              onTap: () {
-                                // if (category.id == 1) {
-                                //   context.router.navigate(
-                                //     AdsSubCategoryRoute(
-                                //       categoryId: category.id.toString(),
-                                //     ),
-                                //   );
-                                // }
-                                Navigator.pop(context, category.id.toString());
+                              onTap: () async {
+                                if (category.id == 1) {
+                                  final ResponseSelectionCategory?
+                                      responseSelectionCategory =
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                AdsSubCategoryPage(
+                                              categoryId:
+                                                  category.id.toString(),
+                                            ),
+                                          ));
+
+                                  if (responseSelectionCategory != null) {
+                                    if (context.mounted) {
+                                      Navigator.pop(
+                                          context, responseSelectionCategory);
+                                    }
+                                  }
+                                } else {
+                                  Navigator.pop(
+                                      context,
+                                      ResponseSelectionCategory(
+                                          true, category));
+                                }
                               },
                             );
                           },

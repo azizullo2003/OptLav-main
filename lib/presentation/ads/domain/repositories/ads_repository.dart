@@ -19,7 +19,8 @@ abstract class AdsRepository {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images);
+      List<MultipartFile> images,
+      String name_firm);
 
   Future<Either<DioException, AdsFunctionResponse>> updateAd(
       String adId,
@@ -34,7 +35,8 @@ abstract class AdsRepository {
       String price,
       String phone,
       String email,
-      List<MultipartFile> images);
+      List<MultipartFile> images,
+      String name_firm);
 
   Future<Either<DioException, AdsFunctionResponse>> deleteAd(String adId);
 
@@ -54,6 +56,7 @@ abstract class AdsRepository {
     String? type,
     String? sort,
     String? category,
+    String? subCategory,
     bool? my,
     String? userId,
     String? poisk,

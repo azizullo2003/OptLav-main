@@ -1,43 +1,4 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:optlove/app/theme/bloc/app_theme_bloc.dart';
-import 'package:optlove/app/theme/models/app_pallete.dart';
-import 'package:optlove/presentation/about/view/bloc/about_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/add_ad_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/ads_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/delete_ad_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/edit_ad_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/category/ads_category_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/city/ads_city_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/ads_fetch_my_ads_bloc.dart';
-import 'package:optlove/presentation/ads/view/bloc/ads/ads_subcategory_bloc.dart';
-import 'package:optlove/presentation/cart/view/bloc/cart_bloc.dart';
-import 'package:optlove/presentation/favorite/view/bloc/favorite_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/search_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/products_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/top_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/user_exist_bloc.dart';
-import 'package:optlove/presentation/main/view/bloc/work_orders_bloc.dart';
-import 'package:optlove/presentation/orders/view/bloc/conditions_bloc.dart';
-import 'package:optlove/presentation/orders/view/bloc/orders_bloc.dart';
-import 'package:optlove/presentation/profile/view/bloc/profile_bloc.dart';
-import 'package:optlove/presentation/profile/view/bloc/user_bloc.dart';
-import 'package:optlove/presentation/registration/view/bloc/auth_bloc.dart';
-import 'package:optlove/presentation/registration/view/bloc/registration_bloc.dart';
-import 'package:optlove/presentation/registration/view/bloc/search_city_bloc.dart';
-import 'package:optlove/presentation/sendactivity/bloc/sendactivity_bloc.dart';
-import 'package:optlove/presentation/splash/view/bloc/static_bloc.dart';
-import 'package:optlove/presentation/support/view/bloc/support_bloc.dart';
-
-import 'app/routes/router.gr.dart';
-import 'injector.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'imports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

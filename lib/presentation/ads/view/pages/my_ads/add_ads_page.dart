@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:optlove/app/theme/bloc/app_theme.dart';
+import 'package:optlove/app/utils/shared_preferences_helper.dart';
 import 'package:optlove/generated/assets.gen.dart';
 import 'package:optlove/presentation/ads/data/models/ads_category_model.dart';
 import 'package:optlove/presentation/ads/domain/entities/ads_function_response.dart';
@@ -75,8 +76,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
             : _selectedCategory != null
         : false;
     final isValidAdsDescription = descriptionTextController.text.isNotEmpty;
-    final isValidOrganizationName =
-        sellerOrOrganizationNameTextController.text.isNotEmpty;
+
     final isValidPhone = phoneTextController.text.length == 18;
     final isValidEmail = EmailValidator.validate(emailTextController.text);
     final isValidImages = images.isNotEmpty;
@@ -93,7 +93,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
         isValidAdsName &&
         isSelectedCategory &&
         isValidAdsDescription &&
-        isValidOrganizationName &&
         isValidImages &&
         isValidPrice) {
       setState(() {
@@ -125,9 +124,6 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     priceTextController.addListener(priceListener);
     nameTextController.addListener(nameListener);
     descriptionTextController.addListener(descriptionListener);
-    sellerOrOrganizationNameTextController
-        .addListener(sellerOrOrganizationListener);
-
     initUserId();
   }
 
@@ -178,28 +174,23 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
     checkFields();
   }
 
-  void sellerOrOrganizationListener() {
-    print(
-        "SellerOrOrganization controller text: ${sellerOrOrganizationNameTextController.text}");
-    checkFields();
-  }
-
   Future<void> initUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? orgName = await SharedPrefsHelper.getName();
     final String? userIdPrefs = prefs.getString('userId');
-    if (userIdPrefs != null) {
-      setState(() {
-        userId = userIdPrefs;
-      });
-    }
+    print(orgName);
+    print(userIdPrefs);
+    setState(() {
+      userId = userIdPrefs ?? "";
+      sellerOrOrganizationNameTextController.text = orgName ?? "";
+    });
   }
 
   @override
   void dispose() {
     nameTextController.removeListener(nameListener);
     descriptionTextController.removeListener(descriptionListener);
-    sellerOrOrganizationNameTextController
-        .removeListener(sellerOrOrganizationListener);
+
     cityController.removeListener(cityListener);
     phoneTextController.removeListener(phoneListener);
     emailTextController.removeListener(emailListener);
@@ -563,6 +554,8 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                         ),
                       ),
                     ),
+                    minLines: 1,
+                    maxLines: null,
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -591,7 +584,7 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                   const SizedBox(height: 20),
                   TextField(
                     controller: sellerOrOrganizationNameTextController,
-                    onChanged: (value) => checkFields,
+                    readOnly: true,
                     decoration: InputDecoration(
                       hintText: "Название продавца или организации",
                       hintStyle: const TextStyle(
@@ -890,6 +883,9 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                                       phone: phone,
                                       email: emailTextController.text,
                                       images: multipartFiles,
+                                      name_firm:
+                                          sellerOrOrganizationNameTextController
+                                              .text,
                                     ),
                                   );
                             }
