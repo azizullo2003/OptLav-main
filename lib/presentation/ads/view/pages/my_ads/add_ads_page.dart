@@ -68,6 +68,8 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
   var os = 0;
   var showSuggestion = false;
 
+  bool _uploading = false;
+
   void checkFields() {
     final isValidAdsName = nameTextController.text.isNotEmpty;
     final isSelectedCategory = _selectedCategory != null
@@ -218,9 +220,17 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
         listener: (context, state) {
           state.when(
             initial: () {},
-            loading: () {},
-            success: (AdsFunctionResponse response) {
-              print(response.toString());
+            loading: () {
+              setState(() {
+                _uploading = true;
+              });
+            },
+            success: (AdsFunctionResponse response) async {
+              await Future.delayed(const Duration(seconds: 2));
+              setState(() {
+                _uploading = false;
+              });
+
               Fluttertoast.showToast(
                   msg: "Объявление успешно сохранено",
                   toastLength: Toast.LENGTH_LONG,
@@ -848,14 +858,13 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                       function: () => emailTextController.clear()),
                   const SizedBox(height: 28),
                   GestureDetector(
-                    onTap: isCorrectFields
+                    onTap: isCorrectFields && !_uploading
                         ? () async {
                             final phone = phoneTextController.text
                                 .replaceAll(RegExp('[^0-9]'), '');
 
                             List<MultipartFile> multipartFiles =
                                 await convertToMultipartFiles(images);
-
                             if (context.mounted) {
                               context.read<AddAdBloc>().add(
                                     AddAdEvent.addAd(
@@ -903,14 +912,18 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                             : const Color(0xFFAAABAD),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Text(
-                        "Сохранить",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      child: _uploading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Сохранить",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 18),

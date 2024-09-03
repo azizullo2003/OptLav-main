@@ -1,5 +1,3 @@
-
-
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +19,7 @@ import '../data/models/type_price.dart';
 import 'bloc/conditions_bloc.dart';
 
 class OrdersPage extends StatefulWidget {
-  const OrdersPage({Key? key}) : super(key: key);
+  const OrdersPage({super.key});
 
   @override
   State<OrdersPage> createState() => _OrdersPageState();
@@ -39,7 +37,6 @@ class _OrdersPageState extends State<OrdersPage> {
   final List<OrderInfo> _orderInfoList = <OrderInfo>[];
   @override
   Widget build(BuildContext context) {
-
     final colorTheme = AppTheme.of(context).colorTheme;
     if (_isAddressExist) {
       return SingleChildScrollView(
@@ -80,20 +77,19 @@ class _OrdersPageState extends State<OrdersPage> {
                           statuses!.count_1 != null) {
                         return GestureDetector(
                           onTap: () => {
-                          BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrdersByStatus("1")),
-                            if(!_secondTap){
-                              _statusOneVis = true,
-                              _statusTwoVis = false,
-                              _statusThreeVis = false,
-                              _statusFourVis = false,
-                              _secondTap = true
-                            } else {
-                              _allStatuses(),
-                              _secondTap = false
-                            },
-                            setState(() {
-
-                            })
+                            BlocProvider.of<OrdersBloc>(context)
+                                .add(const OrdersEvent.getOrdersByStatus("1")),
+                            if (!_secondTap)
+                              {
+                                _statusOneVis = true,
+                                _statusTwoVis = false,
+                                _statusThreeVis = false,
+                                _statusFourVis = false,
+                                _secondTap = true
+                              }
+                            else
+                              {_allStatuses(), _secondTap = false},
+                            setState(() {})
                           },
                           child: Visibility(
                             visible: _statusOneVis,
@@ -116,22 +112,21 @@ class _OrdersPageState extends State<OrdersPage> {
                       if (statuses!.count_2 != "0" &&
                           statuses!.count_2 != null) {
                         return GestureDetector(
-                            onTap: () => {
-                              BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrdersByStatus("2")),
-                              if(!_secondTap){
+                          onTap: () => {
+                            BlocProvider.of<OrdersBloc>(context)
+                                .add(const OrdersEvent.getOrdersByStatus("2")),
+                            if (!_secondTap)
+                              {
                                 _statusOneVis = false,
                                 _statusTwoVis = true,
                                 _statusThreeVis = false,
                                 _statusFourVis = false,
                                 _secondTap = true
-                              } else {
-                                _allStatuses(),
-                                _secondTap = false
-                              },
-                              setState(() {
-
-                              })
-                            },
+                              }
+                            else
+                              {_allStatuses(), _secondTap = false},
+                            setState(() {})
+                          },
                           child: Visibility(
                             visible: _statusTwoVis,
                             child: StatusWidget(
@@ -158,20 +153,19 @@ class _OrdersPageState extends State<OrdersPage> {
                           statuses!.count_3 != null) {
                         return GestureDetector(
                           onTap: () => {
-                            BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrdersByStatus("3")),
-                            if(!_secondTap){
-                              _statusOneVis = false,
-                              _statusTwoVis = false,
-                              _statusThreeVis = true,
-                              _statusFourVis = false,
-                              _secondTap = true
-                            } else {
-                              _allStatuses(),
-                              _secondTap = false
-                            },
-                            setState(() {
-
-                            })
+                            BlocProvider.of<OrdersBloc>(context)
+                                .add(const OrdersEvent.getOrdersByStatus("3")),
+                            if (!_secondTap)
+                              {
+                                _statusOneVis = false,
+                                _statusTwoVis = false,
+                                _statusThreeVis = true,
+                                _statusFourVis = false,
+                                _secondTap = true
+                              }
+                            else
+                              {_allStatuses(), _secondTap = false},
+                            setState(() {})
                           },
                           child: Visibility(
                             visible: _statusThreeVis,
@@ -193,20 +187,19 @@ class _OrdersPageState extends State<OrdersPage> {
                           statuses!.count_4 != null) {
                         return GestureDetector(
                           onTap: () => {
-                            BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrdersByStatus("4")),
-                            if(!_secondTap){
-                              _statusOneVis = false,
-                              _statusTwoVis = false,
-                              _statusThreeVis = false,
-                              _statusFourVis = true,
-                              _secondTap = true
-                            } else {
-                              _allStatuses(),
-                              _secondTap = false
-                            },
-                            setState(() {
-
-                            })
+                            BlocProvider.of<OrdersBloc>(context)
+                                .add(const OrdersEvent.getOrdersByStatus("4")),
+                            if (!_secondTap)
+                              {
+                                _statusOneVis = false,
+                                _statusTwoVis = false,
+                                _statusThreeVis = false,
+                                _statusFourVis = true,
+                                _secondTap = true
+                              }
+                            else
+                              {_allStatuses(), _secondTap = false},
+                            setState(() {})
                           },
                           child: Visibility(
                             visible: _statusFourVis,
@@ -239,50 +232,54 @@ class _OrdersPageState extends State<OrdersPage> {
                           _orderInfoList.addAll(response.response.data);
                           print("loading data");
                           print(response.response.data);
-                          response.response.data.forEach((element) {print(element);});
+                          response.response.data.forEach((element) {
+                            print(element);
+                          });
                         },
                         orElse: () {});
                   },
                   builder: (context, state) => state.maybeMap(
-                    workingOrdersLoaded: (w){
-                      return const SizedBox();
-                    },
+                        workingOrdersLoaded: (w) {
+                          return const SizedBox();
+                        },
                         orElse: () {
                           return const SizedBox();
                         },
-                    failure: (_) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Что-то пошло не так",
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: colorTheme.blackText),
+                        failure: (_) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Что-то пошло не так",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: colorTheme.blackText),
+                            ),
+                            const SizedBox(height: 8),
+                            Box(
+                              width: double.infinity,
+                              padding: const Pad(horizontal: 16),
+                              child: ElevatedButton(
+                                onPressed: () => {
+                                  BlocProvider.of<OrdersBloc>(context)
+                                      .add(const OrdersEvent.getOrders())
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: colorTheme.primary,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    textStyle: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold)),
+                                child: const Text("Обновить"),
+                              ),
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Box(
-                          width: double.infinity,
-                          padding: const Pad(horizontal: 16),
-                          child: ElevatedButton(
-                            onPressed: () => {
-                              BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrders())},
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0, backgroundColor: colorTheme.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(16),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16),
-                                textStyle: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold)),
-                            child: const Text("Обновить"),
-                          ),
-                        )
-                      ],
-                    ),
                         loading: (_) {
                           return const Center(
                               child: CircularProgressIndicator());
@@ -300,14 +297,13 @@ class _OrdersPageState extends State<OrdersPage> {
                                       return Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: OrderWidget(
-                                              onConditions: () =>
-                                                  _inConditions(
-                                                      _orderInfoList[index]),
-                                              onOrderInfo: () =>
-                                                  _onProducts(
-                                                      context,
-                                                      _orderInfoList[index]),
-                                              orderInfo: _orderInfoList[index]));
+                                              onConditions: () => _inConditions(
+                                                  _orderInfoList[index]),
+                                              onOrderInfo: () => _onProducts(
+                                                  context,
+                                                  _orderInfoList[index]),
+                                              orderInfo:
+                                                  _orderInfoList[index]));
                                     }),
                               );
                             } else {
@@ -327,16 +323,16 @@ class _OrdersPageState extends State<OrdersPage> {
                                   Box(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                      onPressed: () =>
-                                      {
+                                      onPressed: () => {
                                         context.router
                                             .navigate(const CatalogsRoute())
                                       },
                                       style: ElevatedButton.styleFrom(
-                                          elevation: 0, backgroundColor: colorTheme.primary,
+                                          elevation: 0,
+                                          backgroundColor: colorTheme.primary,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(16),
+                                                BorderRadius.circular(16),
                                           ),
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 16),
@@ -366,12 +362,15 @@ class _OrdersPageState extends State<OrdersPage> {
                                   padding: const Pad(horizontal: 16),
                                   child: ElevatedButton(
                                     onPressed: () => {
-                                      BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrders())},
+                                      BlocProvider.of<OrdersBloc>(context)
+                                          .add(const OrdersEvent.getOrders())
+                                    },
                                     style: ElevatedButton.styleFrom(
-                                        elevation: 0, backgroundColor: colorTheme.primary,
+                                        elevation: 0,
+                                        backgroundColor: colorTheme.primary,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(16),
+                                              BorderRadius.circular(16),
                                         ),
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 16),
@@ -413,7 +412,7 @@ class _OrdersPageState extends State<OrdersPage> {
 
   void _inConditions(OrderInfo order) {
     BlocProvider.of<ConditionsBloc>(context)
-        .add(ConditionsEvent.getConditions(order.id_user?? ""));
+        .add(ConditionsEvent.getConditions(order.id_user ?? ""));
     List<TypePrice> typesOfPayment = <TypePrice>[];
     List<Deliveries> deliveries = <Deliveries>[];
     TypePrice typeOfPayment;
@@ -641,7 +640,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                     child: ElevatedButton(
                                       onPressed: () => {Navigator.pop(context)},
                                       style: ElevatedButton.styleFrom(
-                                          elevation: 0, backgroundColor: colorTheme.primary,
+                                          elevation: 0,
+                                          backgroundColor: colorTheme.primary,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -669,22 +669,18 @@ class _OrdersPageState extends State<OrdersPage> {
   }
 
   void _isAddressNotEmpty() async {
-    _isAddressExist = (await SharedPrefsHelper.isAddressExist())?? false;
-    setState(() {
-
-    });
+    _isAddressExist = (await SharedPrefsHelper.isAddressExist()) ?? false;
+    setState(() {});
     print("_isAddressNotEmpty Async $_isAddressExist");
   }
 
-  void _allStatuses()  {
+  void _allStatuses() {
     BlocProvider.of<OrdersBloc>(context).add(const OrdersEvent.getOrders());
     _statusOneVis = true;
     _statusTwoVis = true;
     _statusThreeVis = true;
     _statusFourVis = true;
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   void _onEmptyAddress() {
@@ -702,15 +698,13 @@ class _OrdersPageState extends State<OrdersPage> {
       child: const Text("В профиль"),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop(context);
-        context.router
-            .navigate(const ProfileRoute());
+        context.router.navigate(const ProfileRoute());
       },
     );
 
-    AlertDialog alert =  AlertDialog(
+    AlertDialog alert = AlertDialog(
       //title: const Text("Нету адреса"),
-      content:
-           Text(StaticText.first),
+      content: Text(StaticText.first),
       actions: [
         cancelButton,
         continueButton,
@@ -718,14 +712,14 @@ class _OrdersPageState extends State<OrdersPage> {
     );
 
     // show the dialog
-    if(!_isAddressExist) {
+    if (!_isAddressExist) {
       WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (BuildContext context) {
-            return alert;
-          },
-        ));
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return alert;
+            },
+          ));
     }
   }
 }

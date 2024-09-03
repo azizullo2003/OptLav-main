@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
       }
     });
 
-    _showAd(true);
+    // _showAd(true);
   }
 
   @override
@@ -92,6 +92,9 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
         RouterScope.of(context).firstObserverOfType<AutoRouteObserver>();
     if (_observer != null) {
       _observer?.subscribe(this, context.routeData);
+    }
+    if (_bannerAd == null) {
+      _showAd(true);
     }
   }
 
@@ -115,7 +118,7 @@ class _MainPageState extends State<MainPage> with AutoRouteAware {
     print("object");
   }
 
-  _showAd(bool isInitLoad) async {
+  void _showAd(bool isInitLoad) async {
     final windowSize = MediaQuery.of(context).size;
     final adSize = BannerAdSize.inline(
       width: windowSize.width.toInt(),

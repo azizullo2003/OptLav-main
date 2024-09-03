@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:optlove/app/routes/router.gr.dart';
+import 'package:optlove/presentation/favorite/view/pages/favorite_page.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/top_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/work_orders_bloc.dart';
@@ -104,7 +105,12 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: () {
-                      context.router.navigate(const FavoriteRoute());
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoritePage(),
+                        ),
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.only(
@@ -143,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                   padding: const Pad(left: 12, top: 8),
                                   width: 200,
                                   child: Text(
-                                    "Здесь сохранены понравившиеся вам товары",
+                                    "Здесь сохранены понравившиеся вам товары и продавцы",
                                     style: TextStyle(
                                         height: 1.5,
                                         color: colorTheme.greyBarBottomText,

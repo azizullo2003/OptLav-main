@@ -74,9 +74,17 @@ class _AdsMainPageState extends State<AdsMainPage> {
                 children: [
                   const SizedBox(height: 25),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      InkWell(
+                        onTap: () => context.router.push(
+                          const MainRoute(),
+                        ),
+                        child: Box(
+                          child: Assets.images.back.svg(fit: BoxFit.cover),
+                        ),
+                      ),
                       InkWell(
                         onTap: () async {
                           final ResponseSelectionCategory?

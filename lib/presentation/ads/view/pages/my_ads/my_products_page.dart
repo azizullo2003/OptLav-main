@@ -32,7 +32,7 @@ class _MyProductsPageState extends State<MyProductsPage> {
   void initState() {
     super.initState();
     _controller = ScrollController();
-    context.read<AdsFetchMyAdsBloc>().add(FetchMyAds(sort: sort));
+    _fetchAds();
   }
 
   @override
@@ -40,6 +40,16 @@ class _MyProductsPageState extends State<MyProductsPage> {
     _controller.dispose();
     _searchProductController.dispose();
     super.dispose();
+  }
+
+  void _fetchAds() {
+    context.read<AdsFetchMyAdsBloc>().add(FetchMyAds(sort: sort));
+  }
+
+  Future<void> _navigateAndRefresh() async {
+    await context.router.push(const AddNewAdsRoute());
+    await Future.delayed(const Duration(milliseconds: 500));
+    _fetchAds();
   }
 
   @override
@@ -52,7 +62,7 @@ class _MyProductsPageState extends State<MyProductsPage> {
       body: RefreshIndicator(
         color: const Color.fromRGBO(114, 175, 86, 1),
         onRefresh: () async {
-          context.read<AdsFetchMyAdsBloc>().add(FetchMyAds(sort: sort));
+          _fetchAds();
         },
         child: SingleChildScrollView(
           controller: _controller,
@@ -81,9 +91,7 @@ class _MyProductsPageState extends State<MyProductsPage> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          context.router.navigate(const AddNewAdsRoute());
-                        },
+                        onTap: _navigateAndRefresh,
                         child: const Box(
                           color: Colors.white,
                           child: Icon(
@@ -355,8 +363,8 @@ class _MyProductsPageState extends State<MyProductsPage> {
                                             children: [
                                               Expanded(
                                                 child: GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
+                                                  onTap: () async {
+                                                    await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
@@ -364,6 +372,11 @@ class _MyProductsPageState extends State<MyProductsPage> {
                                                                 ads: ad),
                                                       ),
                                                     );
+                                                    await Future.delayed(
+                                                        const Duration(
+                                                            milliseconds: 500));
+
+                                                    _fetchAds();
                                                   },
                                                   child: Container(
                                                     height: 40,
@@ -409,6 +422,10 @@ class _MyProductsPageState extends State<MyProductsPage> {
                                                                       adId: ad
                                                                           .id!),
                                                             );
+                                                        await Future.delayed(
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500));
                                                         context
                                                             .read<
                                                                 AdsFetchMyAdsBloc>()
