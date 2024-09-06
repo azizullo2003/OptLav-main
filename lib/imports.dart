@@ -37,6 +37,3 @@ export 'package:optlove/presentation/support/view/bloc/support_bloc.dart';
 
 export 'app/routes/router.gr.dart';
 export 'injector.dart';
-export 'package:firebase_core/firebase_core.dart';
-export 'firebase_options.dart';
-export 'package:firebase_crashlytics/firebase_crashlytics.dart';

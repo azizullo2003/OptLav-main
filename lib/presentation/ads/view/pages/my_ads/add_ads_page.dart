@@ -19,6 +19,7 @@ import 'package:optlove/presentation/ads/view/widgets/show_select_ads_subcategor
 import 'package:optlove/presentation/registration/domain/entities/cities.dart';
 import 'package:optlove/presentation/registration/view/bloc/search_city_bloc.dart';
 import 'package:optlove/presentation/registration/view/widgets/reg_text_fields.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -639,14 +640,60 @@ class _AddNewAdsPageState extends State<AddNewAdsPage> {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          final ImagePicker picker = ImagePicker();
-                          final List<XFile> files =
-                              await picker.pickMultiImage(limit: 10);
-                          print(files);
-                          setState(() {
-                            images = files;
-                          });
-                          checkFields();
+                          // final ImagePicker picker = ImagePicker();
+                          // final List<XFile> files =
+                          //     await picker.pickMultiImage(limit: 10);
+                          // print(files);
+                          // setState(() {
+                          //   images = files;
+                          // });
+                          // Запрос разрешения на доступ к фотографиям
+                          PermissionStatus permissionStatus =
+                              await Permission.photos.request();
+
+                          if (permissionStatus.isGranted) {
+                            // Разрешение получено, продолжаем выбор изображений
+                            final ImagePicker picker = ImagePicker();
+                            final List<XFile> files =
+                                await picker.pickMultiImage(limit: 10);
+                            setState(() {
+                              images = files;
+                            });
+                            checkFields();
+                          } else if (permissionStatus.isDenied ||
+                              permissionStatus.isPermanentlyDenied) {
+                            // Обработка отказа в разрешении
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Необходимо разрешение'),
+                                content: const Text(
+                                  'Для выбора изображений необходимо разрешение на доступ к галерее. Пожалуйста, предоставьте доступ.',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Отмена'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await openAppSettings();
+                                    },
+                                    child: const Text('Открыть настройки'),
+                                  ),
+                                ],
+                              ),
+                            );
+                            final ImagePicker picker = ImagePicker();
+                            final List<XFile> files =
+                                await picker.pickMultiImage(limit: 10);
+                            setState(() {
+                              images = files;
+                            });
+                            checkFields();
+                          }
                         },
                         child: Container(
                           height: 56,

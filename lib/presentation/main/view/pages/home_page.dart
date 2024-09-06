@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:optlove/app/routes/router.gr.dart';
-import 'package:optlove/presentation/favorite/view/pages/favorite_page.dart';
 import 'package:optlove/presentation/main/view/bloc/action_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/top_bloc.dart';
 import 'package:optlove/presentation/main/view/bloc/work_orders_bloc.dart';
@@ -105,12 +104,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FavoritePage(),
-                        ),
-                      );
+                      context.router.push(const FavoriteRoute());
                     },
                     child: Container(
                       padding: const EdgeInsets.only(

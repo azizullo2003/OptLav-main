@@ -60,73 +60,13 @@ PODS:
     - VGSL (~> 6.0)
   - DivKit_Serialization (30.11.0):
     - VGSL (~> 6.0)
-  - Firebase/CoreOnly (10.29.0):
-    - FirebaseCore (= 10.29.0)
-  - Firebase/Crashlytics (10.29.0):
-    - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 10.29.0)
-  - firebase_core (3.3.0):
-    - Firebase/CoreOnly (= 10.29.0)
-    - Flutter
-  - firebase_crashlytics (4.0.4):
-    - Firebase/Crashlytics (= 10.29.0)
-    - firebase_core
-    - Flutter
-  - FirebaseCore (10.29.0):
-    - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.12)
-    - GoogleUtilities/Logger (~> 7.12)
-  - FirebaseCoreExtension (10.29.0):
-    - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.29.0):
-    - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseCrashlytics (10.29.0):
-    - FirebaseCore (~> 10.5)
-    - FirebaseInstallations (~> 10.0)
-    - FirebaseRemoteConfigInterop (~> 10.23)
-    - FirebaseSessions (~> 10.5)
-    - GoogleDataTransport (~> 9.2)
-    - GoogleUtilities/Environment (~> 7.8)
-    - nanopb (< 2.30911.0, >= 2.30908.0)
-    - PromisesObjC (~> 2.1)
-  - FirebaseInstallations (10.29.0):
-    - FirebaseCore (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/UserDefaults (~> 7.8)
-    - PromisesObjC (~> 2.1)
-  - FirebaseRemoteConfigInterop (10.29.0)
-  - FirebaseSessions (10.29.0):
-    - FirebaseCore (~> 10.5)
-    - FirebaseCoreExtension (~> 10.0)
-    - FirebaseInstallations (~> 10.0)
-    - GoogleDataTransport (~> 9.2)
-    - GoogleUtilities/Environment (~> 7.13)
-    - GoogleUtilities/UserDefaults (~> 7.13)
-    - nanopb (< 2.30911.0, >= 2.30908.0)
-    - PromisesSwift (~> 2.1)
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
   - Google-Mobile-Ads-SDK (11.3.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleDataTransport (9.4.1):
-    - GoogleUtilities/Environment (~> 7.7)
-    - nanopb (< 2.30911.0, >= 2.30908.0)
-    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUserMessagingPlatform (2.5.0)
-  - GoogleUtilities/Environment (7.13.3):
-    - GoogleUtilities/Privacy
-    - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.13.3):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Privacy
-  - "GoogleUtilities/NSData+zlib (7.13.3)":
-    - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (7.13.3)
-  - GoogleUtilities/UserDefaults (7.13.3):
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Privacy
   - GoogleYandexMobileAdsAdapters (11.3.0.5):
     - Google-Mobile-Ads-SDK (~> 11.3.0)
     - YandexMobileAds (= 7.3.2)
@@ -135,19 +75,13 @@ PODS:
   - KSCrash/Recording (1.17.5):
     - KSCrash/Recording/Tools (= 1.17.5)
   - KSCrash/Recording/Tools (1.17.5)
-  - nanopb (2.30910.0):
-    - nanopb/decode (= 2.30910.0)
-    - nanopb/encode (= 2.30910.0)
-  - nanopb/decode (2.30910.0)
-  - nanopb/encode (2.30910.0)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - PromisesObjC (2.4.0)
-  - PromisesSwift (2.4.0):
-    - PromisesObjC (= 2.4.0)
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -176,14 +110,13 @@ PODS:
     - DivKit (= 30.11.0)
 
 DEPENDENCIES:
-  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - GoogleYandexMobileAdsAdapters
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -208,23 +141,10 @@ SPEC REPOS:
     - DivKit_LayoutKit
     - DivKit_LayoutKitInterface
     - DivKit_Serialization
-    - Firebase
-    - FirebaseCore
-    - FirebaseCoreExtension
-    - FirebaseCoreInternal
-    - FirebaseCrashlytics
-    - FirebaseInstallations
-    - FirebaseRemoteConfigInterop
-    - FirebaseSessions
     - Google-Mobile-Ads-SDK
-    - GoogleDataTransport
     - GoogleUserMessagingPlatform
-    - GoogleUtilities
     - GoogleYandexMobileAdsAdapters
     - KSCrash
-    - nanopb
-    - PromisesObjC
-    - PromisesSwift
     - Toast
     - VGSL
     - VGSLFundamentals
@@ -233,10 +153,6 @@ SPEC REPOS:
     - YandexMobileAds
 
 EXTERNAL SOURCES:
-  firebase_core:
-    :path: ".symlinks/plugins/firebase_core/ios"
-  firebase_crashlytics:
-    :path: ".symlinks/plugins/firebase_crashlytics/ios"
   Flutter:
     :path: Flutter
   fluttertoast:
@@ -247,6 +163,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
@@ -274,30 +192,16 @@ SPEC CHECKSUMS:
   DivKit_LayoutKit: 0ccdccd1da72fa8d57fb592a4e2ef0a0080cf421
   DivKit_LayoutKitInterface: a0e6c37e139131a30255ad8d1457528472d346d8
   DivKit_Serialization: 122aa27c87f7ba9ec212e6dae1f1c76284e755df
-  Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
-  firebase_core: 57aeb91680e5d5e6df6b888064be7c785f146efb
-  firebase_crashlytics: e3d3e0c99bad5aaab5908385133dea8ec344693f
-  FirebaseCore: 30e9c1cbe3d38f5f5e75f48bfcea87d7c358ec16
-  FirebaseCoreExtension: 705ca5b14bf71d2564a0ddc677df1fc86ffa600f
-  FirebaseCoreInternal: df84dd300b561c27d5571684f389bf60b0a5c934
-  FirebaseCrashlytics: 34647b41e18de773717fdd348a22206f2f9bc774
-  FirebaseInstallations: 913cf60d0400ebd5d6b63a28b290372ab44590dd
-  FirebaseRemoteConfigInterop: 6efda51fb5e2f15b16585197e26eaa09574e8a4d
-  FirebaseSessions: dbd14adac65ce996228652c1fc3a3f576bdf3ecc
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
   Google-Mobile-Ads-SDK: 301a16c461c331ba34ff4dab40a22ab7c147af61
-  GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUserMessagingPlatform: 6b4f48a370e77ce121d034c908cc6ee4fdafaf13
-  GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GoogleYandexMobileAdsAdapters: 2da333a07c8e6f956e8312c9dc3fb0ad0d993996
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   KSCrash: b104a00c75f4c454590ae8d23cc8d8b003dae900
-  nanopb: 438bc412db1928dac798aa6fd75726007be04262
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e

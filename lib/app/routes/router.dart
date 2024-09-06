@@ -69,6 +69,7 @@ import '../../presentation/support/view/pages/support_request_sent.dart';
               AutoRoute(page: SupportRequestSent, path: 'support_sent'),
               AutoRoute(page: MyProductsPage, path: 'my_ads'),
               AutoRoute(page: AddNewAdsPage, path: 'add_ads_page'),
+              AutoRoute(page: FavoritePage, path: 'favorite_page'),
             ]),
         AutoRoute(page: EmptyRouterPage, name: "CatalogsRoute", children: [
           AutoRoute(page: CatalogPage, path: ''),
@@ -88,7 +89,6 @@ import '../../presentation/support/view/pages/support_request_sent.dart';
               AutoRoute(page: OrdersProductsPage, path: 'orderProducts'),
             ]),
         AutoRoute(page: ProfilePage),
-        AutoRoute(page: FavoritePage),
         AutoRoute(
           page: EmptyRouterPage,
           path: 'adsRoute',

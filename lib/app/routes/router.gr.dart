@@ -16,31 +16,31 @@ import 'package:auto_route/empty_router_widgets.dart' as _i9;
 import 'package:flutter/material.dart' as _i38;
 
 import '../../presentation/about/data/models/block_model.dart' as _i39;
-import '../../presentation/about/view/pages/about_info_page.dart' as _i17;
-import '../../presentation/about/view/pages/about_page.dart' as _i16;
+import '../../presentation/about/view/pages/about_info_page.dart' as _i16;
+import '../../presentation/about/view/pages/about_page.dart' as _i15;
 import '../../presentation/ads/data/models/ads_model.dart' as _i45;
 import '../../presentation/ads/view/pages/ads_category_page.dart' as _i35;
 import '../../presentation/ads/view/pages/ads_detail_page.dart' as _i34;
 import '../../presentation/ads/view/pages/ads_main_page.dart' as _i33;
 import '../../presentation/ads/view/pages/ads_subcategory_page.dart' as _i36;
-import '../../presentation/ads/view/pages/my_ads/add_ads_page.dart' as _i23;
-import '../../presentation/ads/view/pages/my_ads/my_products_page.dart' as _i22;
-import '../../presentation/favorite/view/pages/favorite_page.dart' as _i11;
+import '../../presentation/ads/view/pages/my_ads/add_ads_page.dart' as _i22;
+import '../../presentation/ads/view/pages/my_ads/my_products_page.dart' as _i21;
+import '../../presentation/favorite/view/pages/favorite_page.dart' as _i23;
 import '../../presentation/main/%20data/models/category.dart' as _i40;
 import '../../presentation/main/%20data/models/company.dart' as _i42;
 import '../../presentation/main/%20data/models/product.dart' as _i43;
 import '../../presentation/main/%20data/models/subcategory.dart' as _i41;
-import '../../presentation/main/view/pages/action_list_page.dart' as _i18;
+import '../../presentation/main/view/pages/action_list_page.dart' as _i17;
 import '../../presentation/main/view/pages/catalog_page.dart' as _i24;
 import '../../presentation/main/view/pages/company_catalog.dart' as _i27;
 import '../../presentation/main/view/pages/company_info_page.dart' as _i29;
 import '../../presentation/main/view/pages/company_products.dart' as _i28;
-import '../../presentation/main/view/pages/home_page.dart' as _i12;
+import '../../presentation/main/view/pages/home_page.dart' as _i11;
 import '../../presentation/main/view/pages/main_page.dart' as _i8;
 import '../../presentation/main/view/pages/product_info.dart' as _i30;
 import '../../presentation/main/view/pages/products_page.dart' as _i26;
 import '../../presentation/main/view/pages/subcatalog_page.dart' as _i25;
-import '../../presentation/main/view/pages/top_list_page.dart' as _i19;
+import '../../presentation/main/view/pages/top_list_page.dart' as _i18;
 import '../../presentation/onboarding/view/pages/onboarding_page.dart' as _i2;
 import '../../presentation/orders/data/models/order_info.dart' as _i44;
 import '../../presentation/orders/view/orders_page.dart' as _i31;
@@ -53,13 +53,13 @@ import '../../presentation/registration/view/pages/forgot_password_page.dart'
 import '../../presentation/registration/view/pages/registration.dart' as _i4;
 import '../../presentation/registration/view/pages/registration_begin.dart'
     as _i3;
-import '../../presentation/settings/view/confirm_delete.dart' as _i14;
-import '../../presentation/settings/view/settings_page.dart' as _i13;
-import '../../presentation/settings/view/user_deleted.dart' as _i15;
+import '../../presentation/settings/view/confirm_delete.dart' as _i13;
+import '../../presentation/settings/view/settings_page.dart' as _i12;
+import '../../presentation/settings/view/user_deleted.dart' as _i14;
 import '../../presentation/splash/view/pages/splash_screen.dart' as _i1;
-import '../../presentation/support/view/pages/support_page.dart' as _i20;
+import '../../presentation/support/view/pages/support_page.dart' as _i19;
 import '../../presentation/support/view/pages/support_request_sent.dart'
-    as _i21;
+    as _i20;
 
 class AppRouter extends _i37.RootStackRouter {
   AppRouter([_i38.GlobalKey<_i38.NavigatorState>? navigatorKey])
@@ -143,12 +143,6 @@ class AppRouter extends _i37.RootStackRouter {
         child: const _i10.ProfilePage(),
       );
     },
-    FavoriteRoute.name: (routeData) {
-      return _i37.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i11.FavoritePage(),
-      );
-    },
     AdsMainPageRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -158,38 +152,38 @@ class AppRouter extends _i37.RootStackRouter {
     HomeRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i12.HomePage(),
+        child: const _i11.HomePage(),
       );
     },
     SettingsRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i13.SettingsPage(),
+        child: const _i12.SettingsPage(),
       );
     },
     ConfirmDeleteUserRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.ConfirmDeleteUserPage(),
+        child: const _i13.ConfirmDeleteUserPage(),
       );
     },
     UserDeletedRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i15.UserDeletedPage(),
+        child: const _i14.UserDeletedPage(),
       );
     },
     AboutRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i16.AboutPage(),
+        child: const _i15.AboutPage(),
       );
     },
     AboutInfoRoute.name: (routeData) {
       final args = routeData.argsAs<AboutInfoRouteArgs>();
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i17.AboutInfoPage(
+        child: _i16.AboutInfoPage(
           key: args.key,
           block: args.block,
         ),
@@ -198,37 +192,43 @@ class AppRouter extends _i37.RootStackRouter {
     ActionListRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.ActionListPage(),
+        child: const _i17.ActionListPage(),
       );
     },
     TopListRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i19.TopListPage(),
+        child: const _i18.TopListPage(),
       );
     },
     SupportRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i20.SupportPage(),
+        child: const _i19.SupportPage(),
       );
     },
     SupportRequestSent.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i21.SupportRequestSent(),
+        child: const _i20.SupportRequestSent(),
       );
     },
     MyProductsRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.MyProductsPage(),
+        child: const _i21.MyProductsPage(),
       );
     },
     AddNewAdsRoute.name: (routeData) {
       return _i37.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i23.AddNewAdsPage(),
+        child: const _i22.AddNewAdsPage(),
+      );
+    },
+    FavoriteRoute.name: (routeData) {
+      return _i37.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i23.FavoritePage(),
       );
     },
     CatalogRoute.name: (routeData) {
@@ -468,6 +468,11 @@ class AppRouter extends _i37.RootStackRouter {
                   path: 'add_ads_page',
                   parent: HomePageRoute.name,
                 ),
+                _i37.RouteConfig(
+                  FavoriteRoute.name,
+                  path: 'favorite_page',
+                  parent: HomePageRoute.name,
+                ),
               ],
             ),
             _i37.RouteConfig(
@@ -532,11 +537,6 @@ class AppRouter extends _i37.RootStackRouter {
             _i37.RouteConfig(
               ProfileRoute.name,
               path: 'profile-page',
-              parent: MainRoute.name,
-            ),
-            _i37.RouteConfig(
-              FavoriteRoute.name,
-              path: 'favorite-page',
               parent: MainRoute.name,
             ),
             _i37.RouteConfig(
@@ -772,18 +772,6 @@ class ProfileRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.FavoritePage]
-class FavoriteRoute extends _i37.PageRouteInfo<void> {
-  const FavoriteRoute()
-      : super(
-          FavoriteRoute.name,
-          path: 'favorite-page',
-        );
-
-  static const String name = 'FavoriteRoute';
-}
-
-/// generated route for
 /// [_i9.EmptyRouterPage]
 class AdsMainPageRoute extends _i37.PageRouteInfo<void> {
   const AdsMainPageRoute({List<_i37.PageRouteInfo>? children})
@@ -797,7 +785,7 @@ class AdsMainPageRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.HomePage]
+/// [_i11.HomePage]
 class HomeRoute extends _i37.PageRouteInfo<void> {
   const HomeRoute()
       : super(
@@ -809,7 +797,7 @@ class HomeRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.SettingsPage]
+/// [_i12.SettingsPage]
 class SettingsRoute extends _i37.PageRouteInfo<void> {
   const SettingsRoute()
       : super(
@@ -821,7 +809,7 @@ class SettingsRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ConfirmDeleteUserPage]
+/// [_i13.ConfirmDeleteUserPage]
 class ConfirmDeleteUserRoute extends _i37.PageRouteInfo<void> {
   const ConfirmDeleteUserRoute()
       : super(
@@ -833,7 +821,7 @@ class ConfirmDeleteUserRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.UserDeletedPage]
+/// [_i14.UserDeletedPage]
 class UserDeletedRoute extends _i37.PageRouteInfo<void> {
   const UserDeletedRoute()
       : super(
@@ -845,7 +833,7 @@ class UserDeletedRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.AboutPage]
+/// [_i15.AboutPage]
 class AboutRoute extends _i37.PageRouteInfo<void> {
   const AboutRoute()
       : super(
@@ -857,7 +845,7 @@ class AboutRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.AboutInfoPage]
+/// [_i16.AboutInfoPage]
 class AboutInfoRoute extends _i37.PageRouteInfo<AboutInfoRouteArgs> {
   AboutInfoRoute({
     _i38.Key? key,
@@ -891,7 +879,7 @@ class AboutInfoRouteArgs {
 }
 
 /// generated route for
-/// [_i18.ActionListPage]
+/// [_i17.ActionListPage]
 class ActionListRoute extends _i37.PageRouteInfo<void> {
   const ActionListRoute()
       : super(
@@ -903,7 +891,7 @@ class ActionListRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.TopListPage]
+/// [_i18.TopListPage]
 class TopListRoute extends _i37.PageRouteInfo<void> {
   const TopListRoute()
       : super(
@@ -915,7 +903,7 @@ class TopListRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.SupportPage]
+/// [_i19.SupportPage]
 class SupportRoute extends _i37.PageRouteInfo<void> {
   const SupportRoute()
       : super(
@@ -927,7 +915,7 @@ class SupportRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.SupportRequestSent]
+/// [_i20.SupportRequestSent]
 class SupportRequestSent extends _i37.PageRouteInfo<void> {
   const SupportRequestSent()
       : super(
@@ -939,7 +927,7 @@ class SupportRequestSent extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.MyProductsPage]
+/// [_i21.MyProductsPage]
 class MyProductsRoute extends _i37.PageRouteInfo<void> {
   const MyProductsRoute()
       : super(
@@ -951,7 +939,7 @@ class MyProductsRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.AddNewAdsPage]
+/// [_i22.AddNewAdsPage]
 class AddNewAdsRoute extends _i37.PageRouteInfo<void> {
   const AddNewAdsRoute()
       : super(
@@ -960,6 +948,18 @@ class AddNewAdsRoute extends _i37.PageRouteInfo<void> {
         );
 
   static const String name = 'AddNewAdsRoute';
+}
+
+/// generated route for
+/// [_i23.FavoritePage]
+class FavoriteRoute extends _i37.PageRouteInfo<void> {
+  const FavoriteRoute()
+      : super(
+          FavoriteRoute.name,
+          path: 'favorite_page',
+        );
+
+  static const String name = 'FavoriteRoute';
 }
 
 /// generated route for
